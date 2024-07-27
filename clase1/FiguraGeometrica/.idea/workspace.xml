@@ -1,0 +1,149 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="88ef911f-1834-4f53-ae45-576d5304c4cb" name="Changes" comment="" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="package-info" />
+        <option value="Class" />
+        <option value="Interface" />
+        <option value="JUnit5 Test Class" />
+      </list>
+    </option>
+  </component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 3
+}</component>
+  <component name="ProjectId" id="2jfgjup666NIgLCScJVyHXU0ygx" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;Downloaded.Files.Path.Enabled&quot;: &quot;false&quot;,
+    &quot;JUnit.CuadradoTest.getLado.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.FiguraServiceTest.dadoLadoPositivo_CalculeAreaCuadrado.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.FiguraServiceTest.dadoNombreFiguraNoSoportada_CalculeAreaFigura.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.FiguraServiceTest.dadoRadioPositivo_CalculeAreaCirculo.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.FiguraServiceTest.dadoRadioPositivo_CalculeAreaFigura.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.FiguraServiceTest.dadoUnLadoNegativoMuestreMensaje_AlCalcularAreaCuadrado.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.FiguraServiceTest.dadoUnRadioNegativoMuestreMensaje_AlCalcularAreaCirculo.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.FiguraServiceTest.executor&quot;: &quot;Run&quot;,
+    &quot;Repository.Attach.Annotations&quot;: &quot;false&quot;,
+    &quot;Repository.Attach.JavaDocs&quot;: &quot;false&quot;,
+    &quot;Repository.Attach.Sources&quot;: &quot;false&quot;,
+    &quot;com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrary&quot;: &quot;JUnit5&quot;,
+    &quot;com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrarySuperClass.JUnit5&quot;: &quot;&quot;,
+    &quot;create.test.in.the.same.root&quot;: &quot;true&quot;
+  }
+}</component>
+  <component name="RecentsManager">
+    <key name="CreateTestDialog.Recents.Supers">
+      <recent name="" />
+    </key>
+    <key name="CreateTestDialog.RecentsKey">
+      <recent name="com.backend.test" />
+    </key>
+  </component>
+  <component name="RunManager" selected="JUnit.FiguraServiceTest.dadoRadioPositivo_CalculeAreaCirculo">
+    <configuration name="CuadradoTest.getLado" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="FiguraGeometrica" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.backend.test.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="com.backend.test" />
+      <option name="MAIN_CLASS_NAME" value="com.backend.test.CuadradoTest" />
+      <option name="METHOD_NAME" value="getLado" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="FiguraServiceTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="FiguraGeometrica" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.backend.test.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="com.backend.test" />
+      <option name="MAIN_CLASS_NAME" value="com.backend.test.FiguraServiceTest" />
+      <option name="TEST_OBJECT" value="class" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="FiguraServiceTest.dadoNombreFiguraNoSoportada_CalculeAreaFigura" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="FiguraGeometrica" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.backend.test.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="com.backend.test" />
+      <option name="MAIN_CLASS_NAME" value="com.backend.test.FiguraServiceTest" />
+      <option name="METHOD_NAME" value="dadoNombreFiguraNoSoportada_CalculeAreaFigura" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="FiguraServiceTest.dadoRadioPositivo_CalculeAreaCirculo" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="FiguraGeometrica" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.backend.test.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="com.backend.test" />
+      <option name="MAIN_CLASS_NAME" value="com.backend.test.FiguraServiceTest" />
+      <option name="METHOD_NAME" value="dadoRadioPositivo_CalculeAreaCirculo" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="FiguraServiceTest.dadoUnRadioNegativoMuestreMensaje_AlCalcularAreaCirculo" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="FiguraGeometrica" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.backend.test.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="com.backend.test" />
+      <option name="MAIN_CLASS_NAME" value="com.backend.test.FiguraServiceTest" />
+      <option name="METHOD_NAME" value="dadoUnRadioNegativoMuestreMensaje_AlCalcularAreaCirculo" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="JUnit.FiguraServiceTest.dadoRadioPositivo_CalculeAreaCirculo" />
+        <item itemvalue="JUnit.FiguraServiceTest.dadoNombreFiguraNoSoportada_CalculeAreaFigura" />
+        <item itemvalue="JUnit.FiguraServiceTest.dadoUnRadioNegativoMuestreMensaje_AlCalcularAreaCirculo" />
+        <item itemvalue="JUnit.CuadradoTest.getLado" />
+        <item itemvalue="JUnit.FiguraServiceTest" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+</project>
