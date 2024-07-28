@@ -11,18 +11,17 @@ public class LogsLogsLogsTest {
   @Tag("task:1")
   @DisplayName("Parsing log level TRC")
   public void getLogLevelTrace() {
-    var logLine = new LogLine(
+    LogLine logLine = new LogLine(
       "[TRC]: Line 84 - System.out.println(\"Hello World\");"
     );
     assertThat(logLine.getLogLevel()).isEqualTo(LogLevel.valueOf("TRACE"));
-    assertEquals(1, 1);
   }
 
   @Test
   @Tag("task:1")
   @DisplayName("Parsing log level DBG")
   public void parseLogLevelDbg() {
-    var logLine = new LogLine("[DBG]: ; expected");
+    LogLine logLine = new LogLine("[DBG]: ; expected");
     assertThat(logLine.getLogLevel()).isEqualTo(LogLevel.valueOf("DEBUG"));
   }
 
@@ -30,7 +29,7 @@ public class LogsLogsLogsTest {
   @Tag("task:1")
   @DisplayName("Parsing log level INF")
   public void parseLogLevelInf() {
-    var logLine = new LogLine("[INF]: Timezone changed");
+    LogLine logLine = new LogLine("[INF]: Timezone changed");
     assertThat(logLine.getLogLevel()).isEqualTo(LogLevel.valueOf("INFO"));
   }
 
@@ -38,7 +37,7 @@ public class LogsLogsLogsTest {
   @Tag("task:1")
   @DisplayName("Parsing log level WRN")
   public void parseLogLevelWrn() {
-    var logLine = new LogLine("[WRN]: Timezone not set");
+    LogLine logLine = new LogLine("[WRN]: Timezone not set");
     assertThat(logLine.getLogLevel()).isEqualTo(LogLevel.valueOf("WARNING"));
   }
 
@@ -46,7 +45,7 @@ public class LogsLogsLogsTest {
   @Tag("task:1")
   @DisplayName("Parsing log level ERR")
   public void parseLogLevelErr() {
-    var logLine = new LogLine("[ERR]: Disk full");
+    LogLine logLine = new LogLine("[ERR]: Disk full");
     assertThat(logLine.getLogLevel()).isEqualTo(LogLevel.valueOf("ERROR"));
   }
 

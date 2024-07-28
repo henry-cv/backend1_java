@@ -1,6 +1,8 @@
 package com.backend.test;
 
 import com.backend.service.FiguraService;
+import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
@@ -27,6 +29,8 @@ class FiguraServiceTest {
     assertEquals("El valor del radio o lado debe ser mayor que cero", resultado);
   }
   @Test
+  @Tag("task:3")
+  @DisplayName("Radio positivo calcular Área de Círculo")
   public void dadoRadioPositivo_CalculeAreaCirculo(){
     resultado = FIGURASERVICE.calcularAreaFigura(FiguraService.CIRCULO,5);
     assertEquals("El área del "+ FIGURASERVICE.CIRCULO + " es " +FiguraService.area + " unidades",resultado);
@@ -36,6 +40,7 @@ class FiguraServiceTest {
 
   //TEST PARA FIGURA NO SOPORTADA
   @Test
+
   public void dadoNombreFiguraNoSoportada_CalculeAreaFigura(){
     resultado = FIGURASERVICE.calcularAreaFigura("ROMBO",5);
     assertEquals("FIGURA NO SOPORTADA", resultado);
