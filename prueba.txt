@@ -2,4 +2,4 @@ linea 1 cuenta1 gh
 linea 2 cuenta 2 gh
 linea 3 cuenta 1 gh
 linea 4 desde cuenta1
-linea 5 cuenta 1 gh, esperando cambios
+linea 5 cuenta 1 gh, tu cambio no corresponde
