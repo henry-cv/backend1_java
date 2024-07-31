@@ -48,4 +48,14 @@ public class Arbol {
   public String mostrar() {
     return "Se creo un árbol de tipo: " + this.tipoArbol;
   }
+
+  @Override
+  public String toString() {
+    return "Arbol{" +
+            "alto=" + alto +
+            ", ancho=" + ancho +
+            ", color='" + color + '\'' +
+            ", tipoArbol='" + tipoArbol + '\'' +
+            '}';
+  }
 }
