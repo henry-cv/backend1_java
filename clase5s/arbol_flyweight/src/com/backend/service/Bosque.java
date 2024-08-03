@@ -8,7 +8,7 @@ import java.util.List;
 public class Bosque {
   private final List<Arbol> arboles = new ArrayList<Arbol>();
   public void plantarArbol(Arbol arbol){
-
+    arboles.add(arbol);
   }
   public void mostrarArboles(){
     for (Arbol arbol: arboles){
