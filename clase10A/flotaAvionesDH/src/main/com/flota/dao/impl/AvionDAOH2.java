@@ -6,6 +6,7 @@ import main.com.flota.model.Avion;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
+import org.apache.log4j.Logger;
 
 public class AvionDAOH2 implements IDao<Avion> {
   private static final String DB_JDBC_DRIVER = "org.h2.Driver";
@@ -13,7 +14,16 @@ public class AvionDAOH2 implements IDao<Avion> {
   private static final String DB_USER = "sa";
   private static final String DB_PASSWORD = "sa";
 
+  //Agregada para log4j
+  private static final Logger LOGGER = Logger.getLogger(AvionDAOH2.class);
   public AvionDAOH2() {
+    try {
+      crearTabla();
+    } catch (SQLException e) {
+      throw new RuntimeException(e);
+    } catch (ClassNotFoundException e) {
+      throw new RuntimeException(e);
+    }
   }
 
   @Override
@@ -37,8 +47,10 @@ public class AvionDAOH2 implements IDao<Avion> {
       preparedStatement.executeUpdate();
       preparedStatement.close();
     } catch (SQLException | ClassNotFoundException throwables) {
+      LOGGER.error("Error de conexión al registrar Avión: ",throwables);
       throwables.printStackTrace();
     }
+    LOGGER.info("Avión Registrado: " +avion);
     return avion;
   }
 
@@ -71,9 +83,14 @@ public class AvionDAOH2 implements IDao<Avion> {
       }
       preparedStatement.close();
     } catch (SQLException | ClassNotFoundException throwables) {
+      LOGGER.error("Error de conexión en BD al buscar Avion: ",throwables);
       throwables.printStackTrace();
     }
-
+    if(avion==null) {
+      LOGGER.error("No se encontro avión con ese id: "+id);
+      return null;
+    }
+    LOGGER.info("Avion encontrado --> " +avion);
     return avion;
   }
 
@@ -91,14 +108,15 @@ public class AvionDAOH2 implements IDao<Avion> {
       preparedStatement.setLong(1, id);
 
       // 2.1 Imprimir Avion a Eliminar
-      System.out.println("Avion a eliminar: "+buscarAvion(id));
+      System.out.println("Avión a eliminar: "+buscarAvion(id));
+      LOGGER.info("Avión  a eliminar --> "+buscarAvion(id));
       //3 Ejecutar una sentencia SQL
       preparedStatement.executeUpdate();
       preparedStatement.close();
     } catch (SQLException | ClassNotFoundException throwables) {
       throwables.printStackTrace();
     }
-
+    LOGGER.info("¡Avión ya eliminado! ");
   }
 
   @Override
@@ -112,18 +130,46 @@ public class AvionDAOH2 implements IDao<Avion> {
 
       preparedStatement = connection.prepareStatement("SELECT * FROM aviones");
       ResultSet resultLista = preparedStatement.executeQuery();
-
+      LOGGER.info("< -------------------------------------------------------------- >");
+      LOGGER.info("Mostrando todos los Aviones");
       while (resultLista.next()) {
         Long id = resultLista.getLong("id");
         String marca = resultLista.getString("marca");
         String modelo = resultLista.getString("modelo");
         String matricula = resultLista.getString("matricula");
         String fecha = resultLista.getString("fechaEntrada");
-        aviones.add(new Avion(id, marca, modelo, matricula, fecha));
+        Avion av = (new Avion(id, marca, modelo, matricula, fecha));
+        aviones.add(av);
+        LOGGER.info("Avión agregado: "+av);
       }
     } catch (SQLException | ClassNotFoundException throwables) {
       throwables.printStackTrace();
     }
     return aviones;
+  }
+  public void crearTabla() throws SQLException, ClassNotFoundException {
+    Connection connection = null;
+    try {
+      connection = getConnection();
+      String crea = "DROP TABLE IF EXISTS aviones; CREATE TABLE aviones(id BIGINT PRIMARY KEY, modelo VARCHAR(255), marca VARCHAR(255), matricula VARCHAR(255), fechaEntrada VARCHAR(255))";
+      //crear la tabla
+      Statement statement = connection.createStatement();
+      statement.execute(crea);
+    }catch (Exception exception){
+      exception.printStackTrace();
+      LOGGER.error(exception.getClass() + ": " + exception.getMessage());
+    }
+    finally{
+      try {
+        connection.close();
+      }catch (Exception exception){
+        LOGGER.error(exception.getMessage());
+      }
+    }
+  }
+  public static Connection getConnection() throws ClassNotFoundException, SQLException {
+    //indicar que driver vamos a usar para conectarnos
+    Class.forName(DB_JDBC_DRIVER);
+    return DriverManager.getConnection(DB_URL, DB_USER, DB_PASSWORD);
   }
 }
