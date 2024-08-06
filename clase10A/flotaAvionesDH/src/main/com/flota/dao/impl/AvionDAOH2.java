@@ -54,7 +54,7 @@ public class AvionDAOH2 implements IDao<Avion> {
       connection = DriverManager.getConnection(DB_URL, DB_USER, DB_PASSWORD);
 
       //2 Crear una sentencia
-      preparedStatement = connection.prepareStatement("SELECT id, marca, modelo, matricula, fechaEntrada WHERE id = ?");
+      preparedStatement = connection.prepareStatement("SELECT id, marca, modelo, matricula, fechaEntrada FROM aviones WHERE id = ? ");
       preparedStatement.setLong(1, id);
 
       //3 Ejecutar una sentencia
@@ -90,6 +90,8 @@ public class AvionDAOH2 implements IDao<Avion> {
       preparedStatement = connection.prepareStatement("DELETE FROM aviones where id = ?");
       preparedStatement.setLong(1, id);
 
+      // 2.1 Imprimir Avion a Eliminar
+      System.out.println("Avion a eliminar: "+buscarAvion(id));
       //3 Ejecutar una sentencia SQL
       preparedStatement.executeUpdate();
       preparedStatement.close();

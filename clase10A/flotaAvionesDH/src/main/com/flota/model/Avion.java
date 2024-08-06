@@ -54,4 +54,15 @@ public class Avion {
   public void setFechaEntrada(String fechaEntrada) {
     this.fechaEntrada = fechaEntrada;
   }
+
+  @Override
+  public String toString() {
+    return "Avion{" +
+            "id=" + id +
+            ", marca='" + marca + '\'' +
+            ", modelo='" + modelo + '\'' +
+            ", matricula='" + matricula + '\'' +
+            ", fechaEntrada='" + fechaEntrada + '\'' +
+            '}';
+  }
 }
