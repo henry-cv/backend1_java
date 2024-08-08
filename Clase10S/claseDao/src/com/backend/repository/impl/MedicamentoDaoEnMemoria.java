@@ -8,21 +8,23 @@ import java.util.List;
 import org.apache.log4j.Logger;
 
 public class MedicamentoDaoEnMemoria implements IDao<Medicamento> {
-    private static Long id = 1L;
+    private static Long localId = 1L;
     private static final List<Medicamento> listaMedicamentosMemoria = new ArrayList<>();
     private static final Logger LOGGER = Logger.getLogger(MedicamentoDaoEnMemoria.class);
 
     @Override
     public Medicamento registrar(Medicamento medicamento) {
-        medicamento.setId(id);
-        listaMedicamentosMemoria.add(medicamento);
-        id++;
-        LOGGER.info("Medicamento registrado: "+medicamento);
-        return medicamento;
+        Medicamento medicamentoX = new Medicamento(medicamento.getCodigo(), medicamento.getNombre(),medicamento.getLaboratorio(), medicamento.getCantidad(), medicamento.getPrecio());
+        medicamentoX.setId(localId);
+        listaMedicamentosMemoria.add(medicamentoX);
+        localId++;
+        LOGGER.info("Medicamento registrado: "+medicamentoX);
+        return medicamentoX;
     }
 
     @Override
     public List<Medicamento> listarTodos(){
+        LOGGER.info("Listando Todos los medicamentos");
         for (Medicamento med: listaMedicamentosMemoria){
             //System.out.println(med);
             LOGGER.info(med);

@@ -18,7 +18,7 @@ public class MedicamentoService implements IMedicamentoService {
     @Override
     public Medicamento registrarMedicamento(Medicamento medicamento) {
         //alguna logica de negocio
-        if(medicamento.getCantidad()==0  || medicamento.getPrecio() ==0 ) return null;
+        if(medicamento.getCantidad()==0  || medicamento.getPrecio() ==0 || medicamento.getCodigo() == 0) return null;
         return medicamentoIDao.registrar(medicamento);
     }
 
