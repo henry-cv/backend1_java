@@ -1,0 +1,1 @@
+DROP TABLE IF EXISTS aviones;CREATE TABLE aviones(id LONG PRIMARY KEY AUTO_INCREMENT NOT NULL, marca varchar(60) NOT NULL, modelo varchar(60) NOT NULL, matricula varchar(60) NOT NULL, fechaEntrada varchar(30) NOT NULL);
