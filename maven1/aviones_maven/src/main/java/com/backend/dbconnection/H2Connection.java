@@ -6,7 +6,7 @@ import java.sql.SQLException;
 
 public class H2Connection {
   private static final String DB_JDBC_DRIVER = "org.h2.Driver";
-  private static final String DB_URL= "jdbc:h2:~/avionesh2";
+  private static final String DB_URL= "jdbc:h2:~/avionesdb2";
   private static final String DB_USER= "sa";
   private static final String DB_PASSWORD= "sa";
 
