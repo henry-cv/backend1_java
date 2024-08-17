@@ -3,8 +3,7 @@ package com.backend.repository;
 import java.util.List;
 
 public interface IDao<T> {
-
-    T registrar(T t);
-    List<T> listar();
-
+  T registrar(T t);
+  T buscar(Long id);
+  List<T> listar();
 }

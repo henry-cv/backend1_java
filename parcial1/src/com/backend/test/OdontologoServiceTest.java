@@ -5,16 +5,15 @@ import com.backend.entity.Odontologo;
 import com.backend.repository.impl.OdontologoDaoH2;
 import com.backend.repository.impl.OdontologoDaoMemoria;
 import com.backend.service.impl.OdontologoService;
-import org.apache.log4j.Logger;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
 import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 class OdontologoServiceTest {
-  private static final org.apache.log4j.Logger LOGGER = Logger.getLogger(OdontologoServiceTest.class);
 
   @BeforeAll
   public static void cargarODontologosEnMemoria() {
@@ -35,9 +34,23 @@ class OdontologoServiceTest {
   }
 
   @Test
+  void dadoUnIdExistenteSeDebeBuscarEnH2ElOdontologoCorrespondiente() {
+    OdontologoService odontologoService = new OdontologoService(new OdontologoDaoH2());
+    Odontologo encontrado = odontologoService.buscarOdontologoPorId(2L);
+    assertNotNull(encontrado.getId());
+  }
+
+  @Test
   void seDebePoderListarTodosLosOdontologosAlmacenadosEnMemoriaYListaDistintaDeCero() {
     OdontologoService odontologoService = new OdontologoService(new OdontologoDaoMemoria());
     List<Odontologo> listadoOdontologos = odontologoService.listarOdontologos();
     assertNotEquals(0, listadoOdontologos.size());
+  }
+
+  @Test
+  void dadoUnIdExistenteSeDebeBuscarEnMemoriaElOdontologoCorrespondiente() {
+    OdontologoService odontologoService = new OdontologoService(new OdontologoDaoMemoria());
+    Odontologo encontrado = odontologoService.buscarOdontologoPorId(3L);
+    assertNotNull(encontrado.getId());
   }
 }
