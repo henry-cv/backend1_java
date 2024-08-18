@@ -65,15 +65,23 @@ class OdontologoServiceTest {
   void dadoUnIdInexistenteSeDebeEliminarOdontologoCorrespondienteEnH2() {
     OdontologoService odontologoService = new OdontologoService(new OdontologoDaoH2());
     Odontologo borrado = odontologoService.eliminarOdontologo(6L);
-    System.err.println(borrado);
+    System.err.println("Odontologo Borrado: " + borrado);
     assertEquals(null, borrado);
   }
 
   @Test
-  void dadoUnIdSeDebeEliminarOdontologoCorrespondienteEnMemoria() {
+  void dadoUnIdExistenteSeDebeEliminarOdontologoCorrespondienteEnMemoria() {
     OdontologoService odontologoService = new OdontologoService(new OdontologoDaoMemoria());
     Odontologo borrado = odontologoService.eliminarOdontologo(3L);
     System.err.println("Odontologo Borrado: " + borrado);
     assertEquals(3, borrado.getId());
+  }
+
+  @Test
+  void dadoUnIdInexistenteNoDebeEliminarOdontologoCorrespondienteEnMemoria() {
+    OdontologoService odontologoService = new OdontologoService(new OdontologoDaoMemoria());
+    Odontologo borrado = odontologoService.eliminarOdontologo(6L);
+    System.err.println("Odontologo Borrado: " + borrado);
+    assertEquals(null, borrado);
   }
 }
