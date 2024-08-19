@@ -10,8 +10,7 @@ import org.junit.jupiter.api.Test;
 
 import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.assertNotEquals;
-import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.*;
 
 class OdontologoServiceTest {
 
@@ -52,5 +51,37 @@ class OdontologoServiceTest {
     OdontologoService odontologoService = new OdontologoService(new OdontologoDaoMemoria());
     Odontologo encontrado = odontologoService.buscarOdontologoPorId(3L);
     assertNotNull(encontrado.getId());
+  }
+
+  @Test
+  void dadoUnIdExistenteSeDebeEliminarOdontologoCorrespondienteEnH2() {
+    OdontologoService odontologoService = new OdontologoService(new OdontologoDaoH2());
+    Odontologo borrado = odontologoService.eliminarOdontologo(3L);
+    System.err.println(borrado);
+    assertEquals(3, borrado.getId());
+  }
+
+  @Test
+  void dadoUnIdInexistenteSeDebeEliminarOdontologoCorrespondienteEnH2() {
+    OdontologoService odontologoService = new OdontologoService(new OdontologoDaoH2());
+    Odontologo borrado = odontologoService.eliminarOdontologo(6L);
+    System.err.println("Odontologo Borrado: " + borrado);
+    assertNull(borrado);
+  }
+
+  @Test
+  void dadoUnIdExistenteSeDebeEliminarOdontologoCorrespondienteEnMemoria() {
+    OdontologoService odontologoService = new OdontologoService(new OdontologoDaoMemoria());
+    Odontologo borrado = odontologoService.eliminarOdontologo(3L);
+    System.err.println("Odontologo Borrado: " + borrado);
+    assertEquals(3, borrado.getId());
+  }
+
+  @Test
+  void dadoUnIdInexistenteNoDebeEliminarOdontologoCorrespondienteEnMemoria() {
+    OdontologoService odontologoService = new OdontologoService(new OdontologoDaoMemoria());
+    Odontologo borrado = odontologoService.eliminarOdontologo(6L);
+    System.err.println("Odontologo Borrado: " + borrado);
+    assertNull(borrado);
   }
 }

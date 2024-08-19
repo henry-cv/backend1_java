@@ -24,6 +24,11 @@ public class OdontologoService implements IOdontologoService {
   }
 
   @Override
+  public Odontologo eliminarOdontologo(Long id) {
+    return odontologoDao.eliminar(id);
+  }
+
+  @Override
   public List<Odontologo> listarOdontologos() {
     return odontologoDao.listar();
   }

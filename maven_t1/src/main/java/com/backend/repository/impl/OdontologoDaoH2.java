@@ -90,6 +90,46 @@ public class OdontologoDaoH2 implements IDao<Odontologo> {
     return buscado;
   }
 
+@Override
+  public Odontologo eliminar(Long id) {
+    Odontologo odontologoEliminado = buscar(id);
+    if(odontologoEliminado == null)
+      return null;
+    Connection connection = null;
+    try {
+      connection = H2Connection.getConnection();
+      connection.setAutoCommit(false);
+      String delete = "DELETE FROM ODONTOLOGOS WHERE id = ?";
+      PreparedStatement preparedStatement = connection.prepareStatement(delete);
+      preparedStatement.setLong(1, id);
+      int registros = preparedStatement.executeUpdate();
+      connection.commit();
+      LOGGER.info("Se ha eliminado: " + registros + " registros");
+      LOGGER.info("Odontologo eliminado: " + odontologoEliminado);
+      return odontologoEliminado;
+    } catch (Exception ex) {
+      LOGGER.error(ex.getMessage());
+      if(connection != null) {
+        try {
+          connection.rollback();
+          LOGGER.info("Tuvimos un problema");
+          LOGGER.error(ex.getMessage());
+          ex.printStackTrace();
+        } catch (SQLException sqlException) {
+          LOGGER.error(sqlException.getMessage());
+          sqlException.printStackTrace();
+        }
+      }
+    } finally {
+      try {
+        connection.close();
+      } catch (Exception ex) {
+        LOGGER.error("No se pudo cerrar la conexion: " + ex.getMessage());
+      }
+    }
+    return odontologoEliminado;
+  }
+
   @Override
   public List<Odontologo> listar() {
     List<Odontologo> listaOdontologos = new ArrayList<>();

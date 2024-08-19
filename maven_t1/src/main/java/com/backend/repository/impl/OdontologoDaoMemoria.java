@@ -37,6 +37,14 @@ public class OdontologoDaoMemoria implements IDao<Odontologo> {
     return buscado;
   }
 
+ @Override
+  public Odontologo eliminar(Long id) {
+    Odontologo odontologoEliminado = buscar(id);
+    LOGGER.info("Odontologo Eliminado: " + odontologoEliminado);
+    listaOdontologos.remove(odontologoEliminado);
+    return odontologoEliminado;
+  }
+
   @Override
   public List<Odontologo> listar() {
     LOGGER.info("Listando Todos los Odontologos: " + listaOdontologos);
