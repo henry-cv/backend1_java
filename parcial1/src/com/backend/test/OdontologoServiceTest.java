@@ -56,9 +56,9 @@ class OdontologoServiceTest {
   @Test
   void dadoUnIdExistenteSeDebeEliminarOdontologoCorrespondienteEnH2() {
     OdontologoService odontologoService = new OdontologoService(new OdontologoDaoH2());
-    Odontologo borrado = odontologoService.eliminarOdontologo(2L);
+    Odontologo borrado = odontologoService.eliminarOdontologo(3L);
     System.err.println(borrado);
-    assertEquals(2, borrado.getId());
+    assertEquals(3, borrado.getId());
   }
 
   @Test
@@ -66,7 +66,7 @@ class OdontologoServiceTest {
     OdontologoService odontologoService = new OdontologoService(new OdontologoDaoH2());
     Odontologo borrado = odontologoService.eliminarOdontologo(6L);
     System.err.println("Odontologo Borrado: " + borrado);
-    assertEquals(null, borrado);
+    assertNull(borrado);
   }
 
   @Test
@@ -82,6 +82,6 @@ class OdontologoServiceTest {
     OdontologoService odontologoService = new OdontologoService(new OdontologoDaoMemoria());
     Odontologo borrado = odontologoService.eliminarOdontologo(6L);
     System.err.println("Odontologo Borrado: " + borrado);
-    assertEquals(null, borrado);
+    assertNull(borrado);
   }
 }
