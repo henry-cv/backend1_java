@@ -1,11 +1,11 @@
-package com.backend.clinica.service.impl;
+package com.backend.service.impl;
 
-import com.backend.clinica.dto.entrada.PacienteEntradaDto;
-import com.backend.clinica.dto.salida.PacienteSalidaDto;
-import com.backend.clinica.entity.Paciente;
-import com.backend.clinica.repository.IDao;
-import com.backend.clinica.service.IPacienteService;
-import com.backend.clinica.utils.JsonPrinter;
+import com.backend.dto.entrada.PacienteEntradaDto;
+import com.backend.dto.salida.PacienteSalidaDto;
+import com.backend.entity.Paciente;
+import com.backend.repository.IDao;
+import com.backend.service.IPacienteService;
+import com.backend.utils.JsonPrinter;
 import org.modelmapper.ModelMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -48,7 +48,7 @@ public class PacienteService implements IPacienteService {
 
     @Override
     public List<PacienteSalidaDto> listarPacientes() {
-        List<PacienteSalidaDto> pacienteSalidaDtos = pacienteIDao.listarTodos()
+        List<PacienteSalidaDto> pacienteSalidaDtos = pacienteIDao.listar()
                 .stream()
                 .map(paciente -> modelMapper.map(paciente, PacienteSalidaDto.class))
                 .toList();

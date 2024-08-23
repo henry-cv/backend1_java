@@ -1,4 +1,4 @@
-package com.backend.clinica.dto.salida;
+package com.backend.dto.salida;
 
 public class DomicilioSalidaDto {
     private Long id;

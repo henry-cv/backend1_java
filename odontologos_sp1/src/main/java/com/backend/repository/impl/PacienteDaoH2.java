@@ -1,10 +1,10 @@
-package com.backend.clinica.repository.impl;
+package com.backend.repository.impl;
 
 
-import com.backend.clinica.dbconnection.H2Connection;
-import com.backend.clinica.entity.Domicilio;
-import com.backend.clinica.entity.Paciente;
-import com.backend.clinica.repository.IDao;
+import com.backend.dbconnection.H2Connection;
+import com.backend.entity.Domicilio;
+import com.backend.entity.Paciente;
+import com.backend.repository.IDao;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -76,7 +76,7 @@ public class PacienteDaoH2 implements IDao<Paciente> {
     }
 
     @Override
-    public Paciente buscarPorId(Long id) {
+    public Paciente buscar(Long id) {
         Paciente pacienteBuscado = null;
         Connection connection = null;
         try {
@@ -111,13 +111,18 @@ public class PacienteDaoH2 implements IDao<Paciente> {
     }
 
     @Override
-    public List<Paciente> listarTodos() {
+    public Paciente eliminar(Long id) {
+        return null;
+    }
+
+    @Override
+    public List<Paciente> listar() {
         return new ArrayList<>();
     }
 
     private Paciente crearObjetoPaciente(ResultSet resultSet) throws SQLException {
 
-        Domicilio domicilio = new DomicilioDaoH2().buscarPorId(resultSet.getLong("domicilio_id"));
+        Domicilio domicilio = new DomicilioDaoH2().buscar(resultSet.getLong("domicilio_id"));
 
         return new Paciente(resultSet.getLong("id"), resultSet.getString("nombre"), resultSet.getString("apellido"), resultSet.getInt("dni"), resultSet.getDate("fecha").toLocalDate(), domicilio);
 

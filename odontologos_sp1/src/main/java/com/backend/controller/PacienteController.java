@@ -1,9 +1,9 @@
-package com.backend.clinica.controller;
+package com.backend.controller;
 
-import com.backend.clinica.dto.entrada.PacienteEntradaDto;
-import com.backend.clinica.dto.salida.PacienteSalidaDto;
+import com.backend.dto.entrada.PacienteEntradaDto;
+import com.backend.dto.salida.PacienteSalidaDto;
 
-import com.backend.clinica.service.IPacienteService;
+import com.backend.service.IPacienteService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;

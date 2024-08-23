@@ -1,8 +1,8 @@
-package com.backend.clinica.repository.impl;
+package com.backend.repository.impl;
 
-import com.backend.clinica.dbconnection.H2Connection;
-import com.backend.clinica.entity.Domicilio;
-import com.backend.clinica.repository.IDao;
+import com.backend.dbconnection.H2Connection;
+import com.backend.entity.Domicilio;
+import com.backend.repository.IDao;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -66,8 +66,14 @@ public class DomicilioDaoH2 implements IDao<Domicilio> {
         return domicilioRegistrado;
     }
 
+
     @Override
-    public Domicilio buscarPorId(Long id) {
+    public Domicilio eliminar(Long id) {
+        return null;
+    }
+
+    @Override
+    public Domicilio buscar(Long id) {
         Domicilio domicilioBuscado = null;
         Connection connection = null;
 
@@ -101,9 +107,8 @@ public class DomicilioDaoH2 implements IDao<Domicilio> {
     }
 
 
-
     @Override
-    public List<Domicilio> listarTodos() {
+    public List<Domicilio> listar() {
         return null;
     }
 

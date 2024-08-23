@@ -1,8 +1,8 @@
-package com.backend.clinica.service;
+package com.backend.service;
 
-import com.backend.clinica.dto.entrada.PacienteEntradaDto;
-import com.backend.clinica.dto.salida.PacienteSalidaDto;
-import com.backend.clinica.entity.Paciente;
+import com.backend.dto.entrada.PacienteEntradaDto;
+import com.backend.dto.salida.PacienteSalidaDto;
+import com.backend.entity.Paciente;
 
 import java.util.List;
 

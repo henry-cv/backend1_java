@@ -1,4 +1,4 @@
-package com.backend.clinica.utils;
+package com.backend.utils;
 
 import com.google.gson.*;
 

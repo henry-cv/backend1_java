@@ -1,4 +1,4 @@
-package com.backend.clinica.dto.entrada;
+package com.backend.dto.entrada;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 

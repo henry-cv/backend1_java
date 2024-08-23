@@ -1,11 +1,12 @@
-package com.backend.clinica.utils;
+package com.backend.utils;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
-
+import com.backend.utils.LocalDateTimeAdapter;
+import com.backend.utils.LocalDateAdapter;
 
 public class JsonPrinter {
 

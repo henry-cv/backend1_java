@@ -1,4 +1,4 @@
-package com.backend.clinica.dto.entrada;
+package com.backend.dto.entrada;
 
 import javax.validation.constraints.Digits;
 import javax.validation.constraints.NotBlank;

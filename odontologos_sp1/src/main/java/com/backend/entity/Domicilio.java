@@ -1,4 +1,4 @@
-package com.backend.clinica.entity;
+package com.backend.entity;
 
 public class Domicilio {
     private Long id;
