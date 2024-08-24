@@ -1,0 +1,34 @@
+package com.backend.repository.impl;
+
+import com.backend.entity.Turno;
+import com.backend.repository.IDao;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import java.util.List;
+
+public class TurnoDaoH2 implements IDao<Turno> {
+
+  private final Logger LOGGER = LoggerFactory.getLogger(TurnoDaoH2.class);
+  private TurnoDaoH2 turnoDaoH2;
+
+  @Override
+  public Turno registrar(Turno turno) {
+    return null;
+  }
+
+  @Override
+  public Turno buscar(Long id) {
+    return null;
+  }
+
+  @Override
+  public Turno eliminar(Long id) {
+    return null;
+  }
+
+  @Override
+  public List<Turno> listar() {
+    return List.of();
+  }
+}
