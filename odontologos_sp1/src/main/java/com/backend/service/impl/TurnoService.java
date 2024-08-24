@@ -14,6 +14,7 @@ import com.backend.utils.JsonPrinter;
 import org.modelmapper.ModelMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -22,6 +23,7 @@ import java.util.List;
 public class TurnoService implements ITurnoService {
 
   private final Logger LOGGER = LoggerFactory.getLogger(TurnoService.class);
+  @Autowired
   private final IDao<Turno> turnoIDao;
   private final ModelMapper modelMapper;
 
