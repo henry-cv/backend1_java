@@ -1,7 +1,7 @@
 package com.backend.entity;
 
 import java.time.LocalDate;
-import com.backend.entity.Domicilio;
+
 public class Paciente {
     private Long id;
     private String nombre;

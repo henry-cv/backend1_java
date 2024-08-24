@@ -27,24 +27,20 @@ public class OdontologoController {
 
   //POST para crear un registro Odontologo
 
-  //htt
-  @PostMapping("/registrar")
+  //http://localhost:8080/odontologos/registrar
+  /*@PostMapping("/registrar")
   public OdontologoSalidaDto registrarOdontologo(@RequestBody @Valid OdontologoEntradaDto odontologo){
     //return odontologoService.registrarOdontologo(odontologo);
     return null;
+  }*/
+  @PostMapping("/registrar")
+  public Odontologo registrarOdontologo(Odontologo odontologo){
+    return odontologoService.registrarOdontologo(odontologo);
+    //return null;
   }
-
   @GetMapping("/listar")
   public List<Odontologo> listarOdontologos(){
-
     OdontologoService odontologoService = new OdontologoService(new OdontologoDaoH2());
-    /*
-    odontologoService.registrarOdontologo(new Odontologo("matricula-001", "Pepito", "Perez"));
-    odontologoService.registrarOdontologo(new Odontologo("matricula-002", "Aquiles", "Brinco"));
-    odontologoService.registrarOdontologo(new Odontologo("matricula-003", "Armando", "Casas"));
-    odontologoService.registrarOdontologo(new Odontologo("matricula-004", "Betty", "Pinzón"));
-    */
-
     return odontologoService.listarOdontologos();
   }
 

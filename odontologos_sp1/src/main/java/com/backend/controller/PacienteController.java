@@ -12,7 +12,6 @@ import javax.validation.Valid;
 import java.util.List;
 
 @RestController
-//@RequestMapping("pacientes")
 @RequestMapping("/pacientes")
 public class PacienteController {
 
