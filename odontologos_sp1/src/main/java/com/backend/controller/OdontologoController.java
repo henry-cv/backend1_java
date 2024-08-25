@@ -1,7 +1,7 @@
 package com.backend.controller;
 
 import com.backend.dto.entrada.OdontologoEntradaDto;
-import com.backend.dto.entrada.PacienteEntradaDto;
+import com.backend.dto.entrada.OdontologoEntradaDto;
 import com.backend.dto.salida.OdontologoSalidaDto;
 import com.backend.dto.salida.PacienteSalidaDto;
 import com.backend.entity.Odontologo;
@@ -28,24 +28,18 @@ public class OdontologoController {
   //POST para crear un registro Odontologo
 
   //http://localhost:8080/odontologos/registrar
-  /*@PostMapping("/registrar")
-  public OdontologoSalidaDto registrarOdontologo(@RequestBody @Valid OdontologoEntradaDto odontologo){
-    //return odontologoService.registrarOdontologo(odontologo);
-    return null;
-  }*/
   @PostMapping("/registrar")
-  public Odontologo registrarOdontologo(Odontologo odontologo){
-    return odontologoService.registrarOdontologo(odontologo);
-    //return null;
+  public ResponseEntity<OdontologoSalidaDto> registrarOdontologo(@RequestBody @Valid OdontologoEntradaDto odontologoEntradaDto){
+    OdontologoSalidaDto odontologoSalidaDto = odontologoService.registrarOdontologo(odontologoEntradaDto);
+    return new ResponseEntity<>(odontologoSalidaDto, HttpStatus.CREATED);
   }
   @GetMapping("/listar")
-  public List<Odontologo> listarOdontologos(){
-    OdontologoService odontologoService = new OdontologoService(new OdontologoDaoH2());
-    return odontologoService.listarOdontologos();
+  public ResponseEntity<List<OdontologoSalidaDto>> listarOdontologos(){
+    return new ResponseEntity<>(odontologoService.listarOdontologos(), HttpStatus.OK);
   }
 
   @GetMapping("/{id}") //localhost:8080/odontologos/x
-  public ResponseEntity<Odontologo> buscarOdontologoPorId(@PathVariable Long id){
+  public ResponseEntity<OdontologoSalidaDto> buscarOdontologoPorId(@PathVariable Long id){
     return new ResponseEntity<>(odontologoService.buscarOdontologoPorId(id), HttpStatus.OK);
   }
 
