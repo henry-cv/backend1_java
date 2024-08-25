@@ -1,18 +1,11 @@
 package com.backend.controller;
 
 import com.backend.dto.entrada.OdontologoEntradaDto;
-import com.backend.dto.entrada.OdontologoEntradaDto;
 import com.backend.dto.salida.OdontologoSalidaDto;
-import com.backend.dto.salida.PacienteSalidaDto;
-import com.backend.entity.Odontologo;
-import com.backend.repository.impl.OdontologoDaoH2;
-import com.backend.repository.impl.OdontologoDaoMemoria;
 import com.backend.service.IOdontologoService;
-import com.backend.service.impl.OdontologoService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
 import javax.validation.Valid;
 import java.util.List;
 
@@ -42,5 +35,8 @@ public class OdontologoController {
   public ResponseEntity<OdontologoSalidaDto> buscarOdontologoPorId(@PathVariable Long id){
     return new ResponseEntity<>(odontologoService.buscarOdontologoPorId(id), HttpStatus.OK);
   }
-
+  @DeleteMapping("/{id}") //localhost:8080/odontologos/x
+  public ResponseEntity<OdontologoSalidaDto> eliminarOdontologoPorId(@PathVariable Long id){
+    return new ResponseEntity<>(odontologoService.eliminarOdontologo(id), HttpStatus.OK);
+  }
 }
