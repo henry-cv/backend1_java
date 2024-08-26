@@ -19,7 +19,6 @@ public class OdontologoDaoH2 implements IDao<Odontologo> {
   public Odontologo registrar(Odontologo odontologo) {
     Odontologo odontologoRegistrado = null;
     Connection connection = null;
-
     try {
       connection = H2Connection.getConnection();
       connection.setAutoCommit(false);
@@ -88,7 +87,12 @@ public class OdontologoDaoH2 implements IDao<Odontologo> {
         ex.printStackTrace();
       }
     }
-    LOGGER.info("Odontologo encontrado: " + buscado);
+
+    if(buscado ==null)
+      LOGGER.error("No se ha encontrado el odontólogo con id: " + id);
+    else
+      LOGGER.info("Odontologo encontrado: " + buscado);
+
     return buscado;
   }
 

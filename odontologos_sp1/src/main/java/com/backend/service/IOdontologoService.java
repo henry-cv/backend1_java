@@ -10,5 +10,6 @@ public interface IOdontologoService {
   OdontologoSalidaDto registrarOdontologo(OdontologoEntradaDto odontologo);
   OdontologoSalidaDto buscarOdontologoPorId(Long id);
   OdontologoSalidaDto eliminarOdontologo(Long id);
+  OdontologoSalidaDto actualizarOdontologo(OdontologoEntradaDto odontologoEntradaDto, Long id);
   List<OdontologoSalidaDto> listarOdontologos();
 }
