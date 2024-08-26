@@ -1,0 +1,36 @@
+:root {
+  --Texto1: #000;
+}
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+html {
+  font-size: 62.5%;
+}
+body {
+  font-size: 1.6rem;
+}
+header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 3rem;
+  row-gap: 2rem;
+  text-align: center;
+  nav {
+    padding: 0rem 1.4rem;
+  }
+}
+
+header nav ul {
+  display: flex;
+  column-gap: 2rem;
+  li {
+    list-style-type: none;
+  }
+  a {
+    text-decoration: none;
+  }
+}
