@@ -1,17 +1,15 @@
 package com.backend.service;
 
-import com.backend.entity.Odontologo;
+import com.backend.dto.entrada.OdontologoEntradaDto;
+import com.backend.dto.salida.OdontologoSalidaDto;
 import org.springframework.stereotype.Service;
-
 import java.util.List;
 
 @Service
 public interface IOdontologoService {
-  Odontologo registrarOdontologo(Odontologo odontologo);
-
-  Odontologo buscarOdontologoPorId(Long id);
-
-  Odontologo eliminarOdontologo(Long id);
-
-  List<Odontologo> listarOdontologos();
+  OdontologoSalidaDto registrarOdontologo(OdontologoEntradaDto odontologo);
+  OdontologoSalidaDto buscarOdontologoPorId(Long id);
+  OdontologoSalidaDto eliminarOdontologo(Long id);
+  OdontologoSalidaDto actualizarOdontologo(OdontologoEntradaDto odontologoEntradaDto, Long id);
+  List<OdontologoSalidaDto> listarOdontologos();
 }

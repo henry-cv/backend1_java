@@ -1,7 +1,7 @@
 package com.backend.entity;
 
 import java.time.LocalDate;
-import com.backend.entity.Domicilio;
+
 public class Paciente {
     private Long id;
     private String nombre;
@@ -75,4 +75,8 @@ public class Paciente {
         this.domicilio = domicilio;
     }
 
+    @Override
+    public String toString() {
+        return "Paciente{" + "id=" + id + ", nombre='" + nombre + '\'' + ", apellido='" + apellido + '\'' + ", dni=" + dni + ", fechaIngreso=" + fechaIngreso + ", domicilio=" + domicilio + '}';
+    }
 }
