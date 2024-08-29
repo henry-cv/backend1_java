@@ -1,7 +1,15 @@
 package com.backend.entity;
 
+import javax.persistence.*;
+
+@Entity
+@Table(name = "odontologos")
 public class Odontologo {
+
+  @Id
+  @GeneratedValue(strategy = GenerationType.IDENTITY)
   private Long id;
+
   private String matricula;
   private String nombre;
   private String apellido;

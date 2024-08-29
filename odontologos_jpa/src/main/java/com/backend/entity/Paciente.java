@@ -1,13 +1,28 @@
 package com.backend.entity;
 
+import net.bytebuddy.dynamic.loading.InjectionClassLoader;
+import org.hibernate.annotations.Cascade;
+
+import javax.persistence.*;
 import java.time.LocalDate;
 
+@Entity
+@Table(name="pacientes")
 public class Paciente {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
     private String nombre;
+
     private String apellido;
+
     private int dni;
+
     private LocalDate fechaIngreso;
+
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "domicilio_id")
     private Domicilio domicilio;
 
     public Paciente(String nombre, String apellido, int dni, LocalDate fechaIngreso, Domicilio domicilio) {
