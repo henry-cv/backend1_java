@@ -11,8 +11,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 public class Application {
   private static final Logger LOGGER = LoggerFactory.getLogger(OdontologosSp1Application.class);
 
-  public static void main(String[] args) {
-      H2Connection.inicializarScript();
+  public static void main(String[] args) {     
       SpringApplication.run(Application.class, args);
   }
 }
