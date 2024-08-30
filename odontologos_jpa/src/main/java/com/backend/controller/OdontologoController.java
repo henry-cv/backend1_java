@@ -2,6 +2,7 @@ package com.backend.controller;
 
 import com.backend.dto.entrada.OdontologoEntradaDto;
 import com.backend.dto.salida.OdontologoSalidaDto;
+import com.backend.repository.OdontologoRepository;
 import com.backend.service.IOdontologoService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -13,7 +14,7 @@ import java.util.List;
 @RestController
 @RequestMapping("/odontologos")
 public class OdontologoController {
-  private IOdontologoService odontologoService;
+  private final IOdontologoService odontologoService;
 
   public OdontologoController(IOdontologoService odontologoService) {
     this.odontologoService = odontologoService;
@@ -42,7 +43,8 @@ public class OdontologoController {
 
   //DELETE
   @DeleteMapping("/{id}") //localhost:8080/odontologos/x
-  public ResponseEntity<OdontologoSalidaDto> eliminarOdontologoPorId(@PathVariable Long id) {
-    return new ResponseEntity<>(odontologoService.eliminarOdontologo(id), HttpStatus.OK);
+  public ResponseEntity<String> eliminarOdontologoPorId(@PathVariable Long id) {
+    odontologoService.eliminarOdontologo(id);
+    return new ResponseEntity<>("Odontologo eliminado correctamente", HttpStatus.NO_CONTENT);
   }
 }
