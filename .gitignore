@@ -341,3 +341,7 @@ buildNumber.properties
 
 #fuente
 ##https://www.toptal.com/developers/gitignore/api/maven,intellij
+*/target/**
+**/target/
+**/target/**
+#por mi
