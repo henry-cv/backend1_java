@@ -317,6 +317,13 @@ out
 
 # SvelteKit build / generate output
 .svelte-kit
+## por el mismo intellij
+target/
+!.mvn/wrapper/maven-wrapper.jar
+!**/src/main/**/target/
+!**/src/test/**/target/
+
+## por el mismo intellij
 
 # End of https://www.toptal.com/developers/gitignore/api/node
 ## Maven ###
