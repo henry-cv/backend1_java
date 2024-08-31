@@ -4,15 +4,14 @@ import com.backend.entity.Odontologo;
 import com.backend.repository.IDao;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.stereotype.Repository;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class OdontologoDaoMemoria implements IDao<Odontologo> {
   private static final List<Odontologo> listaOdontologos = new ArrayList<>();
-  private static Long localId = 1L;
   private static final Logger LOGGER = LoggerFactory.getLogger(OdontologoDaoMemoria.class);
+  private static Long localId = 1L;
 
   @Override
   public Odontologo registrar(Odontologo odontologo) {
@@ -38,7 +37,7 @@ public class OdontologoDaoMemoria implements IDao<Odontologo> {
     return buscado;
   }
 
- @Override
+  @Override
   public Odontologo eliminar(Long id) {
     Odontologo odontologoEliminado = buscar(id);
     LOGGER.info("Odontologo Eliminado: " + odontologoEliminado);

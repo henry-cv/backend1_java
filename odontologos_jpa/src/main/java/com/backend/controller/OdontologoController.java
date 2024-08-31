@@ -2,7 +2,6 @@ package com.backend.controller;
 
 import com.backend.dto.entrada.OdontologoEntradaDto;
 import com.backend.dto.salida.OdontologoSalidaDto;
-import com.backend.repository.OdontologoRepository;
 import com.backend.service.IOdontologoService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

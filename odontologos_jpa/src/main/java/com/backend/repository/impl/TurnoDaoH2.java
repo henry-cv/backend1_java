@@ -66,13 +66,14 @@ public class TurnoDaoH2 implements IDao<Turno> {
     }
     return listaTurnos;
   }
+
   private Turno crearObjetoTurno(ResultSet resultSet) throws SQLException {
     Paciente paciente = new PacienteDaoH2().buscar(resultSet.getLong("PACIENTE_ID"));
-    LOGGER.info("Paciente localizado con resulSet: "+paciente);
+    LOGGER.info("Paciente localizado con resulSet: " + paciente);
     Odontologo odontologo = new OdontologoDaoH2().buscar(resultSet.getLong("ODONTOLOGO_ID"));
-    LOGGER.info("Odontologo localizado con resulSet: "+paciente);
+    LOGGER.info("Odontologo localizado con resulSet: " + paciente);
     LocalDateTime fecha = resultSet.getObject("fechahora", LocalDateTime.class);
-    LOGGER.info("Fecha obtenida con resulSet: "+paciente);
+    LOGGER.info("Fecha obtenida con resulSet: " + paciente);
     return new Turno(resultSet.getLong("id"), paciente, odontologo, fecha);
   }
 }

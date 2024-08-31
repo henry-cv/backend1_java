@@ -1,8 +1,6 @@
 package com.backend.controller;
 
-import com.backend.dto.entrada.PacienteEntradaDto;
 import com.backend.dto.entrada.TurnoEntradaDto;
-import com.backend.dto.salida.PacienteSalidaDto;
 import com.backend.dto.salida.TurnoSalidaDto;
 import com.backend.service.ITurnoService;
 import org.springframework.http.HttpStatus;
@@ -23,28 +21,32 @@ public class TurnoController {
 
   //localhost:8080/turnos/registrar
   @PostMapping("/registrar")
-  public ResponseEntity<TurnoSalidaDto> registrarTurno(@RequestBody @Valid TurnoEntradaDto turnoEntradaDto){
+  public ResponseEntity<TurnoSalidaDto> registrarTurno(@RequestBody @Valid TurnoEntradaDto turnoEntradaDto) {
     TurnoSalidaDto turnoSalidaDto = turnoService.registrarTurno(turnoEntradaDto);
     return new ResponseEntity<>(turnoSalidaDto, HttpStatus.CREATED);
   }
 
   //Get
   @GetMapping("/listar")
-  public ResponseEntity<List<TurnoSalidaDto>>listarTurnos(){
+  public ResponseEntity<List<TurnoSalidaDto>> listarTurnos() {
     return new ResponseEntity<>(turnoService.listarTurnos(), HttpStatus.OK);
   }
+
   @GetMapping("/{id}")//localhost:8080/turnos/x
-  public ResponseEntity<TurnoSalidaDto> buscarTurnoPorId(@PathVariable Long id){
+  public ResponseEntity<TurnoSalidaDto> buscarTurnoPorId(@PathVariable Long id) {
     return new ResponseEntity<>(turnoService.buscarTurnoPorId(id), HttpStatus.OK);
   }
+
   //PUT
   @PutMapping("/actualizar/{id}")
-  public ResponseEntity<TurnoSalidaDto> actualizarTurno(@RequestBody @Valid TurnoEntradaDto paciente, @PathVariable Long id){
+  public ResponseEntity<TurnoSalidaDto> actualizarTurno(@RequestBody @Valid TurnoEntradaDto paciente,
+                                                        @PathVariable Long id) {
     return new ResponseEntity<>(turnoService.actualizarTurno(paciente, id), HttpStatus.OK);
   }
+
   //DELETE
   @DeleteMapping("/eliminar")//localhost:8080/turnos/eliminar?id=x
-  public ResponseEntity<String> eliminarTurno(@RequestParam Long id){
+  public ResponseEntity<String> eliminarTurno(@RequestParam Long id) {
     turnoService.eliminarTurno(id);
     return new ResponseEntity<>("Turno eliminado correctamente", HttpStatus.NO_CONTENT);
   }

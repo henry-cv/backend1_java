@@ -31,8 +31,9 @@ public class PacienteDaoH2 implements IDao<Paciente> {
       domicilioDaoH2 = new DomicilioDaoH2();
       Domicilio domicilioRegistrado = domicilioDaoH2.registrar(paciente.getDomicilio());
 
-      PreparedStatement preparedStatement = connection.prepareStatement("INSERT INTO PACIENTES (NOMBRE, APELLIDO, " +
-              "DNI, FECHA, DOMICILIO_ID) VALUES (?, ?, ?, ?, ?)", Statement.RETURN_GENERATED_KEYS);
+      PreparedStatement preparedStatement =
+              connection.prepareStatement("INSERT INTO PACIENTES (NOMBRE, APELLIDO, " + "DNI, FECHA, DOMICILIO_ID) " +
+                      "VALUES (?, ?, ?, ?, ?)", Statement.RETURN_GENERATED_KEYS);
       preparedStatement.setString(1, paciente.getNombre());
       preparedStatement.setString(2, paciente.getApellido());
       preparedStatement.setInt(3, paciente.getDni());

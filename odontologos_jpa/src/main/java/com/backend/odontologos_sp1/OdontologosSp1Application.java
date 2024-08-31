@@ -7,10 +7,11 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
 public class OdontologosSp1Application {
-	private static final Logger LOGGER = LoggerFactory.getLogger(OdontologosSp1Application.class);
-	public static void main(String[] args) {
-		SpringApplication.run(OdontologosSp1Application.class, args);
-		LOGGER.info(" Odontólogo Application FUNCIONANDO ------->");
-	}
+  private static final Logger LOGGER = LoggerFactory.getLogger(OdontologosSp1Application.class);
+
+  public static void main(String[] args) {
+    SpringApplication.run(OdontologosSp1Application.class, args);
+    LOGGER.info(" Odontólogo Application FUNCIONANDO ------->");
+  }
 
 }

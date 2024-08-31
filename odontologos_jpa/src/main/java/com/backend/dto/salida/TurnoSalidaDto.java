@@ -17,7 +17,8 @@ public class TurnoSalidaDto {
     this.fechaHora = fechaHora;
   }
 
-  public TurnoSalidaDto(){}
+  public TurnoSalidaDto() {
+  }
 
   public Long getId() {
     return id;

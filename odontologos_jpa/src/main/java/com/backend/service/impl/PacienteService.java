@@ -1,15 +1,12 @@
 package com.backend.service.impl;
 
 import com.backend.dto.entrada.PacienteEntradaDto;
-import com.backend.dto.entrada.TurnoEntradaDto;
 import com.backend.dto.salida.PacienteSalidaDto;
 import com.backend.entity.Paciente;
-import com.backend.entity.Turno;
 import com.backend.repository.PacienteRepository;
 import com.backend.service.IPacienteService;
 import com.backend.utils.JsonPrinter;
 import org.modelmapper.ModelMapper;
-import org.modelmapper.TypeMap;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
@@ -109,13 +106,8 @@ public class PacienteService implements IPacienteService {
   }
 
   private void configureMapping() {
-    modelMapper.typeMap(PacienteEntradaDto.class, Paciente.class)
-            .addMappings(mapper -> mapper
-                    .map(PacienteEntradaDto::getDomicilioEntradaDto, Paciente::setDomicilio));
-    modelMapper.typeMap(Paciente.class, PacienteSalidaDto.class)
-            .addMappings(mapper -> mapper
-                    .map(Paciente::getDomicilio,
-                            PacienteSalidaDto::setDomicilioSalidaDto));
+    modelMapper.typeMap(PacienteEntradaDto.class, Paciente.class).addMappings(mapper -> mapper.map(PacienteEntradaDto::getDomicilioEntradaDto, Paciente::setDomicilio));
+    modelMapper.typeMap(Paciente.class, PacienteSalidaDto.class).addMappings(mapper -> mapper.map(Paciente::getDomicilio, PacienteSalidaDto::setDomicilioSalidaDto));
   }
 }
 

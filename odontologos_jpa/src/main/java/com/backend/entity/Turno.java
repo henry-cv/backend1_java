@@ -1,9 +1,7 @@
 package com.backend.entity;
 
-import java.time.LocalDateTime;
-import com.backend.entity.Paciente;
-
 import javax.persistence.*;
+import java.time.LocalDateTime;
 
 @Entity
 @Table(name = "turnos")
@@ -72,11 +70,6 @@ public class Turno {
 
   @Override
   public String toString() {
-    return "Turno{" +
-            "id=" + id +
-            ", paciente=" + paciente +
-            ", odontologo=" + odontologo +
-            ", fechaHora=" + fechaHora +
-            '}';
+    return "Turno{" + "id=" + id + ", paciente=" + paciente + ", odontologo=" + odontologo + ", fechaHora=" + fechaHora + '}';
   }
 }

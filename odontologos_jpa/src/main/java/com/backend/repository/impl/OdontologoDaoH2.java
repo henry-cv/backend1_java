@@ -88,7 +88,7 @@ public class OdontologoDaoH2 implements IDao<Odontologo> {
       }
     }
 
-    if(buscado ==null)
+    if(buscado == null)
       LOGGER.error("No se ha encontrado el odontólogo con id: " + id);
     else
       LOGGER.info("Odontologo encontrado: " + buscado);
@@ -96,7 +96,7 @@ public class OdontologoDaoH2 implements IDao<Odontologo> {
     return buscado;
   }
 
-@Override
+  @Override
   public Odontologo eliminar(Long id) {
     Odontologo odontologoEliminado = buscar(id);
     if(odontologoEliminado == null)

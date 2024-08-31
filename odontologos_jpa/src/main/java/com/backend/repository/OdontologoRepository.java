@@ -8,6 +8,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
 public interface OdontologoRepository extends JpaRepository<Odontologo, Long> {
   Odontologo findByMatricula(int matricula);
 
- // @Override
+  // @Override
   //Optional<Odontologo> findById(Long id);
 }

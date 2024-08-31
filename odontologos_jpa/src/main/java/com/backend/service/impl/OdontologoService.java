@@ -11,6 +11,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
 import java.util.List;
 
 @Service
@@ -28,8 +29,7 @@ public class OdontologoService implements IOdontologoService {
   @Override
   /*public Odontologo registrarOdontologo(Odontologo odontologo) {
     return odontologoDao.registrar(odontologo);
-  }*/
-  public OdontologoSalidaDto registrarOdontologo(OdontologoEntradaDto odontologoEntradaDto) {
+  }*/ public OdontologoSalidaDto registrarOdontologo(OdontologoEntradaDto odontologoEntradaDto) {
     LOGGER.info("OdontologoEntradaDto: {}", JsonPrinter.toString(odontologoEntradaDto));
     //Imprime a String el odóntologo de Entrada DTO, y es registrado al LOGGER
 
@@ -55,10 +55,11 @@ public class OdontologoService implements IOdontologoService {
   }
 
   @Override
-  public OdontologoSalidaDto buscarOdontologoPorId(Long id){
+  public OdontologoSalidaDto buscarOdontologoPorId(Long id) {
     Odontologo odontologoBuscado = odontologoRepository.findById(id).orElse(null);
     //Primero el IDao busca un odontologo por id, y lo guarda en odontologoBuscado
-    if(odontologoBuscado == null) throw new NullPointerException("No existe odontólogo con ese id");
+    if(odontologoBuscado == null)
+      throw new NullPointerException("No existe odontólogo con ese id");
     return modelMapper.map(odontologoBuscado, OdontologoSalidaDto.class);
     //El mapper convierte ese odontologoBuscado a un OdontologoSalidaDto
   }
@@ -67,13 +68,12 @@ public class OdontologoService implements IOdontologoService {
   public void eliminarOdontologo(Long id) {
     Odontologo odontologoEncontrado = odontologoRepository.findById(id).orElse(null);
     // Se envia a buscar el odontologo a eliminar y se guarda en odontologoEncontrado
-    if(odontologoEncontrado != null){
+    if(odontologoEncontrado != null) {
       LOGGER.warn("Se ha eliminado el odontólogo con id {}", id);
       odontologoRepository.deleteById(id);
       //Si lo encuentra se elimina el odontologo con ese id
       LOGGER.warn("Se ha eliminado el odontologo con id {}", id);
-    }
-    else {
+    } else {
       //excepcion resource not found
       LOGGER.warn("no Se ha eliminado porque no se encontró el odontologo con id {}", id);
     }
@@ -112,10 +112,9 @@ public class OdontologoService implements IOdontologoService {
 
   @Override
   public List<OdontologoSalidaDto> listarOdontologos() {
-    List<OdontologoSalidaDto> odontologosSalidaDtos = odontologoRepository.findAll()
-            .stream()
-            .map(odontologo -> modelMapper.map(odontologo, OdontologoSalidaDto.class))
-            .toList();
+    List<OdontologoSalidaDto> odontologosSalidaDtos =
+            odontologoRepository.findAll().stream().map(odontologo -> modelMapper.map(odontologo,
+                    OdontologoSalidaDto.class)).toList();
     LOGGER.info("Listado de todos los odontologos: {}", JsonPrinter.toString(odontologosSalidaDtos));
     return odontologosSalidaDtos;
   }

@@ -9,7 +9,9 @@ public class OdontologoSalidaDto {
 
   private String apellido;
 
-  public OdontologoSalidaDto(){}
+  public OdontologoSalidaDto() {
+  }
+
   public OdontologoSalidaDto(Long id, String matricula, String nombre, String apellido) {
     this.id = id;
     this.matricula = matricula;
@@ -51,6 +53,7 @@ public class OdontologoSalidaDto {
 
   @Override
   public String toString() {
-    return "OdontologoSalidaDto{" + "id=" + id + ", matricula='" + matricula + '\'' + ", nombre='" + nombre + '\'' + ", apellido='" + apellido + '\'' + '}';
+    return "OdontologoSalidaDto{" + "id=" + id + ", matricula='" + matricula + '\'' + ", nombre='" + nombre + '\'' +
+            ", apellido='" + apellido + '\'' + '}';
   }
 }
