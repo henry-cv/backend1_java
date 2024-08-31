@@ -1,26 +1,22 @@
 package com.backend.dto.salida;
 
-import com.backend.entity.Odontologo;
-import com.backend.entity.Paciente;
-import com.fasterxml.jackson.annotation.JsonFormat;
-
-import javax.validation.constraints.FutureOrPresent;
-import javax.validation.constraints.NotNull;
 import java.time.LocalDateTime;
 
 public class TurnoSalidaDto {
 
   Long id;
-  Paciente paciente;
-  Odontologo odontologo;
+  PacienteSalidaDto pacienteSalidaDto;
+  OdontologoSalidaDto odontologoSalidaDto;
   LocalDateTime fechaHora;
 
-  public TurnoSalidaDto(Long id, Paciente paciente, Odontologo odontologo, LocalDateTime fechaHora) {
+  public TurnoSalidaDto(Long id, PacienteSalidaDto pacienteSalidaDto, OdontologoSalidaDto odontologoSalidaDto,
+                        LocalDateTime fechaHora) {
     this.id = id;
-    this.paciente = paciente;
-    this.odontologo = odontologo;
+    this.pacienteSalidaDto = pacienteSalidaDto;
+    this.odontologoSalidaDto = odontologoSalidaDto;
     this.fechaHora = fechaHora;
   }
+
   public TurnoSalidaDto(){}
 
   public Long getId() {
@@ -31,20 +27,20 @@ public class TurnoSalidaDto {
     this.id = id;
   }
 
-  public Paciente getPaciente() {
-    return paciente;
+  public PacienteSalidaDto getPacienteSalidaDto() {
+    return pacienteSalidaDto;
   }
 
-  public void setPaciente(Paciente paciente) {
-    this.paciente = paciente;
+  public void setPacienteSalidaDto(PacienteSalidaDto pacienteSalidaDto) {
+    this.pacienteSalidaDto = pacienteSalidaDto;
   }
 
-  public Odontologo getOdontologo() {
-    return odontologo;
+  public OdontologoSalidaDto getOdontologoSalidaDto() {
+    return odontologoSalidaDto;
   }
 
-  public void setOdontologo(Odontologo odontologo) {
-    this.odontologo = odontologo;
+  public void setOdontologoSalidaDto(OdontologoSalidaDto odontologoSalidaDto) {
+    this.odontologoSalidaDto = odontologoSalidaDto;
   }
 
   public LocalDateTime getFechaHora() {

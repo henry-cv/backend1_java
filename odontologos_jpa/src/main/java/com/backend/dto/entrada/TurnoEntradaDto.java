@@ -10,37 +10,37 @@ import java.time.LocalDateTime;
 
 public class TurnoEntradaDto {
   @NotNull
-  Paciente paciente;
+  PacienteEntradaDto pacienteEntradaDto;
 
   @NotNull
-  Odontologo odontologo;
+  OdontologoEntradaDto odontologoEntradaDto;
 
   @FutureOrPresent(message = "La fecha no puede ser anterior al día de hoy")
   @NotNull(message = "Debe especificarse la fecha de ingreso del paciente")
   @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
   LocalDateTime fechaHora;
 
-  public TurnoEntradaDto(Paciente paciente, Odontologo odontologo, LocalDateTime fechaHora) {
-    this.paciente = paciente;
-    this.odontologo = odontologo;
+  public TurnoEntradaDto(PacienteEntradaDto pacienteEntradaDto, OdontologoEntradaDto odontologoEntradaDto,
+                         LocalDateTime fechaHora) {
+    this.pacienteEntradaDto = pacienteEntradaDto;
+    this.odontologoEntradaDto = odontologoEntradaDto;
     this.fechaHora = fechaHora;
   }
-  public TurnoEntradaDto(){};
 
-  public Paciente getPaciente() {
-    return paciente;
+  public PacienteEntradaDto getPacienteEntradaDto() {
+    return pacienteEntradaDto;
   }
 
-  public void setPaciente(Paciente paciente) {
-    this.paciente = paciente;
+  public void setPacienteEntradaDto(PacienteEntradaDto pacienteEntradaDto) {
+    this.pacienteEntradaDto = pacienteEntradaDto;
   }
 
-  public Odontologo getOdontologo() {
-    return odontologo;
+  public OdontologoEntradaDto getOdontologoEntradaDto() {
+    return odontologoEntradaDto;
   }
 
-  public void setOdontologo(Odontologo odontologo) {
-    this.odontologo = odontologo;
+  public void setOdontologoEntradaDto(OdontologoEntradaDto odontologoEntradaDto) {
+    this.odontologoEntradaDto = odontologoEntradaDto;
   }
 
   public LocalDateTime getFechaHora() {
