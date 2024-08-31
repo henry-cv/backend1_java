@@ -340,3 +340,7 @@ buildNumber.properties
 .mvn/wrapper/maven-wrapper.jar
 #fuente
 ##https://www.toptal.com/developers/gitignore/api/maven,intellij
+**/target/**
+*/target/**
+**/target/*
+#por mi
