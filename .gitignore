@@ -319,6 +319,7 @@ out
 .svelte-kit
 ## por el mismo intellij
 target/
+/target/
 !.mvn/wrapper/maven-wrapper.jar
 !**/src/main/**/target/
 !**/src/test/**/target/
