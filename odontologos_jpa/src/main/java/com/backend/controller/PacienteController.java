@@ -24,7 +24,7 @@ public class PacienteController {
   //JSON -> @RequestBody -> DTO Entrada -> controller --> service -> mapper = entidad --> repository --> BDD
   //--> entidad --> repository --> service -> mapper -> DTO Salida --> controller -> @ResponseBody -> JSON --> cliente
 
-  //POST
+  //POST Registrar nuevo Paciente
   @PostMapping("/registrar")
   public ResponseEntity<PacienteSalidaDto> registrarPaciente(
           @RequestBody @Valid PacienteEntradaDto pacienteEntradaDto) {
@@ -32,25 +32,26 @@ public class PacienteController {
     return new ResponseEntity<>(pacienteSalidaDto, HttpStatus.CREATED);
   }
 
-  //GET
+  //GET Listar Todos los Pacientes
   @GetMapping("/listar")
   public ResponseEntity<List<PacienteSalidaDto>> listarPacientes() {
     return new ResponseEntity<>(pacienteService.listarPacientes(), HttpStatus.OK);
   }
 
+  //Buscar por Id
   @GetMapping("/{id}")//localhost:8080/pacientes/x
   public ResponseEntity<PacienteSalidaDto> buscarPacientePorId(@PathVariable Long id) {
     return new ResponseEntity<>(pacienteService.buscarPacientePorId(id), HttpStatus.OK);
   }
 
-  //PUT
+  //PUT Actualizar por Id
   @PutMapping("/actualizar/{id}")
   public ResponseEntity<PacienteSalidaDto> actualizarPaciente(@RequestBody @Valid PacienteEntradaDto paciente,
                                                               @PathVariable Long id) {
     return new ResponseEntity<>(pacienteService.actualizarPaciente(paciente, id), HttpStatus.OK);
   }
 
-  //DELETE
+  //DELETE Eliminar un registro Paciente
   @DeleteMapping("/eliminar")//localhost:8080/pacientes/eliminar?id=x
   public ResponseEntity<String> eliminarPaciente(@RequestParam Long id) {
     pacienteService.eliminarPaciente(id);

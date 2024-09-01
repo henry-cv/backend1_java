@@ -62,7 +62,7 @@ public class PacienteService implements IPacienteService {
     return pacienteSalidaDtos;
   }
 
-
+  @Override
   public void eliminarPaciente(Long id) {
     if(buscarPacientePorId(id) != null) {
       //llamada a la capa repositorio para eliminar
@@ -70,6 +70,8 @@ public class PacienteService implements IPacienteService {
       LOGGER.warn("Se ha eliminado el paciente con id {}", id);
     } else {
       //excepcion resource not found
+      LOGGER.error("No se pudo eliminar con ese id: "+ id +" el paciente porque no se encuentra en nuestra base de " +
+              "datos");
     }
 
   }

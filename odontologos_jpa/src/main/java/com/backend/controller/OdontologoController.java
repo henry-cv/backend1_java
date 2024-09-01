@@ -40,10 +40,15 @@ public class OdontologoController {
     return new ResponseEntity<>(odontologoService.buscarOdontologoPorId(id), HttpStatus.OK);
   }
 
-  //DELETE
+  //DELETE Borrar por Id
   @DeleteMapping("/{id}") //localhost:8080/odontologos/x
   public ResponseEntity<String> eliminarOdontologoPorId(@PathVariable Long id) {
     odontologoService.eliminarOdontologo(id);
     return new ResponseEntity<>("Odontologo eliminado correctamente", HttpStatus.NO_CONTENT);
   }
+  @PutMapping("/actualizar/{id}")
+  public ResponseEntity<OdontologoSalidaDto> actualizarOdontologo(@RequestBody @Valid OdontologoEntradaDto odontologoEntradaDto, @PathVariable Long id){
+    return new ResponseEntity<>(odontologoService.actualizarOdontologo(odontologoEntradaDto, id), HttpStatus.OK);
+  }
+
 }

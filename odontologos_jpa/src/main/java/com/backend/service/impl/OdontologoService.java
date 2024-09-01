@@ -81,9 +81,10 @@ public class OdontologoService implements IOdontologoService {
   }
 
   @Override
+
   public OdontologoSalidaDto actualizarOdontologo(OdontologoEntradaDto odontologoEntradaDto, Long id) {
-    Odontologo odontologoBuscado = odontologoRepository.findById(id).orElse(null);
-    LOGGER.info("Odontologo Buscado por Id: {}", JsonPrinter.toString(odontologoBuscado));
+    Odontologo odontologoPorActualizar = odontologoRepository.findById(id).orElse(null);
+    LOGGER.info("Odontologo por actualizar por Id: {}", JsonPrinter.toString(odontologoPorActualizar));
     //PENDIENTE NO HAY EN REPOSITORY H2 UN MÉTODO ACTUALIZAR
 
     LOGGER.info("OdontologoEntradaDto: {}", JsonPrinter.toString(odontologoEntradaDto));
@@ -95,19 +96,17 @@ public class OdontologoService implements IOdontologoService {
     LOGGER.info("EntidadOdontologo: {}", JsonPrinter.toString(entidadOdontologo));
     //Imprime a String el odóntologo Entidad, y es registrado al LOGGER
 
-    Odontologo odontologoRegistrado = odontologoRepository.save(entidadOdontologo);
-    // Se agrega o registra un nuevo Odontólogo mediante el IDao y se guarda el objeto en odontologoRegistrado
-
-    LOGGER.info("OdontologoRegistrado: {}", JsonPrinter.toString(odontologoRegistrado));
-    //Imprime a String el odóntologo Registrado, y es registrado al LOGGER
-
-    OdontologoSalidaDto odontologoSalidaDto = modelMapper.map(odontologoRegistrado, OdontologoSalidaDto.class);
-    //El mapper toma el odontologoRegistado y lo convierte a un odontologoSalida DTO
-
-    LOGGER.info("OdontologoSalidaDto: {}", JsonPrinter.toString(odontologoSalidaDto));
-    //Imprime a String el odóntologo Salida DTO, y es registrado al LOGGER
-
-    return odontologoSalidaDto;
+    OdontologoSalidaDto odontologoActualizado = null;
+    if(odontologoPorActualizar != null){
+      entidadOdontologo.setId(odontologoPorActualizar.getId());
+      odontologoPorActualizar = entidadOdontologo;
+      odontologoRepository.save(odontologoPorActualizar);
+      odontologoActualizado = modelMapper.map(odontologoPorActualizar, OdontologoSalidaDto.class);
+      LOGGER.warn("Odontologo actualizado: {}", JsonPrinter.toString(odontologoActualizado));
+    }else{
+      LOGGER.error("No fue posible actualizar el odontologo porque no se encuentra en nuestra base de datos");
+    }
+    return odontologoActualizado;
   }
 
   @Override
