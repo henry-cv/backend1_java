@@ -322,6 +322,7 @@ out
 
 #Por el mismo IntelliJ Idea
 target/
+/target/
 !.mvn/wrapper/maven-wrapper.jar
 !**/src/main/**/target/
 !**/src/test/**/target/
