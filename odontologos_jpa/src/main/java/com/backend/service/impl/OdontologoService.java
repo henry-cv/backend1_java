@@ -69,7 +69,7 @@ public class OdontologoService implements IOdontologoService {
     Odontologo odontologoEncontrado = odontologoRepository.findById(id).orElse(null);
     // Se envia a buscar el odontologo a eliminar y se guarda en odontologoEncontrado
     if(odontologoEncontrado != null) {
-      LOGGER.warn("Se ha eliminado el odontólogo con id {}", id);
+      LOGGER.warn("Se ha eliminado el odontólogo {}", odontologoEncontrado);
       odontologoRepository.deleteById(id);
       //Si lo encuentra se elimina el odontologo con ese id
       LOGGER.warn("Se ha eliminado el odontologo con id {}", id);

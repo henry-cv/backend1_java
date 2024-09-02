@@ -1,87 +1,55 @@
 package com.backend.test;
 
-import com.backend.dbconnection.H2Connection;
-import com.backend.entity.Odontologo;
-import com.backend.repository.impl.OdontologoDaoH2;
-import com.backend.repository.impl.OdontologoDaoMemoria;
-import com.backend.service.impl.OdontologoService;
-import org.junit.jupiter.api.BeforeAll;
+import com.backend.dto.entrada.OdontologoEntradaDto;
+import com.backend.dto.salida.OdontologoSalidaDto;
+import com.backend.service.IOdontologoService;
 import org.junit.jupiter.api.Test;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.SpringBootTest;
 
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+@SpringBootTest
 class OdontologoServiceTest {
 
-  @BeforeAll
-  public static void cargarODontologosEnMemoria() {
-    H2Connection.inicializarScript();
-    OdontologoService odontologoService = new OdontologoService(new OdontologoDaoMemoria());
-    odontologoService.registrarOdontologo(new Odontologo("matricula-001", "Pepito", "Perez"));
-    odontologoService.registrarOdontologo(new Odontologo("matricula-002", "Aquiles", "Brinco"));
-    odontologoService.registrarOdontologo(new Odontologo("matricula-003", "Armando", "Casas"));
-    odontologoService.registrarOdontologo(new Odontologo("matricula-004", "Betty", "Pinzón"));
-
-  }
+  @Autowired
+  IOdontologoService odontologoService;
 
   @Test
+  public void debeSerPosibleRegistrarNuevoOdontologo(){
+    OdontologoEntradaDto ingresaOdontologo = new OdontologoEntradaDto("mat-011", "Juliana", "Vera");
+    OdontologoSalidaDto odontologoRegistrado = odontologoService.registrarOdontologo(ingresaOdontologo);
+      System.out.println("SALIDA SYSTEM OUT: "+odontologoRegistrado);
+    assertNotNull(odontologoRegistrado.getId());
+  }
+  @Test
   void seDebePoderListarTodosLosOdontologosAlmacenadosEnH2CuandoListaDistintaDeCero() {
-    OdontologoService odontologoService = new OdontologoService(new OdontologoDaoH2());
-    List<Odontologo> listadoOdontologos = odontologoService.listarOdontologos();
+    List<OdontologoSalidaDto> listadoOdontologos = odontologoService.listarOdontologos();
     assertNotEquals(0, listadoOdontologos.size());
   }
 
   @Test
   void dadoUnIdExistenteSeDebeBuscarEnH2ElOdontologoCorrespondiente() {
-    OdontologoService odontologoService = new OdontologoService(new OdontologoDaoH2());
-    Odontologo encontrado = odontologoService.buscarOdontologoPorId(2L);
+    OdontologoSalidaDto encontrado = odontologoService.buscarOdontologoPorId(2L);
     assertNotNull(encontrado.getId());
   }
-
-  @Test
-  void seDebePoderListarTodosLosOdontologosAlmacenadosEnMemoriaYListaDistintaDeCero() {
-    OdontologoService odontologoService = new OdontologoService(new OdontologoDaoMemoria());
-    List<Odontologo> listadoOdontologos = odontologoService.listarOdontologos();
-    assertNotEquals(0, listadoOdontologos.size());
-  }
-
-  @Test
-  void dadoUnIdExistenteSeDebeBuscarEnMemoriaElOdontologoCorrespondiente() {
-    OdontologoService odontologoService = new OdontologoService(new OdontologoDaoMemoria());
-    Odontologo encontrado = odontologoService.buscarOdontologoPorId(3L);
-    assertNotNull(encontrado.getId());
-  }
-
   @Test
   void dadoUnIdExistenteSeDebeEliminarOdontologoCorrespondienteEnH2() {
-    OdontologoService odontologoService = new OdontologoService(new OdontologoDaoH2());
-    Odontologo borrado = odontologoService.eliminarOdontologo(3L);
-    System.err.println(borrado);
-    assertEquals(3, borrado.getId());
+    //En este caso elimina el último de la lista
+    Long id = odontologoService.listarOdontologos().get(odontologoService.listarOdontologos().size()-1).getId();
+    OdontologoSalidaDto encontrado = odontologoService.buscarOdontologoPorId(id);
+    System.err.println("Odontologo Borrado: " + encontrado);
+    odontologoService.eliminarOdontologo(id);
+    assertNotNull(encontrado);
   }
-
   @Test
-  void dadoUnIdInexistenteSeDebeEliminarOdontologoCorrespondienteEnH2() {
-    OdontologoService odontologoService = new OdontologoService(new OdontologoDaoH2());
-    Odontologo borrado = odontologoService.eliminarOdontologo(6L);
-    System.err.println("Odontologo Borrado: " + borrado);
-    assertNull(borrado);
-  }
-
-  @Test
-  void dadoUnIdExistenteSeDebeEliminarOdontologoCorrespondienteEnMemoria() {
-    OdontologoService odontologoService = new OdontologoService(new OdontologoDaoMemoria());
-    Odontologo borrado = odontologoService.eliminarOdontologo(3L);
-    System.err.println("Odontologo Borrado: " + borrado);
-    assertEquals(3, borrado.getId());
-  }
-
-  @Test
-  void dadoUnIdInexistenteNoDebeEliminarOdontologoCorrespondienteEnMemoria() {
-    OdontologoService odontologoService = new OdontologoService(new OdontologoDaoMemoria());
-    Odontologo borrado = odontologoService.eliminarOdontologo(6L);
-    System.err.println("Odontologo Borrado: " + borrado);
-    assertNull(borrado);
+  void dadoUnIdExistenteYDatosSeDebeModificarOdontologoCorrespondienteEnH2() {
+    //En este caso modifica el último de la lista
+    Long id = odontologoService.listarOdontologos().get(odontologoService.listarOdontologos().size()-1).getId();
+    OdontologoEntradaDto actualizaOdontologo = new OdontologoEntradaDto("prueba-001","Antonio","Lamas");
+    OdontologoSalidaDto odontologoSalidaDto = odontologoService.actualizarOdontologo(actualizaOdontologo, id);
+    assertNotNull(odontologoSalidaDto);
   }
 }
