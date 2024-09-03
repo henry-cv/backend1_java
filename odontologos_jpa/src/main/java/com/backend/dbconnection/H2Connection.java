@@ -9,7 +9,7 @@ import java.util.logging.Logger;
 public class H2Connection {
   private static final Logger LOGGER = Logger.getLogger(H2Connection.class.getName());
   private static final String JDBC_URL = "jdbc:h2:~/odontologosdb";
-  private static final String JDBC_URL_WITH_SCRIPT = JDBC_URL + ";INIT=RUNSCRIPT FROM 'classpath:statement.sql'";
+  private static final String JDBC_URL_WITH_SCRIPT = JDBC_URL + ";INIT=RUNSCRIPT FROM 'classpath:statement.sql.txt'";
   private static final String USER = "sa";
   private static final String PASSWORD = "sa";
 
