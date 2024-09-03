@@ -26,6 +26,8 @@ public class PacienteEntradaDto {
   @Valid
   private DomicilioEntradaDto domicilioEntradaDto;
 
+  public PacienteEntradaDto() {
+  }
 
   public PacienteEntradaDto(String nombre, String apellido, int dni, LocalDate fechaIngreso,
                             DomicilioEntradaDto domicilioEntradaDto) {
