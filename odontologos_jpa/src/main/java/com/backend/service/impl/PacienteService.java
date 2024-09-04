@@ -3,6 +3,7 @@ package com.backend.service.impl;
 import com.backend.dto.entrada.PacienteEntradaDto;
 import com.backend.dto.salida.PacienteSalidaDto;
 import com.backend.entity.Paciente;
+import com.backend.exceptions.ResourceNotFoundException;
 import com.backend.repository.PacienteRepository;
 import com.backend.service.IPacienteService;
 import com.backend.utils.JsonPrinter;
@@ -63,15 +64,14 @@ public class PacienteService implements IPacienteService {
   }
 
   @Override
-  public void eliminarPaciente(Long id) {
+  public void eliminarPaciente(Long id) throws ResourceNotFoundException {
     if(buscarPacientePorId(id) != null) {
       //llamada a la capa repositorio para eliminar
       pacienteRepository.deleteById(id);
       LOGGER.warn("Se ha eliminado el paciente con id {}", id);
     } else {
       //excepcion resource not found
-      LOGGER.error("No se pudo eliminar con ese id: "+ id +" el paciente porque no se encuentra en nuestra base de " +
-              "datos");
+      throw new ResourceNotFoundException("No existe el paciente con id " + id);
     }
 
   }

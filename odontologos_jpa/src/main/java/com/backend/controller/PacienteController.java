@@ -2,6 +2,7 @@ package com.backend.controller;
 
 import com.backend.dto.entrada.PacienteEntradaDto;
 import com.backend.dto.salida.PacienteSalidaDto;
+import com.backend.exceptions.ResourceNotFoundException;
 import com.backend.service.IPacienteService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -50,10 +51,17 @@ public class PacienteController {
                                                               @PathVariable Long id) {
     return new ResponseEntity<>(pacienteService.actualizarPaciente(paciente, id), HttpStatus.OK);
   }
-
+  /*
   //DELETE Eliminar un registro Paciente
   @DeleteMapping("/{id}")//localhost:8080/pacientes/eliminar?id=x
   public ResponseEntity<String> eliminarPaciente(@PathVariable Long id) {
+    pacienteService.eliminarPaciente(id);
+    return new ResponseEntity<>("Paciente eliminado correctamente", HttpStatus.NO_CONTENT);
+  }
+  */
+  //DELETE
+  @DeleteMapping("/eliminar")//localhost:8080/pacientes/eliminar?id=x
+  public ResponseEntity<String> eliminarPaciente(@RequestParam Long id) throws ResourceNotFoundException {
     pacienteService.eliminarPaciente(id);
     return new ResponseEntity<>("Paciente eliminado correctamente", HttpStatus.NO_CONTENT);
   }

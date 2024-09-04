@@ -2,6 +2,7 @@ package com.backend.service;
 
 import com.backend.dto.entrada.OdontologoEntradaDto;
 import com.backend.dto.salida.OdontologoSalidaDto;
+import com.backend.exceptions.ResourceNotFoundException;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -14,7 +15,7 @@ public interface IOdontologoService {
 
   List<OdontologoSalidaDto> listarOdontologos();
 
-  void eliminarOdontologo(Long id);
+  void eliminarOdontologo(Long id) throws ResourceNotFoundException;
 
   OdontologoSalidaDto actualizarOdontologo(OdontologoEntradaDto odontologoEntradaDto, Long id);
 

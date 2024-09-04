@@ -3,6 +3,7 @@ package com.backend.service.impl;
 import com.backend.dto.entrada.OdontologoEntradaDto;
 import com.backend.dto.salida.OdontologoSalidaDto;
 import com.backend.entity.Odontologo;
+import com.backend.exceptions.ResourceNotFoundException;
 import com.backend.repository.OdontologoRepository;
 import com.backend.service.IOdontologoService;
 import com.backend.utils.JsonPrinter;
@@ -65,7 +66,7 @@ public class OdontologoService implements IOdontologoService {
   }
 
   @Override
-  public void eliminarOdontologo(Long id) {
+  public void eliminarOdontologo(Long id) throws ResourceNotFoundException {
     Odontologo odontologoEncontrado = odontologoRepository.findById(id).orElse(null);
     // Se envia a buscar el odontologo a eliminar y se guarda en odontologoEncontrado
     if(odontologoEncontrado != null) {
@@ -75,7 +76,8 @@ public class OdontologoService implements IOdontologoService {
       LOGGER.warn("Se ha eliminado el odontologo con id {}", id);
     } else {
       //excepcion resource not found
-      LOGGER.warn("no Se ha eliminado porque no se encontró el odontologo con id {}", id);
+      //LOGGER.warn("no Se ha eliminado porque no se encontró el odontologo con id {}", id);
+      throw new ResourceNotFoundException("No existe el odontologo con id: "+id);
     }
 
   }
