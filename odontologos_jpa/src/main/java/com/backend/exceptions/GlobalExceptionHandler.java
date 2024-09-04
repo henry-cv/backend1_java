@@ -1,5 +1,8 @@
 package com.backend.exceptions;
 
+import com.backend.service.impl.TurnoService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.FieldError;
@@ -14,13 +17,15 @@ import java.util.Map;
 @RestControllerAdvice
 public class GlobalExceptionHandler {
 
-
+    private final Logger LOGGER = LoggerFactory.getLogger(GlobalExceptionHandler.class);
     @ExceptionHandler({ResourceNotFoundException.class})
     @ResponseStatus(HttpStatus.NOT_FOUND)
     public Map<String, String> manejarResourceNotFoundException(ResourceNotFoundException resourceNotFoundException){
         Map<String, String> mensaje = new HashMap<>();
         mensaje.put("mensaje", "Recurso no encontrado:  " + resourceNotFoundException.getMessage());
+        LOGGER.info("Uso de ResourceNotFoundException, manejadorResourceNotFoundException");
         return mensaje;
+
     }
 
 
@@ -36,7 +41,7 @@ public class GlobalExceptionHandler {
             String mensajeError = e.getDefaultMessage();
             mensaje.put(nombreCampo, mensajeError);
         });
-
+        LOGGER.info("Uso manejarValidationException, MethodArgumentNotValidException");
         return mensaje;
     }
     /*
@@ -73,7 +78,7 @@ public class GlobalExceptionHandler {
             errorResponse.put("cause", ex.getCause().toString());
         }
         // Puedes agregar más campos según la información que quieras retornar
-
+        LOGGER.info("Uso handleBadRequestException ");
         return errorResponse;
     }
     //TAREA Manejar BadRequetException
