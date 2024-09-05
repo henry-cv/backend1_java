@@ -11,25 +11,25 @@ import java.time.LocalDateTime;
 
 public class TurnoEntradaDto {
   @Positive(message = "El Id de Paciente no puede ser nulo o menor a cero")
-  private Long pacienteId;
+  private Long idPaciente;
 
   @Positive(message = "El Id de Odontólogo no puede ser nulo o menor a cero")
-  private Long odontologoId;
+  private Long idOdontologo;
 
   @FutureOrPresent(message = "La fecha no puede ser anterior al día de hoy")
   @NotNull(message = "Debe especificarse la fecha de atención al paciente")
   @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd'T'HH:mm:ss")
   private LocalDateTime fechaHora;
 
-  public TurnoEntradaDto(Long pacienteId, Long odontologoId, LocalDateTime fechaHora) {
-    this.pacienteId = pacienteId;
-    this.odontologoId = odontologoId;
+  public TurnoEntradaDto(Long idPaciente, Long idOdontologo, LocalDateTime fechaHora) {
+    this.idPaciente = idPaciente;
+    this.idOdontologo = idOdontologo;
     this.fechaHora = fechaHora;
   }
 
-  public TurnoEntradaDto(Long pacienteId, Long odontologoId) {
-    this.pacienteId = pacienteId;
-    this.odontologoId = odontologoId;
+  public TurnoEntradaDto(Long idPaciente, Long idOdontologo) {
+    this.idPaciente = idPaciente;
+    this.idOdontologo = idOdontologo;
     this.fechaHora=LocalDateTime.now().plusDays(1);
   }
 
@@ -37,19 +37,19 @@ public class TurnoEntradaDto {
   }
 
   public Long getPacienteId() {
-    return pacienteId;
+    return idPaciente;
   }
 
-  public void setPacienteId(Long pacienteId) {
-    this.pacienteId = pacienteId;
+  public void setPacienteId(Long idPaciente) {
+    this.idPaciente = idPaciente;
   }
 
   public Long getOdontologoId() {
-    return odontologoId;
+    return idOdontologo;
   }
 
-  public void setOdontologoId(Long odontologoId) {
-    this.odontologoId = odontologoId;
+  public void setOdontologoId(Long idOdontologo) {
+    this.idOdontologo = idOdontologo;
   }
 
   public LocalDateTime getFechaHora() {

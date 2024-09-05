@@ -2,9 +2,11 @@ package com.backend.service.impl;
 
 import com.backend.dto.entrada.PacienteEntradaDto;
 import com.backend.dto.entrada.TurnoEntradaDto;
+import com.backend.dto.salida.DomicilioSalidaDto;
 import com.backend.dto.salida.OdontologoSalidaDto;
 import com.backend.dto.salida.PacienteSalidaDto;
 import com.backend.dto.salida.TurnoSalidaDto;
+import com.backend.entity.Domicilio;
 import com.backend.entity.Odontologo;
 import com.backend.entity.Paciente;
 import com.backend.entity.Turno;
@@ -40,18 +42,18 @@ public class TurnoService implements ITurnoService {
 
   @Override
   public TurnoSalidaDto registrarTurno(TurnoEntradaDto turnoEntradaDto) {
-    Long pacienteId = turnoEntradaDto.getPacienteId();
-    Long odontologoId = turnoEntradaDto.getOdontologoId();
+    Long idPaciente = turnoEntradaDto.getPacienteId();
+    Long idOdontologo = turnoEntradaDto.getOdontologoId();
 
     // Verificar si existen
-    PacienteSalidaDto pacienteEncontrado = pacienteService.buscarPacientePorId(pacienteId);
-    OdontologoSalidaDto odontologoEncontrado = odontologoService.buscarOdontologoPorId(odontologoId);
+    PacienteSalidaDto pacienteEncontrado = pacienteService.buscarPacientePorId(idPaciente);
+    OdontologoSalidaDto odontologoEncontrado = odontologoService.buscarOdontologoPorId(idOdontologo);
 
     if(pacienteEncontrado == null) {
-      throw new BadRequestException("Paciente con ID " + pacienteId + " no existe.");
+      throw new BadRequestException("Paciente con ID " + idPaciente + " no existe.");
     }
     if(odontologoEncontrado == null) {
-      throw new BadRequestException("Odontólogo con ID " + odontologoId + " no existe.");
+      throw new BadRequestException("Odontólogo con ID " + idOdontologo + " no existe.");
     }
 
     LOGGER.info("TurnoEntradaDto: {}", JsonPrinter.toString(turnoEntradaDto));
@@ -145,18 +147,18 @@ public class TurnoService implements ITurnoService {
   }
 
   private void configureMapping() {
-    modelMapper.typeMap(TurnoEntradaDto.class, Turno.class).addMappings(mapper -> {
-      mapper.map(turno -> pacienteService.buscarPacientePorId(turno.getPacienteId()), Turno::setPaciente);
-      mapper.map(turno -> odontologoService.buscarOdontologoPorId(turno.getOdontologoId()), Turno::setOdontologo);
-    });
+    modelMapper.emptyTypeMap(TurnoEntradaDto.class, Turno.class)
+            .addMappings(mapper -> mapper.map(TurnoEntradaDto::getFechaHora, Turno::setFechaHora));
 
-    modelMapper.typeMap(Turno.class, TurnoSalidaDto.class).addMappings(mapper -> {
-      mapper.map(turno -> turno.getPaciente().getId(), TurnoSalidaDto::setPacienteId);
-      mapper.map(turno -> turno.getPaciente().getNombre(), TurnoSalidaDto::setPacienteNombre);
-      mapper.map(turno -> turno.getPaciente().getApellido(), TurnoSalidaDto::setPacienteApellido);
-      mapper.map(turno -> turno.getOdontologo().getId(), TurnoSalidaDto::setOdontologoId);
-      mapper.map(turno -> turno.getOdontologo().getNombre(), TurnoSalidaDto::setOdontologoNombre);
-      mapper.map(turno -> turno.getOdontologo().getApellido(), TurnoSalidaDto::setOdontologoApellido);
-    });
+    modelMapper.typeMap(Turno.class, TurnoSalidaDto.class)
+            .addMappings(mapper -> mapper.map(Turno::getPaciente, TurnoSalidaDto::setPacienteSalidaDto))
+            .addMappings(mapper -> mapper.map(Turno::getOdontologo, TurnoSalidaDto::setOdontologoSalidaDto));
+
+    modelMapper.typeMap(OdontologoSalidaDto.class, Odontologo.class);
+    modelMapper.typeMap(PacienteSalidaDto.class, Paciente.class)
+            .addMappings(mapper -> mapper.map(PacienteSalidaDto::getDomicilioSalidaDto, Paciente::setDomicilio));
+    //agregados por mi desde aqui abajo
+
+    //modelMapper.typeMap(DomicilioSalidaDto.class, Domicilio.class);
   }
 }
