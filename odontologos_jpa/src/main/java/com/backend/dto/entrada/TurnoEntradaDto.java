@@ -6,56 +6,50 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 
 import javax.validation.constraints.FutureOrPresent;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Positive;
 import java.time.LocalDateTime;
 
 public class TurnoEntradaDto {
-  @NotNull(message = "El Paciente debe existir, turnoEntradaDTO")
-  PacienteSalidaDto pacienteSalidaDto;
+  @Positive(message = "El Id de Paciente no puede ser nulo o menor a cero")
+  private Long pacienteId;
 
-  @NotNull(message = "El Odontologo debe existir, turnoEntradaDTO")
-  OdontologoSalidaDto odontologoEntradaDto;
+  @Positive(message = "El Id de Odontólogo no puede ser nulo o menor a cero")
+  private Long odontologoId;
 
   @FutureOrPresent(message = "La fecha no puede ser anterior al día de hoy")
   @NotNull(message = "Debe especificarse la fecha de atención al paciente")
   @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd'T'HH:mm:ss")
-  LocalDateTime fechaHora;
+  private LocalDateTime fechaHora;
 
-  /*public TurnoEntradaDto(PacienteSalidaDto pacienteEntradaDto, OdontologoSalidaDto odontologoEntradaDto,
-                         LocalDateTime fechaHora) {
-    this.pacienteEntradaDto = pacienteEntradaDto;
-    this.odontologoEntradaDto = odontologoEntradaDto;
+  public TurnoEntradaDto(Long pacienteId, Long odontologoId, LocalDateTime fechaHora) {
+    this.pacienteId = pacienteId;
+    this.odontologoId = odontologoId;
     this.fechaHora = fechaHora;
-  }*/
-
-  public TurnoEntradaDto(PacienteSalidaDto pacienteSalidaDto, OdontologoSalidaDto odontologoEntradaDto) {
-    this.pacienteSalidaDto = pacienteSalidaDto;
-    this.odontologoEntradaDto = odontologoEntradaDto;
-    this.fechaHora=LocalDateTime.now();
   }
 
-  public TurnoEntradaDto(PacienteSalidaDto pacienteSalidaDto, OdontologoSalidaDto odontologoEntradaDto, LocalDateTime fechaHora) {
-    this.pacienteSalidaDto = pacienteSalidaDto;
-    this.odontologoEntradaDto = odontologoEntradaDto;
-    this.fechaHora = fechaHora;
+  public TurnoEntradaDto(Long pacienteId, Long odontologoId) {
+    this.pacienteId = pacienteId;
+    this.odontologoId = odontologoId;
+    this.fechaHora=LocalDateTime.now().plusDays(1);
   }
 
   public TurnoEntradaDto() {
   }
 
-  public PacienteSalidaDto getPacienteSalidaDto() {
-    return pacienteSalidaDto;
+  public Long getPacienteId() {
+    return pacienteId;
   }
 
-  public void setPacienteSalidaDto(PacienteSalidaDto pacienteSalidaDto) {
-    this.pacienteSalidaDto = pacienteSalidaDto;
+  public void setPacienteId(Long pacienteId) {
+    this.pacienteId = pacienteId;
   }
 
-  public OdontologoSalidaDto getOdontologoSalidaDto() {
-    return odontologoEntradaDto;
+  public Long getOdontologoId() {
+    return odontologoId;
   }
 
-  public void setOdontologoSalidaDto(OdontologoSalidaDto odontologoEntradaDto) {
-    this.odontologoEntradaDto = odontologoEntradaDto;
+  public void setOdontologoId(Long odontologoId) {
+    this.odontologoId = odontologoId;
   }
 
   public LocalDateTime getFechaHora() {
