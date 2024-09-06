@@ -2,6 +2,7 @@ package com.backend.test;
 
 import com.backend.dto.entrada.OdontologoEntradaDto;
 import com.backend.dto.salida.OdontologoSalidaDto;
+import com.backend.exceptions.ResourceNotFoundException;
 import com.backend.service.IOdontologoService;
 import org.junit.jupiter.api.MethodOrderer;
 import org.junit.jupiter.api.Order;
@@ -40,7 +41,8 @@ class OdontologoServiceTest {
     assertNotNull(encontrado.getId());
   }
   @Test @Order(5)
-  void dadoUnIdExistenteSeDebeEliminarOdontologoCorrespondienteEnH2() {
+  void dadoUnIdExistenteSeDebeEliminarOdontologoCorrespondienteEnH2() throws
+    ResourceNotFoundException {
     //En este caso elimina el último de la lista
     Long id = odontologoService.listarOdontologos().get(odontologoService.listarOdontologos().size()-1).getId();
     OdontologoSalidaDto encontrado = odontologoService.buscarOdontologoPorId(id);
