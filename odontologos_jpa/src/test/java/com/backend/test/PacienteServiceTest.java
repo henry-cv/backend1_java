@@ -3,9 +3,8 @@ package com.backend.test;
 
 import com.backend.dto.entrada.DomicilioEntradaDto;
 import com.backend.dto.entrada.PacienteEntradaDto;
-import com.backend.dto.salida.OdontologoSalidaDto;
 import com.backend.dto.salida.PacienteSalidaDto;
-import com.backend.entity.Domicilio;
+import com.backend.exceptions.ResourceNotFoundException;
 import com.backend.service.IPacienteService;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,7 +18,7 @@ import static org.junit.jupiter.api.Assertions.*;
 class PacienteServiceTest {
 
     @Autowired
-    IPacienteService pacienteService ;
+    private IPacienteService pacienteService;
 
 
     @Test
@@ -50,8 +49,9 @@ class PacienteServiceTest {
     }
 
     @Test
-    void eliminarPacienteExistenteUsandosSuId() {
-        Long id = Long.valueOf(1);
+    void eliminarPacienteExistenteUsandosSuId() throws
+      ResourceNotFoundException {
+        Long id = 4L;
         PacienteSalidaDto pacienteEncontrado = pacienteService.buscarPacientePorId(id);
         System.err.println("Paciente Borrado: " + pacienteEncontrado);
         pacienteService.eliminarPaciente(id);
@@ -61,7 +61,7 @@ class PacienteServiceTest {
     }
 
     @Test
-    void actualizarPaciente() {
+    void actualizarPaciente() throws ResourceNotFoundException {
         Long id = Long.valueOf(4);
         DomicilioEntradaDto nuevoDomicilio = new DomicilioEntradaDto("Romero",85, "Lomas","Peru");
         LocalDate fechaIngreso = LocalDate.of(2024, 9, 4);
