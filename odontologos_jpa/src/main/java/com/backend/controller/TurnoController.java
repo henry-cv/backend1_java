@@ -12,6 +12,7 @@ import javax.validation.Valid;
 import java.util.List;
 
 @RestController
+@CrossOrigin
 @RequestMapping("/turnos") //localhost:8080/turnos
 public class TurnoController {
   private ITurnoService turnoService;
