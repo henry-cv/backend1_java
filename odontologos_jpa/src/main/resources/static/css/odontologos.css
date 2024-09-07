@@ -1,5 +1,7 @@
 @import url("./mainStyles.css");
-
+main {
+  margin: 1rem auto;
+}
 .cabeceras {
   column-gap: 1rem;
   display: flex;
@@ -29,13 +31,21 @@
   flex-direction: column;
   list-style-type: none;
 }
-/*
-#form-busqueda input {
+.busqueda {
+  display: flex;
+  justify-content: stretch;
+  flex-wrap: wrap;
+}
+.busqueda input {
   padding: 0.6rem 0.8rem;
 }
-
-*/
-#form-odontologo {
+.tareas {
+  h3 {
+    margin: 0rem auto 2rem auto;
+    text-align: center;
+  }
+}
+.form-odontologo {
   background-color: var(--bg-form1);
   border-radius: 1rem;
   color: var(--texto1);
@@ -52,14 +62,40 @@
     align-self: center;
   }
 }
-.tabla-datos {
-  display: none;
-  font-family: monospace;
+.tabla-datos,
+#odontologosTable {
+  border-collapse: collapse;
   color: black;
   background-color: bisque;
-  margin: 10px auto;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  margin: 20px auto;
+  padding: 0.6rem 0.8rem;
   td {
+    font-family: monospace;
     text-align: center;
   }
-  width: 60%;
+  thead {
+    background-color: var(--bg-form1);
+  }
+  th,
+  td {
+    border: 1px solid #ddd;
+    padding: 8px;
+    text-align: left;
+  }
+  th {
+    background-color: var(--bg-form1);
+    color: var(--texto1);
+  }
+  width: 100%;
+}
+
+/* #odontologosTable {
+  display: none;
+} */
+.oculto {
+  display: none;
+}
+.visible {
+  display: block;
 }
