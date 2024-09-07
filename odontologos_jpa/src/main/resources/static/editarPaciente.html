@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Editar Usuario</title>
+    <link href="../static/css/odontologos.css" rel="stylesheet" />
+</head>
+<body>
+    <main>
+        <h1>Editar Usuario</h1>
+        <form id="editUserForm">
+            <div>
+                <label for="nombre">Nombre:</label>
+                <input type="text" id="nombre" name="nombre" required>
+            </div>
+            <div>
+                <label for="apellido">Apellido:</label>
+                <input type="text" id="apellido" name="apellido" required>
+            </div>
+            <div>
+                <label for="dni">DNI:</label>
+                <input type="text" id="dni" name="dni" required>
+            </div>
+            <div>
+                <label for="domicilio">Domicilio:</label>
+                <input type="text" id="domicilio" name="domicilio" required>
+            </div>
+            <button type="submit">Actualizar</button>
+        </form>
+        <a href="./pacientes.html">Volver a la lista de pacientes</a>
+    </main>
+
+    <script src="./js/editUser.js"></script>
+</body>
+</html>
