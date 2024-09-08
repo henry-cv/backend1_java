@@ -34,7 +34,8 @@ async function listar() {
 
 async function buscarId() {
   let id = parseInt(ingresar("Ingrese id para buscar: "));  
-  try {
+  let data="";
+	try {
     let res = await fetch(`${url1}/${id}`);
     //console.log("res");
     //console.log(res);
@@ -46,16 +47,17 @@ async function buscarId() {
       throw new Error(`status: ${res.status}, texto: ${res.statusText}`);
       //throw new Error(res);
     }
-    let data = await res.json();
+    data = await res.json();
     console.log("data");
     console.log(data);
     //localStorage.setItem("jwt_todo", JSON.stringify(data.jwt));    
-    console.log(JSON.stringify(data.jwt));
+    //console.log(JSON.stringify(data.jwt));
   } catch (error) {
     console.log("ERROR manejado desde catch");
     console.log(error);
   }
-  return;
+	console.log("tipo de dato data: "+typeof data);
+  return data;
 }
 
 console.info("Ingrese b para buscar por Id, l para listar todos")

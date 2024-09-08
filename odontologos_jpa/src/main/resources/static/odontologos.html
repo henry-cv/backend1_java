@@ -8,112 +8,68 @@
   </head>
   <body>
     <header class="header">
-      <h1>Clínica Sonrisa Sana</h1>
+      <h1>Clínica Sonrisa</h1>
       <nav class="main-modules">
         <ul>
+          <li><a href="./index.html">Inicio</a></li>
           <li><a href="./pacientes.html">Pacientes</a></li>
           <li><a href="./odontologos.html">Odontologos</a></li>
           <li><a href="./turnos.html">Turnos</a></li>
-          <li><a href="./index.html">Inicio</a></li>
         </ul>
       </nav>
     </header>
     <main>
-      <h2>Listado de Odontologos</h2>
       <section class="listado">
-        <form action="" id="form-busqueda">
-          <input
-            id="busqueda"
-            placeholder="ID a buscar, ejemplo: 1"
-            type="text"
-          />
+        <div class="tareas">
+          <div><h3>Gestión Odontólogos</h3></div>
+          <div class="controles">
+            <input type="button" value="Buscar" name="btn-buscar" />
+            <input type="button" value="Nuevo" name="btn-nuevo" />
+            <input type="button" value="Editar" name="btn-editar" />
+            <input type="button" value="Borrar" name="btn-borrar" />
+          </div>
+        </div>
+        <form action="" class="busqueda oculto" id="form-busqueda">
+          <input id="busqueda" placeholder="ID a buscar, ejemplo: 1" type="text" />
           <input type="submit" value="Buscar" />
         </form>
-        <div class="nuevo">
-          <input type="button" value="Nuevo" />
-        </div>
-        <form action="" id="form-odontologo">
+
+        <form action="" class="form-odontologo oculto" id="form-odontologo">
           <label
             >Matricula:
-            <input
-              type="text"
-              name="matricula"
-              placeholder="Ingrese matrícula"
-              required
-            />
+            <input name="matricula" id="matricula" placeholder="Ingrese matrícula" required type="text" />
           </label>
           <label
             >Nombre:
-            <input
-              type="text"
-              name="nombre"
-              placeholder="Ingrese nombre"
-              required
-            />
+            <input name="nombre" id="nombre" placeholder="Ingrese nombre" required type="text" />
           </label>
           <label
-            >Apellido:
-            <input
-              type="text"
-              name="apellido"
-              placeholder="Ingrese apellido"
-              required
+            >Apellido: <input name="apellido" id="apellido" placeholder="Ingrese apellido" required type="text"
           /></label>
-          <input type="submit" value="Guardar" id="guardar" />
+          <input id="guardar" type="submit" value="Guardar" />
         </form>
-
-        <div class="cabeceras">
-          <div>Id</div>
-          <div>Matrícula</div>
-          <div>Nombre</div>
-          <div>Apellido</div>
+        <div class="resultado-peticion">
+          <p id="par-resultado"></p>
         </div>
-        <ul class="odontologos">
-          <li class="odontologo">
-            <div class="datos">
-              <div class="id">1</div>
-              <div class="matricula">odont-h2-001</div>
-              <div class="nombre">Dave</div>
-              <div class="apellido">Kauffman</div>
-              <div class="controls">
-                <i>Edit</i>
-                <i>Sup</i>
-              </div>
-            </div>
-          </li>
-          <li class="odontologo">
-            <div class="datos">
-              <div class="id">2</div>
-              <div class="matricula">odont-h2-001</div>
-              <div class="nombre">Dave</div>
-              <div class="apellido">Kauffman</div>
-              <div class="controls">
-                <i>Edit</i>
-                <i>Sup</i>
-              </div>
-            </div>
-          </li>
-        </ul>
       </section>
-      <table class="tabla-datos" id="tabla-datos">
-        <thead>
-          <tr>
-            <th>Id</th>
-            <th>Matricula</th>
-            <th>Nombre</th>
-            <th>Apellido</th>
-          </tr>
-        </thead>
-        <tbody id="odontologoTableBody">
-          <tr>
-            <td>01</td>
-            <td>odont-h2-001</td>
-            <td>Bruce</td>
-            <td>Sprince</td>
-          </tr>
-        </tbody>
-      </table>
+      <section class="resultados">
+        <h3>Listado Odontólogos</h3>
+        <table id="odontologosTable">
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th>Matrícula</th>
+              <th>Nombre</th>
+              <th>Apellido</th>
+            </tr>
+          </thead>
+          <tbody>
+            <!-- Los datos se insertarán aquí -->
+          </tbody>
+        </table>
+      </section>
     </main>
-    <script src="./js/script.js"></script>
+    <!-- <script src="./js/script.js"></script> -->
+    <script src="./js/listaOdontologos.js"></script>
   </body>
 </html>
