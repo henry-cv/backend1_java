@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta content="width=device-width, initial-scale=1.0" name="viewport" />
-    <link href="./css/odontologos.css" rel="stylesheet" />
+    <link href="../css/odontologos.css" rel="stylesheet" />
     <title>Odontólogos</title>
   </head>
   <body>
@@ -25,13 +25,12 @@
           <div class="controles">
             <input type="button" value="Buscar" name="btn-buscar" />
             <input type="button" value="Nuevo" name="btn-nuevo" />
-            <input type="button" value="Editar" name="btn-editar" />
-            <input type="button" value="Borrar" name="btn-borrar" />
+            <input type="button" value="Listar" name="btn-listar" />
           </div>
         </div>
         <form action="" class="busqueda oculto" id="form-busqueda">
-          <input id="busqueda" placeholder="ID a buscar, ejemplo: 1" type="text" />
-          <input type="submit" value="Buscar" />
+          <input id="busqueda" placeholder="ID a buscar, ejemplo: 1" type="number" />
+          <input type="submit" name="buscar" value="Buscar" />
         </form>
 
         <form action="" class="form-odontologo oculto" id="form-odontologo">
@@ -47,6 +46,7 @@
             >Apellido: <input name="apellido" id="apellido" placeholder="Ingrese apellido" required type="text"
           /></label>
           <input id="guardar" type="submit" value="Guardar" />
+          <input type="button" name="actualizar" class="actualizar oculto" id="actualizar" value="Actualizar" />
         </form>
         <div class="resultado-peticion">
           <p id="par-resultado"></p>
@@ -61,6 +61,7 @@
               <th>Matrícula</th>
               <th>Nombre</th>
               <th>Apellido</th>
+              <th>Acciones</th>
             </tr>
           </thead>
           <tbody>
