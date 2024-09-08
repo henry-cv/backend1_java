@@ -3,9 +3,7 @@
 <head>
     <meta charset="UTF-8"/>
     <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-    <link href="../static/css/pacientes.css" rel="stylesheet" />
-    <!-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" 
-    integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous"> -->
+    <link rel="preload" href="./css/pacientes.css" as="style" onload="this.rel='stylesheet'">
     <title>Pacientes</title>
 </head>
 <body>
@@ -23,39 +21,92 @@
       </header>
 
       <main>
-    
 
-        <h2>Bienvenido a Clinica Sonrisa</h2>
-        <p>Aca podras administrar los pacientes, puedes ingresar 
-            , editar y eliminar un paciente dando click en el boton correspondiente</p>
-            
-        <div class="btn-agree-container">
-            <a href="agregarPaciente.html" class="btn btn-agree">Agregar Nuevo Paciente</a>
-        </div>
- 
-
+        <section class="find-agree">
+            <h2>Bienvenido a Clinica Sonrisa</h2>
+            <p>Aca podras administrar los pacientes, puedes ingresar 
+                , editar y eliminar un paciente dando click en el boton correspondiente</p>
                 
-    <table class=" table table-hover mx-auto table-pacients">
+            <div class="btn-container">
+    
+                <form action="" id="form-busqueda">
+                    <input
+                      id="idBusqueda"
+                      placeholder="ID a buscar, ejemplo: 1"
+                      type="text" required
+                    />
+                    <input  id="find-Id" type="submit" value="Buscar" />
+                  </form>
+                  
+                  <button class="agree-btn">Agregar Nuevo Paciente</button>
 
-        <thead >
-            <tr>
-                <th>Nombre</th>
-                <th>Apellido</th>
-                <th>Dni</th>
-                <th>Domicilio</th>
-                <th>Acciones</th>
-            </tr>
-            <tbody>
- 
+            </div>
 
-            </tbody>
-        </thead>
+        </section >
 
+      <!-- formulario agregar o editar -->
+        <section id="form-hidden" class="form-hidden">
+            <div class="chose-form">
+                <h2 class="edit-user-name"></h2>
+                <p class="textP"> </p>
+            </div>
+
+            <form id="pacientForm">
+
+                <div class="id-user">
+                    <input type="text" id="id" name="id" >
+                </div>
+                <div>
+                    <label for="nombre">Nombre:</label>
+                    <input type="text" id="nombre" name="nombre" required>
+                </div>
+                <div>
+                    <label for="apellido">Apellido:</label>
+                    <input type="text" id="apellido" name="apellido" required>
+                </div>
+                <div>
+                    <label for="dni">DNI:</label>
+                    <input type="number" id="dni" name="dni" required>
+                </div>
+                <p for="domicilio">Datos Domicilio</p>
+                <div>
+                    <label for="calle">Calle:</label>
+                    <input type="text" id="calle" name="calle" required>
+                </div>
+                <div>
+                    <label for="numero">Numero:</label>
+                    <input type="number" id="numero" name="numero" required>
+                </div>
+                <div>
+                    <label for="localidad">Localidad:</label>
+                    <input type="text" id="localidad" name="localidad" required>
+                </div>
+                <div>
+                    <label for="provincia">Provincia:</label>
+                    <input type="text" id="provincia" name="provincia" required>
+                </div>
+
+                <button id="guardar" type="submit">Guardar</button>
+            </form>
+        </section>
         
+        <!-- listado pacientes -->
+        <section >             
+        <table class="table-pacients">
+            <thead >
+                <tr>
+                    <th>Nombre</th>
+                    <th>Apellido</th>
+                    <th>Dni</th>
+                    <th>Domicilio</th>
+                    <th>Acciones</th>
+                </tr>
+            </thead>
+            <tbody class="tbody-pacients">
+            </tbody>        
+        </table>
 
-    </table>
-
-
+        </section>
 
       </main> 
 </main>
