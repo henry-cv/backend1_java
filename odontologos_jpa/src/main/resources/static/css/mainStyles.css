@@ -5,6 +5,7 @@
   --third-bg: #dbffff;
   --bg-form1: #338b85;
   --bg-form2: #074d27;
+  --errors-delete:rgb(255, 144, 125);
 }
 * {
   box-sizing: border-box;

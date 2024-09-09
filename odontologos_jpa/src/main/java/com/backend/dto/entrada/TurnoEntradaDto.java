@@ -11,9 +11,11 @@ import java.time.LocalDateTime;
 
 public class TurnoEntradaDto {
   @Positive(message = "El Id de Paciente no puede ser nulo o menor a cero")
+  @JsonFormat(shape = JsonFormat.Shape.NUMBER)
   private Long idPaciente;
 
   @Positive(message = "El Id de Odontólogo no puede ser nulo o menor a cero")
+  @JsonFormat(shape = JsonFormat.Shape.NUMBER)
   private Long idOdontologo;
 
   @FutureOrPresent(message = "La fecha no puede ser anterior al día de hoy")

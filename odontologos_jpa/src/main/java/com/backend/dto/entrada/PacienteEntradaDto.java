@@ -8,26 +8,26 @@ import javax.validation.constraints.*;
 import java.time.LocalDate;
 
 public class PacienteEntradaDto {
-  @NotBlank(message = "Debe especificarse el nombre del paciente")
-  @Size(max = 50, message = "El nombre debe tener hasta 50 caracteres")
-  private String nombre;
-  @Size(max = 50, message = "El apellido debe tener hasta 50 caracteres")
-  @NotBlank(message = "Debe especificarse el apellido del paciente")
-  private String apellido;
-  @Positive(message = "El dni del paciente no puede ser nulo o menor a cero")
-  private int dni;
+    @NotBlank(message = "Debe especificarse el nombre del paciente")
+    @Size(max = 50, message = "El nombre debe tener hasta 50 caracteres")
+    private String nombre;
+    @Size(min = 3, max = 50, message = "El apellido debe entre 3 y  hasta 50 caracteres")
+    @NotBlank(message = "Debe especificarse el apellido del paciente")
+    private String apellido;
+    @Positive(message = "El dni del paciente no puede ser nulo o menor a cero")
+    private int dni;
 
-  @FutureOrPresent(message = "La fecha no puede ser anterior al día de hoy")
-  @NotNull(message = "Debe especificarse la fecha de ingreso del paciente")
-  @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
-  private LocalDate fechaIngreso;
+    @FutureOrPresent(message = "La fecha no puede ser anterior al día de hoy")
+    @NotNull(message = "Debe especificarse la fecha de ingreso del paciente")
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
+    private LocalDate fechaIngreso;
 
-  @NotNull(message = "El domicilio del paciente no puede ser nulo")
-  @Valid
-  private DomicilioEntradaDto domicilioEntradaDto;
+    @NotNull(message = "El domicilio del paciente no puede ser nulo")
+    @Valid
+    private DomicilioEntradaDto domicilioEntradaDto;
 
-  public PacienteEntradaDto() {
-  }
+    public PacienteEntradaDto() {
+    }
 
   public PacienteEntradaDto(String nombre, String apellido, int dni, LocalDate fechaIngreso,
                             DomicilioEntradaDto domicilioEntradaDto) {

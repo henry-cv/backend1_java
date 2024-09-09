@@ -80,6 +80,19 @@
      p{ 
         align-self: flex-start; 
      }
+
+     .errors{
+        width: 80%;
+     }
+     .errors p{
+        background-color: rgba(231, 171, 161, 0.349);
+        color: rgb(219, 38, 38);
+        border-radius: 8px;
+        margin: 5px;
+        padding: 8px;
+        
+
+     }
 }
 
 .table-pacients {

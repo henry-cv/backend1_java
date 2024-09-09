@@ -302,17 +302,37 @@ document.addEventListener('DOMContentLoaded', () => {
         
             if (!response.ok) {
                 const errorData = await response.json(); 
-                throw new Error(`Error al al registrar paciente: ${errorData.message}`); 
+                const errorsContainer = document.querySelector('.errors');
+            
+                console.log(errorData);
+                
+                errorsContainer.innerHTML = ''; 
+    
+                let claves = Object.keys(errorData);
+                for (let i = 0; i < claves.length; i++) {
+                    const pErrors = document.createElement('p');
+                    let clave = claves[i];
+                    pErrors.textContent = `* ${errorData[clave]} ` ; 
+                    errorsContainer.appendChild(pErrors); 
+                }
+    
+
+
+                hiddenElement.classList.remove("form-hidden");
+                
+                return;
             }
-        
+
             alert('Paciente registrado correctamente');
-            hiddenElement.classList.add("form-hidden")   
+            hiddenElement.classList.add("form-hidden")  
+            fetchDataList();
+ 
 
         } catch (error) {
             console.error('Error:', error.message); 
             alert(`Error: ${error.message}`); 
         }
-        fetchDataList();
+        
         
         
 
