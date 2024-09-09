@@ -10,10 +10,13 @@ public class Paciente {
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   private Long id;
 
+  @Column(length = 30, nullable = false)
   private String nombre;
 
+  @Column(length = 30, nullable = false)
   private String apellido;
 
+  @Column(length = 30, nullable = false)
   private int dni;
 
   private LocalDate fechaIngreso;

@@ -10,12 +10,16 @@ public class Domicilio {
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   private Long id;
 
+  @Column(length = 30, nullable = false)
   private String calle;
 
+  @Column(length = 8, nullable = false)
   private int numero;
 
+  @Column(length = 30, nullable = false)
   private String localidad;
 
+  @Column(length = 30, nullable = false)
   private String provincia;
 
   public Domicilio() {

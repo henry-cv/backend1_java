@@ -18,6 +18,6 @@ public interface IPacienteService {
 
   void eliminarPaciente(Long id) throws ResourceNotFoundException;
 
-  PacienteSalidaDto actualizarPaciente(PacienteEntradaDto pacienteEntradaDto, Long id);
+  PacienteSalidaDto actualizarPaciente(PacienteEntradaDto pacienteEntradaDto, Long id) throws ResourceNotFoundException;
   //PacienteSalidaDto buscarPacientePorDni(int dni);
 }
