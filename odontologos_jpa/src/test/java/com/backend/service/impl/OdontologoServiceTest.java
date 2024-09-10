@@ -3,6 +3,7 @@ package com.backend.service.impl;
 import com.backend.dto.entrada.OdontologoEntradaDto;
 import com.backend.dto.salida.OdontologoSalidaDto;
 import com.backend.entity.Odontologo;
+import com.backend.exceptions.ResourceNotFoundException;
 import com.backend.repository.OdontologoRepository;
 import org.junit.jupiter.api.*;
 import org.modelmapper.ModelMapper;
@@ -73,7 +74,7 @@ class OdontologoServiceTest {
   }
 
   @Test
-  public void testActualizarOdontologo() {
+  public void testActualizarOdontologo() throws ResourceNotFoundException {
     // Paso 1: Configurar el mock para devolver el odontólogo existente al
     // buscar por ID
     when(odontologoRepositoryMock.findById(1L)).thenReturn(Optional.of(odontologoExistente));

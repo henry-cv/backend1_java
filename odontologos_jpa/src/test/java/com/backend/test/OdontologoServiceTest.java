@@ -51,7 +51,8 @@ class OdontologoServiceTest {
     assertNotNull(encontrado);
   }
   @Test @Order(4)
-  void dadoUnIdExistenteYDatosSeDebeModificarOdontologoCorrespondienteEnH2() {
+  void dadoUnIdExistenteYDatosSeDebeModificarOdontologoCorrespondienteEnH2() throws
+    ResourceNotFoundException {
     //En este caso modifica el último de la lista
     Long id = odontologoService.listarOdontologos().get(odontologoService.listarOdontologos().size()-1).getId();
     OdontologoEntradaDto actualizaOdontologo = new OdontologoEntradaDto("prueba-001","Antonio","Lamas");

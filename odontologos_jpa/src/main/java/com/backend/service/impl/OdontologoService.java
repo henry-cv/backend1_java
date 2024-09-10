@@ -97,7 +97,8 @@ public class OdontologoService implements IOdontologoService {
       //excepcion resource not found
       //LOGGER.warn("no Se ha eliminado porque no se encontró el odontologo
       // con id {}", id);
-      throw new ResourceNotFoundException("No existe el odontologo con id: " + id);
+      throw new ResourceNotFoundException("Imposible eliminar no existe el " +
+        "odontologo con id: " + id);
     }
 
   }
@@ -105,7 +106,7 @@ public class OdontologoService implements IOdontologoService {
   @Override
 
   public OdontologoSalidaDto actualizarOdontologo(
-    OdontologoEntradaDto odontologoEntradaDto, Long id) {
+    OdontologoEntradaDto odontologoEntradaDto, Long id) throws ResourceNotFoundException{
     //Imprime a String el odóntologo de Entrada DTO, y es registrado al LOGGER
     LOGGER.info("OdontologoEntradaDto: {}",
       JsonPrinter.toString(odontologoEntradaDto));
@@ -135,6 +136,8 @@ public class OdontologoService implements IOdontologoService {
     } else {
       LOGGER.error("No fue posible actualizar el odontologo porque no se " +
         "encuentra en nuestra base de datos");
+        throw new ResourceNotFoundException("No fue posible actualizar el " +
+          "odontólogo con id: "+ id +", registro inexistente");
     }
     return odontologoActualizado;
   }

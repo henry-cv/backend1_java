@@ -42,6 +42,7 @@ public class GlobalExceptionHandler {
             mensaje.put(nombreCampo, mensajeError);
         });
         LOGGER.info("Uso manejarValidationException, MethodArgumentNotValidException");
+        System.err.println(methodArgumentNotValidException);
         return mensaje;
     }
     /*
@@ -64,7 +65,7 @@ public class GlobalExceptionHandler {
     */
 
     @ExceptionHandler(BadRequestException.class)
-    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    @ResponseStatus(HttpStatus.NO_CONTENT)
     public Map<String, String> handleBadRequestException(BadRequestException ex) {
         // Creación del mapa para devolver los detalles del error
         Map<String, String> errorResponse = new HashMap<>();
@@ -78,7 +79,8 @@ public class GlobalExceptionHandler {
             errorResponse.put("cause", ex.getCause().toString());
         }
         // Puedes agregar más campos según la información que quieras retornar
-        LOGGER.info("Uso handleBadRequestException ");
+        LOGGER.info("Uso handleBadRequestException");
+        LOGGER.warn(ex.toString());
         return errorResponse;
     }
     //TAREA Manejar BadRequetException
