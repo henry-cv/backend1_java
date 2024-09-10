@@ -1,12 +1,13 @@
 INSERT INTO ODONTOLOGOS(MATRICULA, NOMBRE, APELLIDO)
 VALUES
-('odont-001', 'Nick', 'Riviera'),
-('odont-002','Gregory','House'),
-('odont-003','Julius','Hibbert'),
-('odont-004','John','Zoidberg'),
-('odont-005','Fulano','Mengueche'),
-('odont-006','Aquiles','Mata'),
-('odont-007','Albert','Jotas');
+('mat-001', 'Nick', 'Riviera'),
+('mat-002','Gregory','House'),
+('mat-003','Julius','Hibbert'),
+('mat-004','John','Zoidberg'),
+('mat-005','Fulano','Mengueche'),
+('mat-006','Aquiles','Mata'),
+('mat-007','Albert','Jotas'),
+('mat-008','Douglas','Powers');
 
 INSERT INTO DOMICILIOS(CALLE, NUMERO, LOCALIDAD, PROVINCIA)
 VALUES
