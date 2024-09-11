@@ -3,6 +3,7 @@ package com.backend.service;
 import com.backend.dto.entrada.TurnoEntradaDto;
 import com.backend.dto.salida.TurnoSalidaDto;
 import com.backend.exceptions.BadRequestException;
+import com.backend.exceptions.ResourceNotFoundException;
 import org.springframework.stereotype.Service;
 
 import java.util.List;

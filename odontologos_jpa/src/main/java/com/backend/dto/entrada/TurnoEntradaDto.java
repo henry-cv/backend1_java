@@ -1,9 +1,6 @@
 package com.backend.dto.entrada;
 
-import com.backend.dto.salida.OdontologoSalidaDto;
-import com.backend.dto.salida.PacienteSalidaDto;
 import com.fasterxml.jackson.annotation.JsonFormat;
-
 import javax.validation.constraints.FutureOrPresent;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Positive;

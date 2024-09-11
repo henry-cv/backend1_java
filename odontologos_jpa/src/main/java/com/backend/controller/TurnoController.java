@@ -3,6 +3,7 @@ package com.backend.controller;
 import com.backend.dto.entrada.TurnoEntradaDto;
 import com.backend.dto.salida.TurnoSalidaDto;
 import com.backend.exceptions.BadRequestException;
+import com.backend.exceptions.ResourceNotFoundException;
 import com.backend.service.ITurnoService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -42,7 +43,8 @@ public class TurnoController {
   //PUT
   @PutMapping("/actualizar/{id}")
   public ResponseEntity<TurnoSalidaDto> actualizarTurno(@RequestBody @Valid TurnoEntradaDto turnoEntradaDto,
-                                                        @PathVariable Long id) {
+                                                        @PathVariable Long id) throws
+    ResourceNotFoundException, BadRequestException {
     return new ResponseEntity<>(turnoService.actualizarTurno(turnoEntradaDto, id), HttpStatus.OK);
   }
 
