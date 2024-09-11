@@ -43,6 +43,9 @@ public class TurnoService implements ITurnoService {
     configureMapping();
   }
 
+
+
+
   @Override
   public TurnoSalidaDto registrarTurno(TurnoEntradaDto turnoEntradaDto)throws BadRequestException {
     Long idPaciente = turnoEntradaDto.getPacienteId();
@@ -57,6 +60,7 @@ public class TurnoService implements ITurnoService {
     }
     if(odontologoEncontrado == null) {
       throw new BadRequestException("Odontólogo con ID " + idOdontologo + " no existe.");
+    }
 
      if(pacienteEncontrado == null && odontologoEncontrado == null ) {
 
@@ -185,4 +189,4 @@ public class TurnoService implements ITurnoService {
     modelMapper.typeMap(PacienteSalidaDto.class, Paciente.class)
             .addMappings(mapper -> mapper.map(PacienteSalidaDto::getDomicilioSalidaDto, Paciente::setDomicilio));
   }
-}
+};
