@@ -169,7 +169,7 @@ document.addEventListener('DOMContentLoaded', () => {
     };
 
     fetchDataList();
-
+    addEventListeners();
 
     // consultar la api y buscar paciente por id
  
@@ -319,7 +319,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
                 hiddenElement.classList.remove("form-hidden");
-                
+                window.location.hash = 'form-hidden'
                 return;
             }
 

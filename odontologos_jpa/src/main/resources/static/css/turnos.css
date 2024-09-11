@@ -1,0 +1,44 @@
+@import url("./mainStyles.css");
+
+.tables-container{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    margin: 15px;
+    padding: 15px;
+    align-items: start;
+    background-color: bisque;
+    
+    
+
+    .table-odont, .table-pacient {
+        padding: 25px;
+        max-height: 400px;
+        overflow-y: auto;  
+        font-family: monospace;
+        color: black;
+       
+        margin: 10px auto;
+        border-radius: 0px 0px 25px 25px;
+        align-items: start;
+    }
+    thead tr {
+        display: flex; 
+        background-color: rgb(255, 136, 0);
+        /* width: 100%;  */
+    }
+    
+    thead th, tbody td{
+        padding: 10px; 
+    }
+    
+    thead .encabezado {
+        justify-content: space-between; 
+    }
+    tbody tr{
+        display: flex;
+        flex-direction: row;
+        
+    }
+
+}

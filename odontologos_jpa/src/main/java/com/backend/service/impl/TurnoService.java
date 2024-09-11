@@ -41,7 +41,7 @@ public class TurnoService implements ITurnoService {
   }
 
   @Override
-  public TurnoSalidaDto registrarTurno(TurnoEntradaDto turnoEntradaDto) {
+  public TurnoSalidaDto registrarTurno(TurnoEntradaDto turnoEntradaDto)throws BadRequestException {
     Long idPaciente = turnoEntradaDto.getPacienteId();
     Long idOdontologo = turnoEntradaDto.getOdontologoId();
 
