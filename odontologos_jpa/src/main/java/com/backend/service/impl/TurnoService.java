@@ -49,11 +49,9 @@ public class TurnoService implements ITurnoService {
     PacienteSalidaDto pacienteEncontrado = pacienteService.buscarPacientePorId(idPaciente);
     OdontologoSalidaDto odontologoEncontrado = odontologoService.buscarOdontologoPorId(idOdontologo);
 
-    if(pacienteEncontrado == null) {
-      throw new BadRequestException("Paciente con ID " + idPaciente + " no existe.");
-    }
-    if(odontologoEncontrado == null) {
-      throw new BadRequestException("Odontólogo con ID " + idOdontologo + " no existe.");
+    if(pacienteEncontrado == null || odontologoEncontrado == null ) {
+// mirar validaciones del mensaje
+      throw new BadRequestException("Paciente con ID " + idPaciente + " no existe." + "Odontólogo con ID " + idOdontologo + " no existe." );
     }
 
     LOGGER.info("TurnoEntradaDto: {}", JsonPrinter.toString(turnoEntradaDto));

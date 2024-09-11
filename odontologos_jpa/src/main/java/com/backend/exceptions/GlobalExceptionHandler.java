@@ -65,7 +65,7 @@ public class GlobalExceptionHandler {
     */
 
     @ExceptionHandler(BadRequestException.class)
-    @ResponseStatus(HttpStatus.NO_CONTENT)
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
     public Map<String, String> handleBadRequestException(BadRequestException ex) {
         // Creación del mapa para devolver los detalles del error
         Map<String, String> errorResponse = new HashMap<>();
