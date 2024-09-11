@@ -4,6 +4,8 @@ const apiUrl = 'http://localhost:8080/turnos';
 const  apiPatients = 'http://localhost:8080/pacientes';
 const apiDentist = 'http://localhost:8080/odontologos'
 
+const formCreated = document.getElementById('form-created');
+
 LoadDentist=()=>{
 
 
@@ -21,7 +23,7 @@ const fetchDataList = async (url) => {
         let info = [] ;
         let typeTable = ""
         let typeBody = ""
-        console.log(data);
+        // console.log(data);
         data.forEach(item => {
       
             if (item.odontologoSalidaDto) {
@@ -60,18 +62,18 @@ const renderTable = (info, typeTable, typeBody) => {
 
 
     //encabezados
-    const thCheck = document.createElement('th');
-    thCheck.textContent = 'Seleccionar';
-    thead.appendChild(thCheck);
+    // const thCheck = document.createElement('th');
+    // thCheck.textContent = ' ';
+    // thead.appendChild(thCheck);
 
 
-    claves.forEach(clave => {
-        if (clave === "nombre" || clave === "apellido") {
-            const th = document.createElement('th');
-            th.textContent = clave.charAt(0).toUpperCase() + clave.slice(1);
-            thead.appendChild(th);
-        }
-    });
+    // claves.forEach(clave => {
+    //     if (clave === "nombre" || clave === "apellido") {
+    //         const th = document.createElement('th');
+    //         th.textContent = clave.charAt(0).toUpperCase() + clave.slice(1);
+    //         thead.appendChild(th);
+    //     }
+    // });
 
 
 
@@ -99,27 +101,50 @@ const renderTable = (info, typeTable, typeBody) => {
         tdCheck.appendChild(check);
         tr.appendChild(tdCheck);
 
-        // Agregar celdas con información
+     
+        let nombreCompleto = ""; 
+
         claves.forEach(clave => {
-            if (clave === "nombre" || clave === "apellido") {
-                const td = document.createElement('td');
-                td.textContent = item[clave] || '';
-                tr.appendChild(td);
+            if (clave === "nombre") {
+                nombreCompleto += item[clave];
+            }
+            if (clave === "apellido") {
+                nombreCompleto += " " + item[clave]; 
             }
         });
+        
+  
+  
+        nombreCompleto = nombreCompleto.trim();
+        
+        const td = document.createElement('td');
+        
+        if (typeTable === "table-odont") {
+            td.textContent = `Dr ${nombreCompleto}`;
+        } else {
+            td.textContent = nombreCompleto; 
+        }
+        
 
+        tr.appendChild(td);
         tbody.appendChild(tr);
+
     });
 };
 
 
-document.getElementById('form-created').addEventListener('submit', async function(event) {
+formCreated.addEventListener('submit', async function(event) {
     event.preventDefault();
 
- 
     const selectedOdont = document.querySelector('input[name="table-odont"]:checked');
     const selectedPacient = document.querySelector('input[name="table-pacient"]:checked');
 
+
+    
+    if(!selectedOdont && !selectedPacient ){
+        alert("para poder reservar un turno debe escoger un paciente y un odontologo ")
+    }else{
+        
     const idOdontologo = selectedOdont.value;
     const idPaciente = selectedPacient.value;
     const fechaHora = new Date(new Date().setDate(new Date().getDate() + 1)).toISOString().slice(0, 19);
@@ -151,6 +176,7 @@ document.getElementById('form-created').addEventListener('submit', async functio
             if (response.ok) {
                 const result = await response.json();
                 console.log('Turno registrado con éxito:', result);
+                formCreated.reset()
             } else {
                 console.error('Error al registrar el turno:', response.statusText);
             }
@@ -158,6 +184,12 @@ document.getElementById('form-created').addEventListener('submit', async functio
             console.error('Error al realizar la solicitud:', error);
         }
  
+
+    }
+
+
+
+
 });
 
 
