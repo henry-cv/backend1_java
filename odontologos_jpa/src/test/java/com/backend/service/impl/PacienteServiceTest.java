@@ -12,12 +12,10 @@ import org.junit.jupiter.api.Test;
 import org.modelmapper.ModelMapper;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.TestPropertySource;
-
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
-
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.*;
@@ -26,12 +24,6 @@ import static org.mockito.Mockito.times;
 @SpringBootTest
   //@TestPropertySource(locations = "classpath:application-test.properties")
 class PacienteServiceTest {
-
-  //@Mock
-  //private PacienteRepository pacienteRepository;
-  //@InjectMocks
-  //private PacienteService pacienteService;
-
   private final PacienteRepository pacienteRepositoryMock =
     mock(PacienteRepository.class);
   private final ModelMapper modelMapper = new ModelMapper();
@@ -40,23 +32,20 @@ class PacienteServiceTest {
     new PacienteService(pacienteRepositoryMock, modelMapper);
 
   private static PacienteEntradaDto pacienteEntradaDto;
-  private static Paciente paciente;
+  private static Paciente pacienteExistente;
 
   @BeforeAll
   static void setUp() {
-
     // Inicializa el objeto común antes de cada prueba
-    paciente = new Paciente(1L, "Juan", "Perez", 123456, LocalDate.of(2024, 6
+    pacienteExistente = new Paciente(1L, "Juan", "Perez", 123456, LocalDate.of(2024, 6
       , 22), new Domicilio(1L, "Calle", 123, "Localidad", "Provincia"));
-
     pacienteEntradaDto = new PacienteEntradaDto("Juan", "Perez", 123456,
       LocalDate.of(2024, 6, 22), new DomicilioEntradaDto("Calle", 123,
       "Localidad", "Provincia"));
   }
-
   @Test
   void deberiaMandarAlRepositorioUnPacienteDeNombreJuan_yRetornarUnSalidaDtoConSuId() {
-    when(pacienteRepositoryMock.save(any(Paciente.class))).thenReturn(paciente);
+    when(pacienteRepositoryMock.save(any(Paciente.class))).thenReturn(pacienteExistente);
 
     PacienteSalidaDto pacienteSalidaDto =
       pacienteService.registrarPaciente(pacienteEntradaDto);
@@ -69,7 +58,7 @@ class PacienteServiceTest {
 
   @Test
   void deberiaDevolverUnListadoNoVacioDePacientes() {
-    List<Paciente> pacientes = new java.util.ArrayList<>(List.of(paciente));
+    List<Paciente> pacientes = new java.util.ArrayList<>(List.of(pacienteExistente));
     when(pacienteRepositoryMock.findAll()).thenReturn(pacientes);
 
     List<PacienteSalidaDto> listadoDePacientes =
@@ -79,7 +68,7 @@ class PacienteServiceTest {
 
   @Test
   void deberiaEliminarElPacienteConId1() {
-    when(pacienteRepositoryMock.findById(1L)).thenReturn(Optional.of(paciente));
+    when(pacienteRepositoryMock.findById(1L)).thenReturn(Optional.of(pacienteExistente));
     doNothing().when(pacienteRepositoryMock).deleteById(1L);
 
     assertDoesNotThrow(() -> pacienteService.eliminarPaciente(1L));
@@ -90,8 +79,8 @@ class PacienteServiceTest {
 
   @Test
   void deberiaEliminarElPacienteConId2() {
-    paciente.setId(2L);
-    when(pacienteRepositoryMock.findById(2L)).thenReturn(Optional.of(paciente));
+    pacienteExistente.setId(2L);
+    when(pacienteRepositoryMock.findById(2L)).thenReturn(Optional.of(pacienteExistente));
     doNothing().when(pacienteRepositoryMock).deleteById(2L);
 
     try {
@@ -120,5 +109,65 @@ class PacienteServiceTest {
     assertThrows(ResourceNotFoundException.class,
       () -> pacienteService.actualizarPaciente(pacienteEntradaDto, 2L));
 
+  }
+
+  //Agregados no de la Profe :)
+  @Test
+  void dadoElIdUnoDebeBuscarEnRepositorioYRetornarElPacienteConEseId() {
+    Long id = 1L;
+    when(pacienteRepositoryMock.findById(id)).thenReturn(Optional.of(pacienteExistente));
+    PacienteSalidaDto pacienteSalidaDto =
+      pacienteService.buscarPacientePorId(id);
+    assertNotNull(pacienteSalidaDto);
+    assertNotNull(pacienteSalidaDto.getId());
+    assertEquals("Perez", pacienteSalidaDto.getApellido());
+  }
+  @Test
+  public void debeSerPosibleActualizarDatosDePacienteExistente() throws ResourceNotFoundException {
+    when(pacienteRepositoryMock.findById(1L)).thenReturn(Optional.of(pacienteExistente));
+
+    Domicilio nuevoDomicilio = new Domicilio(2L, "Sucre",
+      120,"Loja","Loja");
+    DomicilioEntradaDto nuevoDomicilioEntradaDto =new DomicilioEntradaDto(
+      "Sucre",120,"Loja","Loja");
+
+    pacienteEntradaDto = new PacienteEntradaDto("Ana","Mendez",11223344,
+      LocalDate.of(2024, 6, 22),nuevoDomicilioEntradaDto);
+
+    Paciente pacienteActualizado = new Paciente();
+    pacienteActualizado.setId(1L);
+    pacienteActualizado.setNombre(pacienteEntradaDto.getNombre());
+    pacienteActualizado.setApellido(pacienteEntradaDto.getApellido());
+    pacienteActualizado.setDni(pacienteEntradaDto.getDni());
+    pacienteActualizado.setFechaIngreso(pacienteEntradaDto.getFechaIngreso());
+    pacienteActualizado.setDomicilio(nuevoDomicilio);
+
+    when(pacienteRepositoryMock.save(any(Paciente.class))).thenReturn(pacienteActualizado);
+
+    PacienteSalidaDto resultado =
+      pacienteService.actualizarPaciente(pacienteEntradaDto, 1L);
+
+    assertNotNull(resultado);
+    assertEquals(1L, resultado.getId());
+    assertEquals("Mendez", resultado.getApellido());
+
+    // Verificar que el método save fue llamado con cualquier objeto Paciente
+    verify(pacienteRepositoryMock).save(argThat(paciente -> paciente.getId().equals(1L)
+      && paciente.getDni()==(11223344)
+      && paciente.getNombre().equals("Ana")
+      && paciente.getApellido().equals("Mendez")
+    ));
+  }
+
+  @Test
+  public void alBuscarPacientePorId_Inexistente_DebeRetornarNull() {
+    // Paso 1: Configurar el mock para devolver un Optional vacío al buscar
+    // por un ID inexistente
+    Long idInexistente = 15L;
+    when(pacienteRepositoryMock.findById(idInexistente)).thenReturn(Optional.empty());
+
+    assertNull(pacienteService.buscarPacientePorId(idInexistente));
+
+    verify(pacienteRepositoryMock).findById(idInexistente);
   }
 }

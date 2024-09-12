@@ -74,7 +74,7 @@ class OdontologoServiceTest {
   }
 
   @Test
-  public void testActualizarOdontologo() throws ResourceNotFoundException {
+  public void seDebePoderActualizarOdontologoExistente() throws ResourceNotFoundException {
     // Paso 1: Configurar el mock para devolver el odontólogo existente al
     // buscar por ID
     when(odontologoRepositoryMock.findById(1L)).thenReturn(Optional.of(odontologoExistente));
@@ -113,7 +113,7 @@ class OdontologoServiceTest {
   }
 
   @Test
-  public void alBuscarPorId_Inexistente_DebeRetornarNull() {
+  public void alBuscarOdontologoPorId_Inexistente_DebeRetornarNull() {
     // Paso 1: Configurar el mock para devolver un Optional vacío al buscar
     // por un ID inexistente
     Long idInexistente = 99L;
