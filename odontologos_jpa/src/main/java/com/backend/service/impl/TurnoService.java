@@ -1,12 +1,9 @@
 package com.backend.service.impl;
 
-import com.backend.dto.entrada.PacienteEntradaDto;
 import com.backend.dto.entrada.TurnoEntradaDto;
-import com.backend.dto.salida.DomicilioSalidaDto;
 import com.backend.dto.salida.OdontologoSalidaDto;
 import com.backend.dto.salida.PacienteSalidaDto;
 import com.backend.dto.salida.TurnoSalidaDto;
-import com.backend.entity.Domicilio;
 import com.backend.entity.Odontologo;
 import com.backend.entity.Paciente;
 import com.backend.entity.Turno;
@@ -20,8 +17,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-
-import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -55,17 +50,17 @@ public class TurnoService implements ITurnoService {
     PacienteSalidaDto pacienteEncontrado = pacienteService.buscarPacientePorId(idPaciente);
     OdontologoSalidaDto odontologoEncontrado = odontologoService.buscarOdontologoPorId(idOdontologo);
 
-     if(pacienteEncontrado == null) {
+    if(pacienteEncontrado == null && odontologoEncontrado == null ) {
+      throw new BadRequestException("Paciente con ID " + idPaciente + " no existe." + "Odontólogo con ID " + idOdontologo + " no existe." );
+    }
+    if(pacienteEncontrado == null) {
       throw new BadRequestException("Paciente con ID " + idPaciente + " no existe.");
     }
     if(odontologoEncontrado == null) {
       throw new BadRequestException("Odontólogo con ID " + idOdontologo + " no existe.");
     }
 
-     if(pacienteEncontrado == null && odontologoEncontrado == null ) {
 
-      throw new BadRequestException("Paciente con ID " + idPaciente + " no existe." + "Odontólogo con ID " + idOdontologo + " no existe." );
-    }
     LOGGER.info("TurnoEntradaDto: {}", JsonPrinter.toString(turnoEntradaDto));
 
     //Recibe un TurnoEntradato y convierte a una Entidad Turno
