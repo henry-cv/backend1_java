@@ -75,12 +75,8 @@ class OdontologoServiceTest {
 
   @Test
   public void seDebePoderActualizarOdontologoExistente() throws ResourceNotFoundException {
-    // Paso 1: Configurar el mock para devolver el odontólogo existente al
-    // buscar por ID
     when(odontologoRepositoryMock.findById(1L)).thenReturn(Optional.of(odontologoExistente));
 
-    // Paso 2: Configurar el odontólogo actualizado con los valores del DTO
-    // de entrada
     odontologoEntradaDto.setMatricula("mat-2002");
     odontologoEntradaDto.setNombre("Ana");
     odontologoEntradaDto.setApellido("Mendez");
@@ -88,39 +84,29 @@ class OdontologoServiceTest {
     Odontologo odontologoActualizado = new Odontologo();
     odontologoActualizado.setId(1L);
     odontologoActualizado.setMatricula(odontologoEntradaDto.getMatricula());
-    // La
-    // matrícula no cambia
     odontologoActualizado.setNombre(odontologoEntradaDto.getNombre());
     odontologoActualizado.setApellido(odontologoEntradaDto.getApellido());
 
-    // Paso 3: Configurar el mock para simular la actualización y devolver el
-    // odontólogo actualizado
     when(odontologoRepositoryMock.save(any(Odontologo.class))).thenReturn(odontologoActualizado);
 
-    // Paso 4: Realizar la actualización a través del servicio
     OdontologoSalidaDto resultado =
       odontologoService.actualizarOdontologo(odontologoEntradaDto, 1L);
 
-    // Verificar que el resultado es el esperado utilizando OdontologoSalidaDto
     assertNotNull(resultado);
     assertEquals(1L, resultado.getId());
     assertEquals("mat-2002", resultado.getMatricula());
     assertEquals("Ana", resultado.getNombre());
     assertEquals("Mendez", resultado.getApellido());
 
-    // Verificar que el método save fue llamado con cualquier objeto Odontologo
     verify(odontologoRepositoryMock).save(argThat(odontologo -> odontologo.getId().equals(1L) && odontologo.getMatricula().equals("mat-2002") && odontologo.getNombre().equals("Ana") && odontologo.getApellido().equals("Mendez")));
   }
 
   @Test
   public void alBuscarOdontologoPorId_Inexistente_DebeRetornarNull() {
-    // Paso 1: Configurar el mock para devolver un Optional vacío al buscar
-    // por un ID inexistente
     Long idInexistente = 99L;
     when(odontologoRepositoryMock.findById(idInexistente)).thenReturn(Optional.empty());
 
     assertNull(odontologoService.buscarOdontologoPorId(idInexistente));
-
     verify(odontologoRepositoryMock).findById(idInexistente);
   }
 

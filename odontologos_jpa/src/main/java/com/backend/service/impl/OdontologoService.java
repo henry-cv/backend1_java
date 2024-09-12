@@ -34,33 +34,24 @@ public class OdontologoService implements IOdontologoService {
           OdontologoEntradaDto odontologoEntradaDto) {
     LOGGER.info("OdontologoEntradaDto: {}",
             JsonPrinter.toString(odontologoEntradaDto));
-    //Imprime a String el odóntologo de Entrada DTO, y es registrado al LOGGER
 
     Odontologo entidadOdontologo = modelMapper.map(odontologoEntradaDto,
             Odontologo.class);
-    // el mapper convierte el odontólogo Entrada a un Odontólogo Entidad
 
     LOGGER.info("EntidadOdontologo: {}",
             JsonPrinter.toString(entidadOdontologo));
-    //Imprime a String el odóntologo Entidad, y es registrado al LOGGER
 
     Odontologo odontologoRegistrado =
             odontologoRepository.save(entidadOdontologo);
-    // Se agrega o registra un nuevo Odontólogo mediante el IDao y se guarda
-    // el objeto en odontologoRegistrado
 
     LOGGER.info("OdontologoRegistrado: {}",
             JsonPrinter.toString(odontologoRegistrado));
-    //Imprime a String el odóntologo Registrado, y es registrado al LOGGER
 
     OdontologoSalidaDto odontologoSalidaDto =
             modelMapper.map(odontologoRegistrado, OdontologoSalidaDto.class);
-    //El mapper toma el odontologoRegistado y lo convierte a un
-    // odontologoSalida DTO
 
     LOGGER.info("OdontologoSalidaDto: {}",
             JsonPrinter.toString(odontologoSalidaDto));
-    //Imprime a String el odóntologo Salida DTO, y es registrado al LOGGER
 
     return odontologoSalidaDto;
   }
@@ -86,28 +77,20 @@ public class OdontologoService implements IOdontologoService {
   public void eliminarOdontologo(Long id) throws ResourceNotFoundException {
     Odontologo odontologoEncontrado =
             odontologoRepository.findById(id).orElse(null);
-    // Se envia a buscar el odontologo a eliminar y se guarda en
-    // odontologoEncontrado
     if(odontologoEncontrado != null) {
       LOGGER.warn("Se ha eliminado el odontólogo {}", odontologoEncontrado);
       odontologoRepository.deleteById(id);
-      //Si lo encuentra se elimina el odontologo con ese id
       LOGGER.warn("Se ha eliminado el odontologo con id {}", id);
     } else {
-      //excepcion resource not found
-      //LOGGER.warn("no Se ha eliminado porque no se encontró el odontologo
-      // con id {}", id);
       throw new ResourceNotFoundException("Imposible eliminar no existe el " +
               "odontologo con id: " + id);
     }
-
   }
 
   @Override
 
   public OdontologoSalidaDto actualizarOdontologo(
           OdontologoEntradaDto odontologoEntradaDto, Long id) throws ResourceNotFoundException{
-    //Imprime a String el odóntologo de Entrada DTO, y es registrado al LOGGER
     LOGGER.info("OdontologoEntradaDto: {}",
             JsonPrinter.toString(odontologoEntradaDto));
 
@@ -118,7 +101,6 @@ public class OdontologoService implements IOdontologoService {
 
     Odontologo entidadOdontologo = modelMapper.map(odontologoEntradaDto,
             Odontologo.class);
-    // el mapper convierte el odontólogo Entrada a un Odontólogo Entidad
 
     LOGGER.info("EntidadOdontologo: {}",
             JsonPrinter.toString(entidadOdontologo));

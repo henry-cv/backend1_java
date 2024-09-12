@@ -40,7 +40,7 @@ public class PacienteService implements IPacienteService {
     return pacienteSalidaDto;
   }
 
-  @Override//NO HAY QUE LANZAR LA EXCEPCION ACA NI EN NINGUN SERVICIO EN EL METODO buscarPorId
+  @Override
   public PacienteSalidaDto buscarPacientePorId(Long id) {
     Paciente pacienteBuscado = pacienteRepository.findById(id).orElse(null);
     LOGGER.info("Paciente buscado: {}", JsonPrinter.toString(pacienteBuscado));
@@ -66,14 +66,11 @@ public class PacienteService implements IPacienteService {
   @Override
   public void eliminarPaciente(Long id) throws ResourceNotFoundException {
     if(buscarPacientePorId(id) != null) {
-      //llamada a la capa repositorio para eliminar
       pacienteRepository.deleteById(id);
       LOGGER.warn("Se ha eliminado el paciente con id {}", id);
     } else {
-      //excepcion resource not found
       throw new ResourceNotFoundException("No existe el paciente con id " + id);
     }
-
   }
 
   @Override
@@ -88,14 +85,6 @@ public class PacienteService implements IPacienteService {
       pacienteRecibido.getDomicilio().setId(pacienteAActualizar.getDomicilio().getId());
       pacienteAActualizar = pacienteRecibido;
 
-      //pacienteAActualizar.setNombre(pacienteRecibido.getNombre());
-      //pacienteAActualizar.setApellido(pacienteRecibido.getApellido());
-      //pacienteAActualizar.setDni(pacienteRecibido.getDni());
-      //pacienteAActualizar.setFechaIngreso(pacienteRecibido.getFechaIngreso());
-      //pacienteAActualizar.getDomicilio().setNumero(pacienteRecibido.getDomicilio().getNumero());
-      //pacienteAActualizar.getDomicilio().setLocalidad(pacienteRecibido.getDomicilio().getLocalidad());
-      //pacienteAActualizar.getDomicilio().setProvincia(pacienteRecibido.getDomicilio().getProvincia());
-
       pacienteRepository.save(pacienteAActualizar);
       pacienteSalidaDto = modelMapper.map(pacienteAActualizar, PacienteSalidaDto.class);
       LOGGER.warn("Paciente actualizado: {}", JsonPrinter.toString(pacienteSalidaDto));
@@ -104,7 +93,6 @@ public class PacienteService implements IPacienteService {
       LOGGER.error("No fue posible actualizar el paciente porque no se encuentra en nuestra base de datos");
       throw new ResourceNotFoundException("No fue posible actualizar el paciente porque no se encuentra en nuestra base de datos");
     }
-
     return pacienteSalidaDto;
   }
 

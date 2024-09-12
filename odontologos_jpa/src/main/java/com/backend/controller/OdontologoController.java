@@ -20,10 +20,6 @@ public class OdontologoController {
   public OdontologoController(IOdontologoService odontologoService) {
     this.odontologoService = odontologoService;
   }
-
-  //POST para crear un registro Odontologo
-
-  //http://localhost:8080/odontologos/registrar
   @PostMapping("/registrar")
   public ResponseEntity<OdontologoSalidaDto> registrarOdontologo(
           @RequestBody @Valid OdontologoEntradaDto odontologoEntradaDto) {
@@ -37,7 +33,7 @@ public class OdontologoController {
   }
 
   //Buscar por ID
-  @GetMapping("/{id}") //localhost:8080/odontologos/x
+  @GetMapping("/{id}")
   public ResponseEntity<OdontologoSalidaDto> buscarOdontologoPorId(@PathVariable Long id) {
     return new ResponseEntity<>(odontologoService.buscarOdontologoPorId(id), HttpStatus.OK);
   }

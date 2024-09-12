@@ -11,7 +11,6 @@ import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import org.modelmapper.ModelMapper;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.test.context.TestPropertySource;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
@@ -22,7 +21,6 @@ import static org.mockito.Mockito.*;
 import static org.mockito.Mockito.times;
 
 @SpringBootTest
-  //@TestPropertySource(locations = "classpath:application-test.properties")
 class PacienteServiceTest {
   private final PacienteRepository pacienteRepositoryMock =
     mock(PacienteRepository.class);
@@ -111,7 +109,7 @@ class PacienteServiceTest {
 
   }
 
-  //Agregados no de la Profe :)
+  //Agregados de Tarea :)
   @Test
   void dadoElIdUnoDebeBuscarEnRepositorioYRetornarElPacienteConEseId() {
     Long id = 1L;
@@ -151,7 +149,6 @@ class PacienteServiceTest {
     assertEquals(1L, resultado.getId());
     assertEquals("Mendez", resultado.getApellido());
 
-    // Verificar que el método save fue llamado con cualquier objeto Paciente
     verify(pacienteRepositoryMock).save(argThat(paciente -> paciente.getId().equals(1L)
       && paciente.getDni()==(11223344)
       && paciente.getNombre().equals("Ana")
@@ -161,8 +158,7 @@ class PacienteServiceTest {
 
   @Test
   public void alBuscarPacientePorId_Inexistente_DebeRetornarNull() {
-    // Paso 1: Configurar el mock para devolver un Optional vacío al buscar
-    // por un ID inexistente
+
     Long idInexistente = 15L;
     when(pacienteRepositoryMock.findById(idInexistente)).thenReturn(Optional.empty());
 

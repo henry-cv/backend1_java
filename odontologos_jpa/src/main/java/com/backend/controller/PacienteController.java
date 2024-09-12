@@ -22,11 +22,6 @@ public class PacienteController {
     this.pacienteService = pacienteService;
   }
 
-
-  //JSON -> @RequestBody -> DTO Entrada -> controller --> service -> mapper = entidad --> repository --> BDD
-  //--> entidad --> repository --> service -> mapper -> DTO Salida --> controller -> @ResponseBody -> JSON --> cliente
-
-  //POST Registrar nuevo Paciente
   @PostMapping("/registrar")
   public ResponseEntity<PacienteSalidaDto> registrarPaciente(
           @RequestBody @Valid PacienteEntradaDto pacienteEntradaDto) {
@@ -41,7 +36,7 @@ public class PacienteController {
   }
 
   //Buscar por Id
-  @GetMapping("/{id}")//localhost:8080/pacientes/x
+  @GetMapping("/{id}")
   public ResponseEntity<PacienteSalidaDto> buscarPacientePorId(@PathVariable Long id) {
     return new ResponseEntity<>(pacienteService.buscarPacientePorId(id), HttpStatus.OK);
   }
@@ -52,16 +47,8 @@ public class PacienteController {
                                                               @PathVariable Long id) throws ResourceNotFoundException{
     return new ResponseEntity<>(pacienteService.actualizarPaciente(paciente, id), HttpStatus.OK);
   }
-  /*
-  //DELETE Eliminar un registro Paciente
-  @DeleteMapping("/{id}")//localhost:8080/pacientes/eliminar?id=x
-  public ResponseEntity<String> eliminarPaciente(@PathVariable Long id) {
-    pacienteService.eliminarPaciente(id);
-    return new ResponseEntity<>("Paciente eliminado correctamente", HttpStatus.NO_CONTENT);
-  }
-  */
-  //DELETE
-  @DeleteMapping("/eliminar")//localhost:8080/pacientes/eliminar?id=x
+
+  @DeleteMapping("/eliminar")
   public ResponseEntity<String> eliminarPaciente(@RequestParam Long id) throws ResourceNotFoundException {
     pacienteService.eliminarPaciente(id);
     return ResponseEntity
