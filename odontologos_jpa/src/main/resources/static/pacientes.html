@@ -40,6 +40,10 @@
 
             </div>
 
+            <h3 id="message-update" class="hidden">Paciente Actualizado correctamente</h3>
+
+            
+
         </section >
 
       <!-- formulario agregar o editar -->
@@ -101,11 +105,17 @@
                     <th>Acciones</th>
                 </tr>
             </thead>
-            <tbody class="tbody-pacients">
+            <tbody class="tbody-pacients">                            
+                <td class="empty-list">
+                lista vacia
+                </td>
+
             </tbody>        
         </table>
+        
 
         </section>
+        <button id="btn-back" class="hidden">Volver al listado de pacientes</button>
 
 </main>
 <script src="./js/pacientes.js"></script>

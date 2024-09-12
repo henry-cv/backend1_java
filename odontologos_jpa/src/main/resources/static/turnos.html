@@ -23,8 +23,19 @@
             <h2>Bienvenido a Clinica Sonrisa</h2>
             <p>Aca podras separar turnos y ver los proximos turnos de la clinica</p>
         </section>
+        <section >
+            <div id="message-shift" class="hidden">
 
-        <section id="shift-list">
+            </div>
+
+        </section>
+
+        <section id="shift-list" class="hidden">
+            <!-- <form id="search-form">
+                <label for="search-id">Buscar Turno por ID:</label>
+                <input type="text" id="search-id" name="search-id" required>
+                <button type="submit">Buscar</button>
+            </form> -->
             <div class="shift-container">
                 <h3>Turnos  </h3>
             <table class="table-shift">
@@ -40,8 +51,11 @@
                         </td>       
                 </tbody>        
             </table>
+           
 
             </div>
+            <button id="btn-back" class="hidden">Volver al listado para crear un nuevo turno</button>
+            <!-- <button id="delete-shift" onclick="clearShiftList()">Eliminar Turnos</button> -->
             
 
         </section >

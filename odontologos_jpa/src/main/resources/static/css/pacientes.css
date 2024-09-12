@@ -40,7 +40,7 @@
     }
 }
 
-.form-hidden {
+.form-hidden ,.hidden {
     display: none;
 }
 
@@ -101,10 +101,10 @@
     font-family: monospace;
     color: black;
     background-color: bisque;
-    margin: 10px auto;
     border-radius: 0px 0px 25px 25px;
     width: 80%; /* Asegura que el contenedor ocupe todo el ancho disponible */
     box-sizing: border-box;
+    padding: 0;
 
 
     .table-pacients {
@@ -116,8 +116,8 @@
     .table-pacients thead tr {
         background-color: var(--bg-form1);
         position: sticky;
-        top: -20px;
-        left: -150px;
+        /* top: -20px;
+        left: -80px; */
         width: 100%; /* Asegura que el th cubra todo el ancho de la tabla */
         box-shadow: 0 2px 2px -1px rgba(0, 0, 0, 0.1);
         z-index: 10; /* Asegura que el encabezado esté siempre encima de los <td> */
@@ -158,24 +158,30 @@
         top: 0;
         box-shadow: 0 2px 2px -1px rgba(0, 0, 0, 0.1);
         z-index: 1;
-        padding: 8px; /* Ajustar padding si es necesario */
-        width: auto; /* Asegura que los th se ajusten al contenido */
+        padding: 8px; 
+        width: auto; 
         box-sizing: border-box;
     }
 
 
     .table-pacients tr:hover td {
-        background-color: var(--hover-list); /* Color de fondo al pasar el mouse */
+        background-color: var(--hover-list); 
     }
     .table-pacients tbody tr:first-child td {
-        padding-top: 15%;
+        padding-top: 4%;
 
+    }
+
+    tbody .empty-list {
+        display: flex;
+        width: 100%;
+        justify-content: center;
     }
 
 }
 
 
-.edit-btn, .delete-btn{
+.edit-btn, .delete-btn, #btn-back{
     padding: 5px 20px;
     border-radius: 15px ;
     border: #0000003f;
@@ -186,6 +192,12 @@
 
 .delete-btn{
     background-color: rgb(255, 144, 125);
+}
+
+#btn-back{
+    margin: 20px;
+    background-color:var(--bg-form1);
+    color: white;
 }
 
 .btn-container {
