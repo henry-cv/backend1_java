@@ -19,11 +19,44 @@
         </nav>
     </header>
     <main>
-        <section >  
-            <form action="" id="form-created"  >
+        <section>
+            <h2>Bienvenido a Clinica Sonrisa</h2>
+            <p>Aca podras separar turnos y ver los proximos turnos de la clinica</p>
+        </section>
 
+        <section id="shift-list">
+            <div class="shift-container">
+                <h3>Turnos  </h3>
+            <table class="table-shift">
+                <thead id="thead" >
+                    <tr>
+                        <th>Turnos</th>
+                    </tr>
+
+                </thead>
+                <tbody class="tbody-shift">
+                        <td class="empty-list">
+                            lista vacia
+                        </td>       
+                </tbody>        
+            </table>
+
+            </div>
+            
+
+        </section >
+
+        <section id="new-shift">
+
+        </section>
+
+    
+        <section id="table-create-shift" >           
+            <form action="" id="form-created"  >
+                <h3>Para separar tu turno elige un odontólogo y  un paciente.  </h3>
                 <div class="tables-container">
-                    <table class="table-odont">
+                    
+                    <table class="table-dentist">
                         <thead >
                             <tr>
                                 <th>Listado de Odontologos</th>
@@ -33,7 +66,11 @@
                                 
                             </tr>
                         </thead>
-                        <tbody class="tbody-odont">
+                        <tbody class="tbody-dentist">
+                                <td class="empty-list">
+                                    lista vacia
+                                </td>
+                            
                         </tbody>        
                     </table>
         
@@ -47,6 +84,10 @@
                             </tr>
                         </thead>
                         <tbody class="tbody-pacient">
+                            <td class="empty-list">
+                                lista vacia
+                            </td>
+                        
                         </tbody>        
                     </table>
                 </div>
@@ -55,12 +96,9 @@
                 </div>
                 
     
-                </form>             
+            </form>             
+        </section>
 
-                
-                
-
-            </section>
     </main>
     <script src="./js/turnos.js"></script>
 </body>
