@@ -1,81 +1,95 @@
 @import url("./mainStyles.css");
 
 
+section{
+    row-gap: 0;
+}
 #form-created{
     display: flex;
     flex-direction: column;
     background-color: bisque;
     border-radius: 0px 0px 25px 25px;
-    padding-bottom: 25px; /* Espacio para el botón fijo */
+    padding-bottom: 25px; 
     max-height: 500px;
     overflow-y: auto;
     position: relative;
     align-items: center;
     font-family: monospace;
+    /* width: 80%; */
 
    
 }
+
+h3 {
+    text-align: center;
+    padding: 10px;
+    width: 100%;
+    background-color: var(--bg-form1);
+    border-bottom: 2px solid rgba(0, 0, 0, 0.205);
+    position: sticky;
+    
+}
+
+.hidden{
+    display: none;
+}
+
+
+thead tr {
+    position: sticky;
+    width: 100%;
+    z-index: 1;
+    display: flex; 
+    justify-content: center;
+    background-color: var(--bg-form1);
+}
+
+
+thead th, tbody td{
+    padding: 20px 10px; 
+    margin: 2px 15px;
+    
+    
+}
+
+tbody tr{
+    display: flex;
+    flex-direction: row;
+    border-bottom: 2px solid rgba(0, 0, 0, 0.205);    
+}
+
+tbody .empty-list{
+    display: flex;
+    width: 100%;
+    justify-content: center;
+
+}
+
 .tables-container{
     display: flex;
     flex-direction: row;
     justify-content: space-around;
     align-items: start;
  
-    .table-odont tbody{
+    .table-dentist tbody{
         border-right: 2px solid rgba(0, 0, 0, 0.205);
     }
 
-    .table-odont, .table-pacient {
-        overflow-y: auto;  
-        
+    .table-dentist, .table-pacient,.table-shift {            
         border-radius: 0px 0px 25px 25px;
         width: 100%;
         table-layout: fixed;
         border-collapse: collapse;
 
-        thead tr {
-            position: sticky;
-            width: 100%;
-            z-index: 1;
-            display: flex; 
-            justify-content: center;
-            background-color: var(--bg-form1);
-      
-        
-        }
-        
-
-        thead th, tbody td{
-            padding: 20px 10px; 
-            margin: 2px 15px;
-            
-            
-        }
-        
-        tbody tr{
-            display: flex;
-            flex-direction: row;
-            border-bottom: 2px solid rgba(0, 0, 0, 0.205);
-            
-            
-        }
-
-    
 
     }
 
-
- 
-
-
-
-
 }
 
-.table-odont thead, .table-pacient thead {
+.table-dentist thead, .table-pacient thead, .table-shift thead  {
     position: sticky;
-    top: 0; /* Mantén los encabezados en la parte superior al hacer scroll */
-    z-index: 10; /* Asegúrate de que estén sobre el contenido */
+    top: 0; 
+    z-index: 10; 
    
 }
 
@@ -93,7 +107,7 @@
 }
 .submit {
 
-    width:50%; 
+    width:30%; 
     background-color: var(--bg-form1); 
     font-family: monospace;
     font-weight: 600;
@@ -102,6 +116,33 @@
     border-radius: 25px; 
     cursor: pointer; 
     box-shadow: 0px 5px 12px 1px; 
-    
 
 }
+
+.shift-container{
+
+    background-color: bisque;
+    border-radius: 0px 0px 25px 25px;
+    overflow-y: auto;
+    max-height: 500px;
+    position: relative;
+    align-items: center;
+    font-family: monospace;
+
+    .table-shift{
+                 
+        border-radius: 0px 0px 25px 25px;
+        width: 100%;
+        table-layout: fixed;
+        border-collapse: collapse;
+    }
+
+    thead tr {
+        justify-content: space-around;
+    }
+    tbody tr{
+        justify-content: space-around;   
+    }
+}
+
+
