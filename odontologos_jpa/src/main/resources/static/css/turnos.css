@@ -177,5 +177,6 @@ tbody .empty-list {
 #btn-back{
     margin: 20px;
     background-color:var(--bg-form1);
-    color: white;
+    font-family: monospace;
+    font-weight:600 ;
 }

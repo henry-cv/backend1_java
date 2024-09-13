@@ -9,6 +9,8 @@ document.addEventListener('DOMContentLoaded', () => {
     const findForm = document.getElementById('form-busqueda');
     const buttonBack = document.getElementById('btn-back');
     const messageUpdate = document.getElementById('message-update');
+    const agreeButton = document.querySelector('.agree-btn');
+
 
     // api lista los pacientes
     const fetchDataList = async () => {
@@ -49,47 +51,56 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const addEventListeners = () => {
         const findButton = document.getElementById('find-Id');
-        findButton.removeEventListener('click', findButtonClickHandler);
-        findButton.addEventListener('click', findButtonClickHandler);
-
-        const agreeButton = document.querySelectorAll('.agree-btn');
-        agreeButton.forEach(button => {
-            button.removeEventListener('click', agreeButtonClickHandler);
-            button.addEventListener('click', agreeButtonClickHandler);
-        });
-
+        if (findButton) {
+            findButton.removeEventListener('click', findButtonClickHandler); 
+            findButton.addEventListener('click', findButtonClickHandler);
+        }
+    
+        const agreeButton = document.querySelector('.agree-btn');
+        if (agreeButton) {
+            agreeButton.removeEventListener('click', agreeButtonClickHandler); 
+            agreeButton.addEventListener('click', agreeButtonClickHandler);
+        }
+    
         const editButtons = document.querySelectorAll('.edit-btn');
         editButtons.forEach(button => {
-            button.removeEventListener('click', editButtonClickHandler);
+            button.removeEventListener('click', editButtonClickHandler); 
             button.addEventListener('click', editButtonClickHandler);
         });
-
+    
         const deleteButtons = document.querySelectorAll('.delete-btn');
         deleteButtons.forEach(button => {
-            button.removeEventListener('click', deleteButtonClickHandler);
+            button.removeEventListener('click', deleteButtonClickHandler); 
             button.addEventListener('click', deleteButtonClickHandler);
         });
-
-        saveButton.removeEventListener('click', saveButtonClickHandler);
-        saveButton.addEventListener('click', saveButtonClickHandler);
+    
+        const saveButton = document.getElementById('guardar');
+        if (saveButton) {
+            saveButton.removeEventListener('click', saveButtonClickHandler); 
+            saveButton.addEventListener('click', saveButtonClickHandler);
+        }
     };
+    
+    
 
     const findButtonClickHandler = (e) => {
         e.preventDefault();
         const idPacient = document.getElementById('idBusqueda').value;
-        console.log(idPacient);
         if (!idPacient) {
+            hiddenElement.classList.add("form-hidden");
             alert("Ingresa un ID válido");
             fetchDataList();
         } else {
             editOnePaciente = "find";
             fetchData(idPacient);
+            hiddenElement.classList.add("form-hidden");
         }
         findForm.reset();
-        console.log(`entre a buscar y borre la lista y el id es: ${idPacient}`);
     };
 
+
     const agreeButtonClickHandler = (e) => {
+        e.preventDefault();
         hiddenElement.classList.remove("form-hidden");
         form.reset();
         agreeOrEdit = 'add';
@@ -97,6 +108,9 @@ document.addEventListener('DOMContentLoaded', () => {
         h2Element.textContent = `Agregar un nuevo paciente`;
         const textP = document.querySelector('.textP');
         textP.textContent = "Debes ingresar correctamente todos los datos, ningún campo debería quedar vacío";
+
+        const errorsContainer = document.querySelector('.errors');
+        errorsContainer.innerHTML = '';
     };
 
     const editButtonClickHandler = (e) => {
@@ -143,6 +157,7 @@ document.addEventListener('DOMContentLoaded', () => {
     };
 
     const fetchData = async (user) => {
+
         try {
             const response = await fetch(`${apiUrl}/${user}`);
             if (!response.ok) {
@@ -229,9 +244,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 provincia,
             }
         };
-        console.log("el usuario a agregar : ");
-        console.log(newUser);
-        hiddenElement.classList.add("form-hidden");
+        hiddenElement.classList.add("form-hidden"); // Oculta el formulario
         try {
             const response = await fetch(`${apiUrl}/registrar`, {
                 method: 'POST',
@@ -243,7 +256,6 @@ document.addEventListener('DOMContentLoaded', () => {
             if (!response.ok) {
                 const errorData = await response.json();
                 const errorsContainer = document.querySelector('.errors');
-                console.log(errorData);
                 errorsContainer.innerHTML = '';
                 let claves = Object.keys(errorData);
                 for (let i = 0; i < claves.length; i++) {
@@ -263,8 +275,8 @@ document.addEventListener('DOMContentLoaded', () => {
             console.error('Error:', error.message);
             alert(`Error: ${error.message}`);
         }
-    }
-
+    };
+    
     const updateUserData = async (event) => {
         event.preventDefault();
         const userId = document.getElementById('id').value;
@@ -320,14 +332,10 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     };
 
-    // Agregar el event listener para el botón "volver" que recarga la página
-    const btnBack = document.getElementById('btn-back');
-    if (btnBack) {
-        btnBack.addEventListener('click', () => {
-            fetchDataList();
-            buttonBack.classList.add("hidden");
-        });
-    }
+    buttonBack.addEventListener('click', () => {
+        buttonBack.classList.add("hidden");
+        fetchDataList();
+    });
 
     fetchDataList();
     addEventListeners();

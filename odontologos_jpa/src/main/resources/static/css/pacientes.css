@@ -40,7 +40,7 @@
     }
 }
 
-.form-hidden ,.hidden {
+.form-hidden ,.hidden ,#pacientForm.form-hidden {
     display: none;
 }
 
