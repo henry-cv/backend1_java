@@ -2,8 +2,6 @@ package com.backend.entity;
 
 import javax.persistence.*;
 import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.List;
 
 @Entity
 @Table(name = "pacientes")
@@ -26,9 +24,6 @@ public class Paciente {
   @OneToOne(cascade = CascadeType.ALL)
   @JoinColumn(name = "domicilio_id")
   private Domicilio domicilio;
-
-  @OneToMany(mappedBy = "paciente", cascade = CascadeType.ALL, orphanRemoval = true)
-  private List<Turno> turnos = new ArrayList<>();
 
   public Paciente() {
   }
@@ -96,14 +91,6 @@ public class Paciente {
 
   public void setDomicilio(Domicilio domicilio) {
     this.domicilio = domicilio;
-  }
-
-  public List<Turno> getTurnos() {
-    return turnos;
-  }
-
-  public void setTurnos(List<Turno> turnos) {
-    this.turnos = turnos;
   }
 
   @Override

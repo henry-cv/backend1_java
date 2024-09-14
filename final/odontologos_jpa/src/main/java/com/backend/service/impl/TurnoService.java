@@ -97,24 +97,17 @@ public class TurnoService implements ITurnoService {
   }
 
   @Override
-  public void eliminarTurno(Long id) throws ResourceNotFoundException {
-    Turno turno = turnoRepository.findById(id)
-      .orElseThrow(()-> new ResourceNotFoundException("No se encontró Turno " +
-        "con ese id: "+id));
-    // Opcional. Desvincular el paciente y odontólogo del turno, si es necesario
-    /*
-    if(turno.getPaciente()!=null){
-      turno.getPaciente().getTurnos().remove(turno);
+  public void eliminarTurno(Long id) {
+    if(buscarTurnoPorId(id) != null) {
+      turnoRepository.deleteById(id);
+      LOGGER.warn("Se ha eliminado el turno con id {}", id);
+    } else {
+      LOGGER.error("No se pudo eliminar porque no existe turno con ese id: " + id);
     }
-    if(turno.getOdontologo()!=null){
-      turno.getOdontologo().getTurnos().remove(turno);
-    } */
-    //Eliminar el turno
-    turnoRepository.delete(turno);
-    LOGGER.warn("Se ha eliminado el turno con id: {}",id);
   }
 
   @Override
+  @Transactional
   public TurnoSalidaDto actualizarTurno(TurnoEntradaDto turnoEntradaDto, Long id) throws
     ResourceNotFoundException, BadRequestException {
     Turno turnoExistente = turnoRepository.findById(id)
