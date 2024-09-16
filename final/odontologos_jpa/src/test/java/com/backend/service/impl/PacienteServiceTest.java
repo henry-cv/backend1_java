@@ -67,26 +67,30 @@ class PacienteServiceTest {
   @Test
   void deberiaEliminarElPacienteConId1() {
     when(pacienteRepositoryMock.findById(1L)).thenReturn(Optional.of(pacienteExistente));
-    doNothing().when(pacienteRepositoryMock).deleteById(1L);
-
+    doNothing().when(pacienteRepositoryMock).delete(pacienteExistente);
     assertDoesNotThrow(() -> pacienteService.eliminarPaciente(1L));
-
-    verify(pacienteRepositoryMock, times(1)).deleteById(1L);
-
+    verify(pacienteRepositoryMock, times(1)).findById(1L);
+    verify(pacienteRepositoryMock, times(1)).delete(pacienteExistente);
   }
 
   @Test
-  void deberiaEliminarElPacienteConId2() {
-    pacienteExistente.setId(2L);
-    when(pacienteRepositoryMock.findById(2L)).thenReturn(Optional.of(pacienteExistente));
-    doNothing().when(pacienteRepositoryMock).deleteById(2L);
+void deberiaEliminarElPacienteConId2() {
+  // Arrange
+  Long id = 2L;
+  Paciente paciente2 = new Paciente(); // Crea un nuevo paciente para este test
+  paciente2.setId(id);
+  when(pacienteRepositoryMock.findById(id)).thenReturn(Optional.of(paciente2));
+  doNothing().when(pacienteRepositoryMock).delete(paciente2);
 
-    try {
-      pacienteService.eliminarPaciente(2L);
-    } catch (ResourceNotFoundException resourceNotFoundException) {
-      fail("No debería lanzarse la excepción");
-    }
-    verify(pacienteRepositoryMock, times(1)).deleteById(2L);
+  try {
+    pacienteService.eliminarPaciente(id);
+  }catch(ResourceNotFoundException rnf){
+    fail("No deberia lanzarse la excepción");
+  }
+
+  // Assert
+  verify(pacienteRepositoryMock, times(1)).findById(id);
+  verify(pacienteRepositoryMock, times(1)).delete(paciente2);
   }
 
   @Test
