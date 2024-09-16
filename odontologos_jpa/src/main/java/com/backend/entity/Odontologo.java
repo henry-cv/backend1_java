@@ -19,7 +19,7 @@ public class Odontologo {
   private String apellido;
 
   @JsonIgnore
-  @OneToMany(mappedBy = "odontologo", cascade = CascadeType.REMOVE, fetch = FetchType.LAZY)
+  @OneToMany(mappedBy = "odontologo", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
   private List<Turno> turnos = new ArrayList<>();
 
   public Odontologo(String matricula, String nombre, String apellido) {

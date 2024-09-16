@@ -72,6 +72,7 @@ public class PacienteService implements IPacienteService {
 
     // Ahora podemos eliminar el odontólogo
     pacienteRepository.delete(paciente);
+    LOGGER.warn("Se ha eliminado el paciente con id: {} "+id);
   }
 
   @Override

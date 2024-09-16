@@ -68,8 +68,7 @@ public class PacienteService implements IPacienteService {
   @Transactional
   public void eliminarPaciente(Long id) throws ResourceNotFoundException {
     Paciente paciente = pacienteRepository.findById(id)
-      .orElseThrow(()-> new ResourceNotFoundException("No existe paciente con" +
-        " ese id: "+id));
+      .orElseThrow(()-> new ResourceNotFoundException("No existe paciente con ese id: "+id));
     //Devincular los turnos del paciente
     paciente.getTurnos().forEach(turno -> turno.setPaciente(null));
 
@@ -80,7 +79,7 @@ public class PacienteService implements IPacienteService {
 
   @Override
   public PacienteSalidaDto actualizarPaciente(PacienteEntradaDto pacienteEntradaDto, Long id) throws ResourceNotFoundException{
-    Paciente pacienteAActualizar = pacienteRepository.findById(id).orElse(null);
+    Paciente pacienteAActualizar = pacienteRepository.findById(id).orElseThrow(()->new ResourceNotFoundException("No se encontró Paciente con id:"+id));
     Paciente pacienteRecibido = modelMapper.map(pacienteEntradaDto, Paciente.class);
     PacienteSalidaDto pacienteSalidaDto;
 

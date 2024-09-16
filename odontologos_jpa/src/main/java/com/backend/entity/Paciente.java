@@ -30,7 +30,7 @@ public class Paciente {
   private Domicilio domicilio;
 
   @JsonIgnore
-  @OneToMany(mappedBy = "paciente", cascade = CascadeType.REMOVE,fetch = FetchType.LAZY)
+  @OneToMany(mappedBy = "paciente", cascade = CascadeType.ALL,fetch = FetchType.LAZY)
   private List<Turno> turnos = new ArrayList<>();
 
   public Paciente() {
