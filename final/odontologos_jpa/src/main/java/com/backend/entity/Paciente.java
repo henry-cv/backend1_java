@@ -1,7 +1,12 @@
 package com.backend.entity;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 import javax.persistence.*;
+
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Table(name = "pacientes")
@@ -24,6 +29,18 @@ public class Paciente {
   @OneToOne(cascade = CascadeType.ALL)
   @JoinColumn(name = "domicilio_id")
   private Domicilio domicilio;
+
+  @OneToMany(mappedBy = "paciente", cascade = CascadeType.REMOVE)
+  @JsonManagedReference
+  private List<Turno> turnos;
+
+  public List<Turno> getTurnos() {
+    return turnos;
+  }
+
+  public void setTurnos(List<Turno> turnos) {
+    this.turnos = turnos;
+  }
 
   public Paciente() {
   }

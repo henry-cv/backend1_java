@@ -1,5 +1,7 @@
 package com.backend.entity;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 import javax.persistence.*;
 import java.time.LocalDateTime;
 
@@ -11,12 +13,14 @@ public class Turno {
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   private Long id;
 
-  @OneToOne(cascade = CascadeType.MERGE)
-  @JoinColumn(name = "paciente_id")
+  @ManyToOne(cascade = CascadeType.REMOVE)
+  @JoinColumn(name = "paciente_id", nullable = false)
+  @JsonBackReference
   private Paciente paciente;
 
-  @OneToOne(cascade = CascadeType.MERGE)
-  @JoinColumn(name = "odontologo_id")
+  @ManyToOne(cascade = CascadeType.REMOVE)
+  @JoinColumn(name = "odontologo_id", nullable = false)
+  @JsonBackReference
   private Odontologo odontologo;
   private LocalDateTime fechaHora;
 

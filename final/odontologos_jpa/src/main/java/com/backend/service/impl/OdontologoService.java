@@ -12,6 +12,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -30,6 +31,7 @@ public class OdontologoService implements IOdontologoService {
   }
 
   @Override
+  @Transactional
   public OdontologoSalidaDto registrarOdontologo(
           OdontologoEntradaDto odontologoEntradaDto) {
     LOGGER.info("OdontologoEntradaDto: {}",
@@ -72,7 +74,7 @@ public class OdontologoService implements IOdontologoService {
       LOGGER.error("No se ha encontrado el odontologo con id {}", id);
     return odontologoEncontrado;
   }
-
+  /*
   @Override
   public void eliminarOdontologo(Long id) throws ResourceNotFoundException {
     Odontologo odontologoEncontrado =
@@ -86,9 +88,17 @@ public class OdontologoService implements IOdontologoService {
               "odontologo con id: " + id);
     }
   }
+  */
+  @Override
+  @Transactional
+    public void eliminarOdontologo(Long id) throws ResourceNotFoundException {
+        Odontologo odontologo = odontologoRepository.findById(id)
+            .orElseThrow(() -> new ResourceNotFoundException("Odontologo no encontrado"));
+        // Ahora podemos eliminar el odontólogo
+        odontologoRepository.delete(odontologo);
+    }
 
   @Override
-
   public OdontologoSalidaDto actualizarOdontologo(
           OdontologoEntradaDto odontologoEntradaDto, Long id) throws ResourceNotFoundException{
     LOGGER.info("OdontologoEntradaDto: {}",

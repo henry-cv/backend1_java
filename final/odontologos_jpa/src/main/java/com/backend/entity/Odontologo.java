@@ -1,6 +1,10 @@
 package com.backend.entity;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Table(name = "odontologos")
@@ -13,6 +17,18 @@ public class Odontologo {
   private String matricula;
   private String nombre;
   private String apellido;
+
+  @OneToMany(mappedBy = "odontologo", cascade = CascadeType.REMOVE)
+  @JsonManagedReference
+  private List<Turno> turnos;
+
+  public List<Turno> getTurnos() {
+    return turnos;
+  }
+
+  public void setTurnos(List<Turno> turnos) {
+    this.turnos = turnos;
+  }
 
   public Odontologo(String matricula, String nombre, String apellido) {
     this.matricula = matricula;

@@ -12,6 +12,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
+import javax.transaction.Transactional;
 import java.util.List;
 
 @Service
@@ -64,13 +65,13 @@ public class PacienteService implements IPacienteService {
   }
 
   @Override
+  @Transactional
   public void eliminarPaciente(Long id) throws ResourceNotFoundException {
-    if(buscarPacientePorId(id) != null) {
-      pacienteRepository.deleteById(id);
-      LOGGER.warn("Se ha eliminado el paciente con id {}", id);
-    } else {
-      throw new ResourceNotFoundException("No existe el paciente con id " + id);
-    }
+    Paciente paciente = pacienteRepository.findById(id)
+            .orElseThrow(() -> new ResourceNotFoundException("Paciente no encontrado"));
+
+    // Ahora podemos eliminar el odontólogo
+    pacienteRepository.delete(paciente);
   }
 
   @Override
