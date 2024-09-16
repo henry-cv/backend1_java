@@ -12,14 +12,14 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
 @Service
 public class OdontologoService implements IOdontologoService {
-  private static final Logger LOGGER =
-          LoggerFactory.getLogger(OdontologoService.class.getName());
-  @Autowired
+  private final Logger LOGGER =
+    LoggerFactory.getLogger(OdontologoService.class.getName());
   private final OdontologoRepository odontologoRepository;
   private final ModelMapper modelMapper;
 
@@ -31,95 +31,91 @@ public class OdontologoService implements IOdontologoService {
 
   @Override
   public OdontologoSalidaDto registrarOdontologo(
-          OdontologoEntradaDto odontologoEntradaDto) {
+    OdontologoEntradaDto odontologoEntradaDto) {
     LOGGER.info("OdontologoEntradaDto: {}",
-            JsonPrinter.toString(odontologoEntradaDto));
+      JsonPrinter.toString(odontologoEntradaDto));
 
     Odontologo entidadOdontologo = modelMapper.map(odontologoEntradaDto,
-            Odontologo.class);
+      Odontologo.class);
 
     LOGGER.info("EntidadOdontologo: {}",
-            JsonPrinter.toString(entidadOdontologo));
+      JsonPrinter.toString(entidadOdontologo));
 
     Odontologo odontologoRegistrado =
-            odontologoRepository.save(entidadOdontologo);
+      odontologoRepository.save(entidadOdontologo);
 
     LOGGER.info("OdontologoRegistrado: {}",
-            JsonPrinter.toString(odontologoRegistrado));
+      JsonPrinter.toString(odontologoRegistrado));
 
     OdontologoSalidaDto odontologoSalidaDto =
-            modelMapper.map(odontologoRegistrado, OdontologoSalidaDto.class);
+      modelMapper.map(odontologoRegistrado, OdontologoSalidaDto.class);
 
     LOGGER.info("OdontologoSalidaDto: {}",
-            JsonPrinter.toString(odontologoSalidaDto));
+      JsonPrinter.toString(odontologoSalidaDto));
 
     return odontologoSalidaDto;
   }
 
   @Override
   public OdontologoSalidaDto buscarOdontologoPorId(Long id) {
-    Odontologo odontologoBuscado =
-            odontologoRepository.findById(id).orElse(null);
+    Odontologo odontologoBuscado = odontologoRepository.findById(id).orElse(null);
     LOGGER.info("Odontologo buscado: {}",
-            JsonPrinter.toString(odontologoBuscado));
+      JsonPrinter.toString(odontologoBuscado));
     OdontologoSalidaDto odontologoEncontrado = null;
-    if(odontologoBuscado != null) {
+    if (odontologoBuscado != null) {
       odontologoEncontrado = modelMapper.map(odontologoBuscado,
-              OdontologoSalidaDto.class);
+        OdontologoSalidaDto.class);
       LOGGER.info("Odontologo encontrado: {}",
-              JsonPrinter.toString(odontologoEncontrado));
+        JsonPrinter.toString(odontologoEncontrado));
     } else
       LOGGER.error("No se ha encontrado el odontologo con id {}", id);
     return odontologoEncontrado;
   }
 
   @Override
+  @Transactional
   public void eliminarOdontologo(Long id) throws ResourceNotFoundException {
     Odontologo odontologoEncontrado =
-            odontologoRepository.findById(id).orElse(null);
-    if(odontologoEncontrado != null) {
-      LOGGER.warn("Se ha eliminado el odontólogo {}", odontologoEncontrado);
-      odontologoRepository.deleteById(id);
-      LOGGER.warn("Se ha eliminado el odontologo con id {}", id);
-    } else {
-      throw new ResourceNotFoundException("Imposible eliminar no existe el " +
-              "odontologo con id: " + id);
-    }
+      odontologoRepository.findById(id)
+        .orElseThrow(() -> new ResourceNotFoundException("No existe " +
+          "odontólogo con ese id: " + id));
+    odontologoEncontrado.getTurnos().forEach(turno -> turno.setOdontologo(null));
+    odontologoRepository.delete(odontologoEncontrado);
+    LOGGER.warn("Se elimino el odontologo con id: {}", id);
   }
 
   @Override
-
+  @Transactional
   public OdontologoSalidaDto actualizarOdontologo(
-          OdontologoEntradaDto odontologoEntradaDto, Long id) throws ResourceNotFoundException{
-    LOGGER.info("OdontologoEntradaDto: {}",
-            JsonPrinter.toString(odontologoEntradaDto));
+    OdontologoEntradaDto odontologoEntradaDto, Long id) throws ResourceNotFoundException {
+    if (odontologoEntradaDto == null) throw new ResourceNotFoundException(
+      "Odontologo recibido no debe ser nulo");
 
     Odontologo odontologoPorActualizar =
-            odontologoRepository.findById(id).orElse(null);
+      odontologoRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("No se encontro odontologo con ese id: " + id));
+
     LOGGER.info("Odontologo por actualizar por Id: {}",
-            JsonPrinter.toString(odontologoPorActualizar));
+      JsonPrinter.toString(odontologoPorActualizar));
 
     Odontologo entidadOdontologo = modelMapper.map(odontologoEntradaDto,
-            Odontologo.class);
-
+      Odontologo.class);
     LOGGER.info("EntidadOdontologo: {}",
-            JsonPrinter.toString(entidadOdontologo));
-    //Imprime a String el odóntologo Entidad, y es registrado al LOGGER
+      JsonPrinter.toString(entidadOdontologo));
 
     OdontologoSalidaDto odontologoActualizado = null;
-    if(odontologoPorActualizar != null) {
+    if (odontologoPorActualizar != null) {
       entidadOdontologo.setId(odontologoPorActualizar.getId());
       odontologoPorActualizar = entidadOdontologo;
       odontologoRepository.save(odontologoPorActualizar);
       odontologoActualizado = modelMapper.map(odontologoPorActualizar,
-              OdontologoSalidaDto.class);
+        OdontologoSalidaDto.class);
       LOGGER.warn("Odontologo actualizado: {}",
-              JsonPrinter.toString(odontologoActualizado));
+        JsonPrinter.toString(odontologoActualizado));
     } else {
       LOGGER.error("No fue posible actualizar el odontologo porque no se " +
-              "encuentra en nuestra base de datos");
+        "encuentra en nuestra base de datos");
       throw new ResourceNotFoundException("No fue posible actualizar el " +
-              "odontólogo con id: "+ id +", registro inexistente");
+        "odontólogo con id: " + id + ", registro inexistente");
     }
     return odontologoActualizado;
   }
@@ -127,9 +123,9 @@ public class OdontologoService implements IOdontologoService {
   @Override
   public List<OdontologoSalidaDto> listarOdontologos() {
     List<OdontologoSalidaDto> odontologosSalidaDtos =
-            odontologoRepository.findAll().stream().map(odontologo -> modelMapper.map(odontologo, OdontologoSalidaDto.class)).toList();
+      odontologoRepository.findAll().stream().map(odontologo -> modelMapper.map(odontologo, OdontologoSalidaDto.class)).toList();
     LOGGER.info("Listado de todos los odontologos: {}",
-            JsonPrinter.toString(odontologosSalidaDtos));
+      JsonPrinter.toString(odontologosSalidaDtos));
     return odontologosSalidaDtos;
   }
 }

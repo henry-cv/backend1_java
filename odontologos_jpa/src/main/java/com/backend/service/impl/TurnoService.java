@@ -38,6 +38,7 @@ public class TurnoService implements ITurnoService {
     configureMapping();
   }
   @Override
+  @Transactional
   public TurnoSalidaDto registrarTurno(TurnoEntradaDto turnoEntradaDto)throws BadRequestException {
     Long idPaciente = turnoEntradaDto.getPacienteId();
     Long idOdontologo = turnoEntradaDto.getOdontologoId();
@@ -97,6 +98,7 @@ public class TurnoService implements ITurnoService {
   }
 
   @Override
+  @Transactional
   public void eliminarTurno(Long id) throws ResourceNotFoundException {
     Turno turno = turnoRepository.findById(id)
       .orElseThrow(()-> new ResourceNotFoundException("No se encontró Turno " +
@@ -115,6 +117,7 @@ public class TurnoService implements ITurnoService {
   }
 
   @Override
+  @Transactional
   public TurnoSalidaDto actualizarTurno(TurnoEntradaDto turnoEntradaDto, Long id) throws
     ResourceNotFoundException, BadRequestException {
     Turno turnoExistente = turnoRepository.findById(id)

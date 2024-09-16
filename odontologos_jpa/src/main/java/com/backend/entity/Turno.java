@@ -11,12 +11,12 @@ public class Turno {
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   private Long id;
 
-  @ManyToOne(cascade = CascadeType.ALL)
-  @JoinColumn(name = "paciente_id")
+  @ManyToOne
+  @JoinColumn(name = "paciente_id", nullable = false)
   private Paciente paciente;
 
-  @ManyToOne(cascade = CascadeType.ALL)
-  @JoinColumn(name = "odontologo_id")
+  @ManyToOne
+  @JoinColumn(name = "odontologo_id", nullable = false)
   private Odontologo odontologo;
   private LocalDateTime fechaHora;
 

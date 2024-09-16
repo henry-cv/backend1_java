@@ -1,5 +1,7 @@
 package com.backend.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -16,7 +18,8 @@ public class Odontologo {
   private String nombre;
   private String apellido;
 
-  @OneToMany(mappedBy = "odontologo", cascade = CascadeType.ALL, orphanRemoval = true)
+  @JsonIgnore
+  @OneToMany(mappedBy = "odontologo", cascade = CascadeType.REMOVE, fetch = FetchType.LAZY)
   private List<Turno> turnos = new ArrayList<>();
 
   public Odontologo(String matricula, String nombre, String apellido) {

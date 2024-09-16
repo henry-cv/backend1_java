@@ -1,5 +1,7 @@
 package com.backend.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -27,7 +29,8 @@ public class Paciente {
   @JoinColumn(name = "domicilio_id")
   private Domicilio domicilio;
 
-  @OneToMany(mappedBy = "paciente", cascade = CascadeType.ALL, orphanRemoval = true)
+  @JsonIgnore
+  @OneToMany(mappedBy = "paciente", cascade = CascadeType.REMOVE,fetch = FetchType.LAZY)
   private List<Turno> turnos = new ArrayList<>();
 
   public Paciente() {
