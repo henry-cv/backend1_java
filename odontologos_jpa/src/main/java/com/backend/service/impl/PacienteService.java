@@ -3,6 +3,7 @@ package com.backend.service.impl;
 import com.backend.dto.entrada.PacienteEntradaDto;
 import com.backend.dto.salida.PacienteSalidaDto;
 import com.backend.entity.Paciente;
+import com.backend.entity.Turno;
 import com.backend.exceptions.ResourceNotFoundException;
 import com.backend.repository.PacienteRepository;
 import com.backend.repository.TurnoRepository;
@@ -74,11 +75,12 @@ public class PacienteService implements IPacienteService {
   public void eliminarPaciente(Long id) throws ResourceNotFoundException {
     Paciente paciente = pacienteRepository.findById(id)
       .orElseThrow(()-> new ResourceNotFoundException("No existe paciente con ese id: "+id));
-    //Devincular los turnos del paciente
-    //paciente.getTurnos().forEach(turno -> turno.setPaciente(null));
 
+    //Turno turnoPaciente = turnoRepository.findById(id).orElse(null);
+    //turnoRepository.deleteById(turnoPaciente.getId());
     // Primero, establece el paciente como nulo en todos los turnos asociados
     turnoRepository.setPacienteToNullByPacienteId(id);
+
     //Eliminar al paciente
     pacienteRepository.delete(paciente);
     LOGGER.warn("Se ha eliminado el paciente con id: {} "+id);
@@ -87,8 +89,9 @@ public class PacienteService implements IPacienteService {
   @Override
   public PacienteSalidaDto actualizarPaciente(PacienteEntradaDto pacienteEntradaDto, Long id) throws ResourceNotFoundException{
     Paciente pacienteAActualizar = pacienteRepository.findById(id).orElseThrow(()->new ResourceNotFoundException("No se encontró Paciente con id:"+id));
+    if(pacienteEntradaDto == null) throw new ResourceNotFoundException("Paciente recibido no puede ser nulo");
     Paciente pacienteRecibido = modelMapper.map(pacienteEntradaDto, Paciente.class);
-    PacienteSalidaDto pacienteSalidaDto;
+    PacienteSalidaDto pacienteSalidaDto=null;
 
     if(pacienteAActualizar != null) {
 
@@ -112,6 +115,3 @@ public class PacienteService implements IPacienteService {
     modelMapper.typeMap(Paciente.class, PacienteSalidaDto.class).addMappings(mapper -> mapper.map(Paciente::getDomicilio, PacienteSalidaDto::setDomicilioSalidaDto));
   }
 }
-
-
-

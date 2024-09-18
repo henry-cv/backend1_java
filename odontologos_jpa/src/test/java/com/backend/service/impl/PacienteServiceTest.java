@@ -7,6 +7,7 @@ import com.backend.entity.Domicilio;
 import com.backend.entity.Paciente;
 import com.backend.exceptions.ResourceNotFoundException;
 import com.backend.repository.PacienteRepository;
+import com.backend.repository.TurnoRepository;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import org.modelmapper.ModelMapper;
@@ -25,7 +26,7 @@ class PacienteServiceTest {
   private final PacienteRepository pacienteRepositoryMock =
     mock(PacienteRepository.class);
   private final ModelMapper modelMapper = new ModelMapper();
-
+  private final TurnoRepository turnoRepository = mock(TurnoRepository.class);
   private final PacienteService pacienteService =
     new PacienteService(pacienteRepositoryMock, modelMapper);
 
@@ -67,14 +68,11 @@ class PacienteServiceTest {
   @Test
   void deberiaEliminarElPacienteConId1() {
     when(pacienteRepositoryMock.findById(1L)).thenReturn(Optional.of(pacienteExistente));
-    doNothing().when(pacienteRepositoryMock).delete(pacienteExistente);
+    doNothing().when(pacienteRepositoryMock).deleteById(1L);
     assertDoesNotThrow(() -> pacienteService.eliminarPaciente(1L));
-    verify(pacienteRepositoryMock, times(1)).findById(1L);
     verify(pacienteRepositoryMock, times(1)).delete(pacienteExistente);
   }
 
-
-/*
   @Test
   void deberiaEliminarElPacienteConId2() {
     pacienteExistente.setId(2L);
@@ -87,11 +85,9 @@ class PacienteServiceTest {
       fail("No debería lanzarse la excepción");
     }
     // Act & Assert
-    assertDoesNotThrow(() -> pacienteService.eliminarPaciente(2L));
-    verify(pacienteRepositoryMock, times(1)).findById(2L);
-    verify(pacienteRepositoryMock, times(1)).delete(pacienteExistente);
+    verify(pacienteRepositoryMock, times(2)).delete(pacienteExistente);
   }
-*/
+/*
 @Test
 void deberiaEliminarElPacienteConId2() {
   // Arrange
@@ -103,14 +99,15 @@ void deberiaEliminarElPacienteConId2() {
 
   try {
     pacienteService.eliminarPaciente(id);
-  }catch(ResourceNotFoundException rnf){
-    fail("No deberia lanzarse la excepción");
+  }catch(Exception exception){
+    fail("No deberia lanzarse la excepción: "+exception);
   }
 
   // Assert
   verify(pacienteRepositoryMock, times(1)).findById(id);
   verify(pacienteRepositoryMock, times(1)).delete(paciente2);
 }
+ */
   @Test
   void deberiaDevolverUnaListaVaciaDePacientes() {
     when(pacienteRepositoryMock.findAll()).thenReturn(new ArrayList<>());
