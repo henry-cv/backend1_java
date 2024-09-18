@@ -18,23 +18,25 @@ public class Odontologo {
   private String nombre;
   private String apellido;
 
+  /*
+  //@OneToMany(mappedBy = "odontologo", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+  @OneToMany(mappedBy = "odontologo", fetch = FetchType.LAZY)
   @JsonIgnore
-  @OneToMany(mappedBy = "odontologo", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
   private List<Turno> turnos = new ArrayList<>();
-
+  */
   public Odontologo(String matricula, String nombre, String apellido) {
     this.matricula = matricula;
     this.nombre = nombre;
     this.apellido = apellido;
   }
 
-  public List<Turno> getTurnos() {
+  /*public List<Turno> getTurnos() {
     return turnos;
   }
 
   public void setTurnos(List<Turno> turnos) {
     this.turnos = turnos;
-  }
+  }*/
 
   public Odontologo(Long id, String matricula, String nombre, String apellido) {
     this.id = id;

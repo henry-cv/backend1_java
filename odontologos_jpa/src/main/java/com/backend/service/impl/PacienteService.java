@@ -5,21 +5,26 @@ import com.backend.dto.salida.PacienteSalidaDto;
 import com.backend.entity.Paciente;
 import com.backend.exceptions.ResourceNotFoundException;
 import com.backend.repository.PacienteRepository;
+import com.backend.repository.TurnoRepository;
 import com.backend.service.IPacienteService;
 import com.backend.utils.JsonPrinter;
 import org.modelmapper.ModelMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
 import java.util.List;
 
 @Service
+@Transactional
 public class PacienteService implements IPacienteService {
   private final Logger LOGGER = LoggerFactory.getLogger(PacienteService.class);
   private final PacienteRepository pacienteRepository;
   private final ModelMapper modelMapper;
+  @Autowired
+  private TurnoRepository turnoRepository;
 
   public PacienteService(PacienteRepository pacienteRepository, ModelMapper modelMapper) {
     this.pacienteRepository = pacienteRepository;
@@ -70,8 +75,10 @@ public class PacienteService implements IPacienteService {
     Paciente paciente = pacienteRepository.findById(id)
       .orElseThrow(()-> new ResourceNotFoundException("No existe paciente con ese id: "+id));
     //Devincular los turnos del paciente
-    paciente.getTurnos().forEach(turno -> turno.setPaciente(null));
+    //paciente.getTurnos().forEach(turno -> turno.setPaciente(null));
 
+    // Primero, establece el paciente como nulo en todos los turnos asociados
+    turnoRepository.setPacienteToNullByPacienteId(id);
     //Eliminar al paciente
     pacienteRepository.delete(paciente);
     LOGGER.warn("Se ha eliminado el paciente con id: {} "+id);

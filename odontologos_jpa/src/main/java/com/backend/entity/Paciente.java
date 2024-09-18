@@ -29,9 +29,12 @@ public class Paciente {
   @JoinColumn(name = "domicilio_id")
   private Domicilio domicilio;
 
+  /*
+  //@OneToMany(mappedBy = "paciente", cascade = CascadeType.ALL,fetch = FetchType.LAZY)
+  @OneToMany(mappedBy = "paciente", fetch = FetchType.LAZY)
   @JsonIgnore
-  @OneToMany(mappedBy = "paciente", cascade = CascadeType.ALL,fetch = FetchType.LAZY)
   private List<Turno> turnos = new ArrayList<>();
+  */
 
   public Paciente() {
   }
@@ -101,13 +104,13 @@ public class Paciente {
     this.domicilio = domicilio;
   }
 
-  public List<Turno> getTurnos() {
+  /*public List<Turno> getTurnos() {
     return turnos;
   }
 
   public void setTurnos(List<Turno> turnos) {
     this.turnos = turnos;
-  }
+  }*/
 
   @Override
   public String toString() {

@@ -5,6 +5,7 @@ import com.backend.dto.salida.OdontologoSalidaDto;
 import com.backend.entity.Odontologo;
 import com.backend.exceptions.ResourceNotFoundException;
 import com.backend.repository.OdontologoRepository;
+import com.backend.repository.TurnoRepository;
 import com.backend.service.IOdontologoService;
 import com.backend.utils.JsonPrinter;
 import org.modelmapper.ModelMapper;
@@ -17,11 +18,14 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.List;
 
 @Service
+@Transactional
 public class OdontologoService implements IOdontologoService {
   private final Logger LOGGER =
     LoggerFactory.getLogger(OdontologoService.class.getName());
   private final OdontologoRepository odontologoRepository;
   private final ModelMapper modelMapper;
+  @Autowired
+  private TurnoRepository turnoRepository;
 
   public OdontologoService(OdontologoRepository odontologoRepository,
                            ModelMapper modelMapper) {
@@ -79,7 +83,9 @@ public class OdontologoService implements IOdontologoService {
       odontologoRepository.findById(id)
         .orElseThrow(() -> new ResourceNotFoundException("No existe " +
           "odontólogo con ese id: " + id));
-    odontologoEncontrado.getTurnos().forEach(turno -> turno.setOdontologo(null));
+    // Primero, establece el odontólogo como nulo en todos los turnos asociados
+    turnoRepository.setOdontologoToNullByOdontologoId(id);
+    //odontologoEncontrado.getTurnos().forEach(turno -> turno.setOdontologo(null));
     odontologoRepository.delete(odontologoEncontrado);
     LOGGER.warn("Se elimino el odontologo con id: {}", id);
   }
