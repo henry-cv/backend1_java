@@ -29,7 +29,7 @@
           </div>
         </div>
         <form action="" class="busqueda oculto" id="form-busqueda">
-          <input id="busqueda" placeholder="ID a buscar, ejemplo: 1" type="number" />
+          <input id="busqueda" placeholder="ID a buscar, ejemplo: 1" type="number" min="1" />
           <input type="submit" name="buscar" value="Buscar" />
         </form>
 
@@ -49,7 +49,7 @@
           <input type="button" name="actualizar" class="actualizar oculto" id="actualizar" value="Actualizar" />
         </form>
         <div class="resultado-peticion">
-          <p id="par-resultado"></p>
+          <p id="par-resultado" class="par-resultado oculto"></p>
         </div>
       </section>
       <section class="resultados">
@@ -71,6 +71,6 @@
       </section>
     </main>
     <!-- <script src="./js/script.js"></script> -->
-    <script src="./js/listaOdontologos.js"></script>
+    <script src="./js/odontologos.js"></script>
   </body>
 </html>

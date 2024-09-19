@@ -148,19 +148,17 @@ tareaBuscar.addEventListener("click", (e) => {
 });
 async function eliminarOdontologo(id) {
   try {
-    console.log(id);
-
     const response = await fetch(`${OdontologosUrl}/eliminar/${id}`, {
       method: "DELETE",
     });
 
     if (!response.ok) {
-      alert("Error al borrar el Odontólogo");
       throw new Error("Error al borrar el Odontólogo: ", response.status);
     }
     mostrarResultado("Se eliminó Odontólogo con id: " + id);
+    $parrafoResultado.classList.remove("oculto");
     setTimeout(() => {
-      $parrafoResultado.classList.toggle("oculto");
+      $parrafoResultado.classList.add("oculto");
     }, 2000);
     listarOdontologos();
   } catch (error) {
@@ -171,42 +169,39 @@ async function buscarPorId(id) {
   let data = "";
   try {
     let res = await fetch(`${OdontologosUrl}/${id}`);
-    //console.log("res");
-    //console.log(res);
     if (!res.ok) {
-      console.log("Error respuesta: " + res.ok);
-      console.error(`status: ${res.status}, texto: ${res.statusText}`);
-      //console.error(res);
-      throw new Error(`status: ${res.status}, texto: ${res.statusText}`);
-      //throw new Error(res);
+      throw new Error(res);
     }
     data = await res.json();
-    console.log("data");
-    console.log(data);
-    console.log(JSON.stringify(data));
     mostrarBusqueda(data);
   } catch (error) {
-    console.log("ERROR manejado desde catch");
-    console.log(error);
+    console.log(error.statusText);
+    if (data === "") data = `No se encontró odontólogo con id: ${id}`;
+    $parrafoResultado.classList.remove("oculto");
+    mostrarResultado(data);
+    setTimeout(() => {
+      $parrafoResultado.classList.add("oculto");
+    }, 3000);
   }
   return data;
 }
 async function localizarOdontologo(id) {
   try {
-    console.log(id);
-
     const response = await fetch(`${OdontologosUrl}/${id}`, {
       method: "GET",
     });
-    console.log(response);
     if (!response.ok) {
       throw new Error("Error al buscar el Odontólogo: ", response.status);
     }
     let data = await response.json();
-    console.log(data);
     cargarFormulario(data);
   } catch (error) {
-    console.error("Error:", error);
+    if (data === "") data = `No se encontró odontólogo con id: ${id}`;
+    $parrafoResultado.classList.remove("oculto");
+    mostrarResultado(data);
+    setTimeout(() => {
+      $parrafoResultado.classList.add("oculto");
+    }, 3000);
   }
 }
 async function actualizarOdontologo() {
