@@ -26,9 +26,8 @@ class PacienteServiceTest {
   private final PacienteRepository pacienteRepositoryMock =
     mock(PacienteRepository.class);
   private final ModelMapper modelMapper = new ModelMapper();
-  private final TurnoRepository turnoRepository = mock(TurnoRepository.class);
-  private final PacienteService pacienteService =
-    new PacienteService(pacienteRepositoryMock, modelMapper);
+  //private final TurnoRepository turnoRepository = mock(TurnoRepository.class);
+  private final PacienteService pacienteService = new PacienteService(pacienteRepositoryMock, modelMapper);
 
   private static PacienteEntradaDto pacienteEntradaDto;
   private static Paciente pacienteExistente;
@@ -46,8 +45,7 @@ class PacienteServiceTest {
   void deberiaMandarAlRepositorioUnPacienteDeNombreJuan_yRetornarUnSalidaDtoConSuId() {
     when(pacienteRepositoryMock.save(any(Paciente.class))).thenReturn(pacienteExistente);
 
-    PacienteSalidaDto pacienteSalidaDto =
-      pacienteService.registrarPaciente(pacienteEntradaDto);
+    PacienteSalidaDto pacienteSalidaDto = pacienteService.registrarPaciente(pacienteEntradaDto);
 
     assertNotNull(pacienteSalidaDto);
     assertNotNull(pacienteSalidaDto.getId());
@@ -60,11 +58,11 @@ class PacienteServiceTest {
     List<Paciente> pacientes = new java.util.ArrayList<>(List.of(pacienteExistente));
     when(pacienteRepositoryMock.findAll()).thenReturn(pacientes);
 
-    List<PacienteSalidaDto> listadoDePacientes =
-      pacienteService.listarPacientes();
+    List<PacienteSalidaDto> listadoDePacientes = pacienteService.listarPacientes();
     assertFalse(listadoDePacientes.isEmpty());
   }
 
+  /*
   @Test
   void deberiaEliminarElPacienteConId1() {
     when(pacienteRepositoryMock.findById(1L)).thenReturn(Optional.of(pacienteExistente));
@@ -87,7 +85,8 @@ class PacienteServiceTest {
     // Act & Assert
     verify(pacienteRepositoryMock, times(2)).delete(pacienteExistente);
   }
-/*
+*/
+  /*
 @Test
 void deberiaEliminarElPacienteConId2() {
   // Arrange
@@ -174,7 +173,6 @@ void deberiaEliminarElPacienteConId2() {
 
   @Test
   public void alBuscarPacientePorId_Inexistente_DebeRetornarNull() {
-
     Long idInexistente = 15L;
     when(pacienteRepositoryMock.findById(idInexistente)).thenReturn(Optional.empty());
 

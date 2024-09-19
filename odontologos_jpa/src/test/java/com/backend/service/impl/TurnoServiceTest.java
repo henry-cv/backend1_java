@@ -86,13 +86,13 @@ class TurnoServiceTest {
   }
 
   @Test
-  public void dadoUnIdDebeBuscarEnRepositorioYRetornarElTurnoConEseId(){
-    Long id =1L;
+  public void dadoUnIdDebeBuscarEnRepositorioYRetornarElTurnoConEseId() {
+    Long id = 1L;
     when(turnoRepositoryMock.findById(id)).thenReturn(Optional.of(turnoExistente));
     TurnoSalidaDto respuestaSalidaDto = turnoService.buscarTurnoPorId(id);
     assertNotNull(respuestaSalidaDto);
     assertNotNull(turnoSalidaDto.getId());
-    assertEquals(1L,respuestaSalidaDto.getId());
+    assertEquals(1L, respuestaSalidaDto.getId());
   }
   @Test
   public void alBuscarTurnoPorId_Inexistente_DebeRetornarNull() {
