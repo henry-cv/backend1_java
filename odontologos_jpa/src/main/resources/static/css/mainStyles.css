@@ -27,7 +27,7 @@ header {
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin-top: 3rem;
+  margin-top: 1rem;
   row-gap: 2rem;
   text-align: center;
   nav {

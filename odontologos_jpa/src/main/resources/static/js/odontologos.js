@@ -81,8 +81,9 @@ async function crearOdontologo() {
 
     let respuesta = res.status === 201 ? `Odontólogo creado con exito: ${data.nombre} ${data.apellido}` : "";
     mostrarResultado(respuesta);
+    $parrafoResultado.classList.remove("oculto");
     setTimeout(() => {
-      $parrafoResultado.classList.toggle("oculto");
+      $parrafoResultado.classList.add("oculto");
     }, 2000);
     listarOdontologos();
   } catch (error) {
@@ -234,8 +235,9 @@ async function actualizarOdontologo() {
     let respuesta =
       res.status === 200 ? `Odontólogo con ${id} actualizado con exito: ${data.nombre} ${data.apellido}` : "";
     mostrarResultado(respuesta);
+    $parrafoResultado.classList.remove("oculto");
     setTimeout(() => {
-      $parrafoResultado.classList.toggle("oculto");
+      $parrafoResultado.classList.add("oculto");
     }, 2000);
     listarOdontologos();
   } catch (error) {
