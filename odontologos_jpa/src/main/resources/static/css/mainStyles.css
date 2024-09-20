@@ -21,13 +21,14 @@ html {
 body {
   font-size: 1.6rem;
   background-color: var(--main-bg);
+  height: 100vh;
 }
 header {
   color: var(--texto1);
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin-top: 1rem;
+  padding: 2rem 0;
   row-gap: 2rem;
   text-align: center;
   nav {
@@ -50,9 +51,9 @@ main {
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  margin: 3rem auto;
-  width: 80%;
-  height: auto;
+  margin: 2rem auto;
+  /* width: 100%;
+  height: auto; */
   h2 {
     text-align: center;
   }
@@ -61,18 +62,15 @@ main {
     article {
       background-color: var(--second-bg);
       color: var(--texto1);
+      height: 22vh;
       figure {
-        height: auto;
+        height: 22vh;
         img {
           background-color: var(--main-bg);
-          height: auto;
-          width: 240px;
+          height: 22vh;
         }
-        width: 100%;
       }
-      height: 240px;
       text-align: center;
-      width: 240px;
     }
     display: flex;
     flex-direction: column;
