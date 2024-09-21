@@ -10,13 +10,17 @@ const botonNuevo = document.querySelector("[name=btn-nuevo]");
 const botonListar = document.querySelector("[name=btn-listar]");
 const formBusqueda = document.querySelector("#form-busqueda");
 const tareaBuscar = document.querySelector("[name=btn-buscar]");
+const ulErrores = document.querySelector("#ul-errores");
 let arErrores = [];
+
 async function listarOdontologos() {
   try {
     const response = await fetch(`${OdontologosUrl}/listar`);
     // Cambia esta URL por la de tu API
     const data = await response.json();
-    const tableBody = document.getElementById("odontologosTable").querySelector("tbody");
+    const tableBody = document
+      .getElementById("odontologosTable")
+      .querySelector("tbody");
 
     // Limpiar la tabla antes de agregar nuevos datos
     tableBody.innerHTML = "";
@@ -53,6 +57,7 @@ function mostrarResultado(respuesta) {
   $parrafoResultado.textContent = respuesta;
 }
 async function crearOdontologo() {
+  arErrores = [];
   const odontologo = {
     matricula: $inputMatricula.value,
     nombre: $inputNombre.value,
@@ -75,18 +80,25 @@ async function crearOdontologo() {
       console.log("Error Data");
       console.log(resErrores);
       console.log("tipo de res Errores: " + typeof resErrores);
-      //arErrores = Object.values(resErrores);
-      arErrores[0] = resErrores.matricula || "";
+      arErrores = Object.values(resErrores);
+      /* arErrores[0] = resErrores.matricula || "";
       arErrores[1] = resErrores.nombre || "";
-      arErrores[2] = resErrores.apellido || "";
-      renderizarErrores(arErrores);
+      arErrores[2] = resErrores.apellido || ""; */
+      if (arErrores.length > 0) renderizarErrores(arErrores);
+      throw new Error(
+        `Error al obtener los datos: ${res.status} ${res.statusText}`
+      );
+      return;
     }
+    arErrores = [];
     console.log("res exitosa");
     console.log(res);
     let data = await res.json();
     console.log("data");
     console.log(data);
-    console.log(`Estado: ${res.status}, Mensaje, Texto Estado: ${res.statusText}`);
+    console.log(
+      `Estado: ${res.status}, Mensaje, Texto Estado: ${res.statusText}`
+    );
 
     let respuesta =
       res.status === 201
@@ -148,7 +160,9 @@ function manejarAcciones() {
       const userId = e.target.getAttribute("data-id");
       //const userId = e.target.dataset.id;
       console.info(userId);
-      const confirmDelete = confirm("¿Estás seguro de que deseas borrar este Odontólogo?");
+      const confirmDelete = confirm(
+        "¿Estás seguro de que deseas borrar este Odontólogo?"
+      );
       if (confirmDelete) {
         eliminarOdontologo(userId);
       }
@@ -245,7 +259,9 @@ async function actualizarOdontologo() {
     console.log(data);
     console.log(`Estado: ${res.status}, Mensaje: ${res.statusText}`);
     let respuesta =
-      res.status === 200 ? `Odontólogo con ${id} actualizado con exito: ${data.nombre} ${data.apellido}` : "";
+      res.status === 200
+        ? `Odontólogo con ${id} actualizado con exito: ${data.nombre} ${data.apellido}`
+        : "";
     mostrarResultado(respuesta);
     $parrafoResultado.classList.remove("oculto");
     setTimeout(() => {
@@ -286,10 +302,12 @@ function mostrarBusqueda(data) {
   manejarAcciones();
 }
 function renderizarErrores(errores) {
-  const ulErrores = document.querySelector("#ul-errores");
   ulErrores.innerHTML = "";
-  if (!errores || errores.length == 0) return;
+  console.log("Errores dentro de renderizar Errores");
+  console.log(errores);
+
   errores.forEach((error) => {
     ulErrores.innerHTML += `<li>${error}</li>`;
   });
+  ulErrores.classList.remove("oculto");
 }
