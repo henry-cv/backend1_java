@@ -10,7 +10,7 @@ const botonNuevo = document.querySelector("[name=btn-nuevo]");
 const botonListar = document.querySelector("[name=btn-listar]");
 const formBusqueda = document.querySelector("#form-busqueda");
 const tareaBuscar = document.querySelector("[name=btn-buscar]");
-
+let arErrores = [];
 async function listarOdontologos() {
   try {
     const response = await fetch(`${OdontologosUrl}/listar`);
@@ -68,18 +68,30 @@ async function crearOdontologo() {
   try {
     let res = await fetch(`${OdontologosUrl}/registrar`, settings);
     if (!res.ok) {
-      //console.log(res);
+      console.log("Mensaje de !res.ok");
+      console.log(res);
       console.error(res.status);
-      throw new Error(res);
+      const resErrores = await res.json();
+      console.log("Error Data");
+      console.log(resErrores);
+      console.log("tipo de res Errores: " + typeof resErrores);
+      //arErrores = Object.values(resErrores);
+      arErrores[0] = resErrores.matricula || "";
+      arErrores[1] = resErrores.nombre || "";
+      arErrores[2] = resErrores.apellido || "";
+      renderizarErrores(arErrores);
     }
-    //console.log("res exitosa");
-    //console.log(res);
+    console.log("res exitosa");
+    console.log(res);
     let data = await res.json();
-    //console.log("data");
-    //console.log(data);
-    console.log(`Estado: ${res.status}, Mensaje: ${res.statusText}`);
+    console.log("data");
+    console.log(data);
+    console.log(`Estado: ${res.status}, Mensaje, Texto Estado: ${res.statusText}`);
 
-    let respuesta = res.status === 201 ? `Odontólogo creado con exito: ${data.nombre} ${data.apellido}` : "";
+    let respuesta =
+      res.status === 201
+        ? `Odontólogo creado con exito: ${data.nombre} ${data.apellido}`
+        : `status: ${res.status}, status Text: ${res.statusText}`;
     mostrarResultado(respuesta);
     $parrafoResultado.classList.remove("oculto");
     setTimeout(() => {
@@ -272,4 +284,12 @@ function mostrarBusqueda(data) {
 
   tableBody.appendChild(row);
   manejarAcciones();
+}
+function renderizarErrores(errores) {
+  const ulErrores = document.querySelector("#ul-errores");
+  ulErrores.innerHTML = "";
+  if (!errores || errores.length == 0) return;
+  errores.forEach((error) => {
+    ulErrores.innerHTML += `<li>${error}</li>`;
+  });
 }

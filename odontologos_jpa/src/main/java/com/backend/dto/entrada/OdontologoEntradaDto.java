@@ -5,15 +5,15 @@ import javax.validation.constraints.Size;
 
 public class OdontologoEntradaDto {
   @NotBlank(message = "Debe ingresar la matrícula del Odontólogo")
-  @Size(max = 20, message = "La matrícula puede poseer hasta 20 carácteres")
+  @Size(min = 3,max = 20, message = "La matrícula debe tener entre 3 y 20 carácteres")
   private String matricula;
 
   @NotBlank(message = "Debe ingresar el nombre del Odontólogo")
-  @Size(max = 20, message = "El nombre puede poseer hasta 20 carácteres")
+  @Size(min = 3, max = 20, message = "El nombre debe tener entre 3 y 20 carácteres")
   private String nombre;
 
-  @NotBlank(message = "Debe ingresar la apellido del Odontólogo")
-  @Size(max = 20, message = "El apellido puede poseer hasta 20 carácteres")
+  @NotBlank(message = "Debe ingresar el apellido del Odontólogo")
+  @Size(min = 4, max = 20, message = "El apellido debe tener entre 4 y 20 carácteres")
   private String apellido;
 
   public OdontologoEntradaDto(String matricula, String nombre, String apellido) {

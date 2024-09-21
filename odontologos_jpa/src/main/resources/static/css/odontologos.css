@@ -45,6 +45,24 @@ main {
     text-align: center;
   }
 }
+.resultado-peticion {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.lista-errores {
+  width: 90%;
+  li {
+    background-color: var(--texto1);
+    color: var(--text-error);
+    list-style-type: none;
+    border-radius: 8px;
+    margin: 1rem 0;
+    padding: 1rem;
+    text-align: justify;
+  }
+}
 .par-resultado {
   background-color: var(--bg-form1);
   color: var(--texto1);
