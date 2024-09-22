@@ -9,20 +9,24 @@
   --hover-list: #c4c4c4;
   --text-error: rgb(197, 5, 5);
 }
+
 * {
   box-sizing: border-box;
   margin: 0;
   padding: 0;
   border: none;
 }
+
 html {
   font-size: 62.5%;
 }
+
 body {
   font-size: 1.6rem;
   background-color: var(--main-bg);
   height: 100vh;
 }
+
 header {
   color: var(--texto1);
   display: flex;
@@ -31,6 +35,7 @@ header {
   padding: 2rem 0;
   row-gap: 2rem;
   text-align: center;
+
   nav {
     padding: 0rem 1.4rem;
   }
@@ -39,39 +44,49 @@ header {
 header nav ul {
   display: flex;
   column-gap: 2rem;
+
   li {
     list-style-type: none;
   }
+
   a {
     text-decoration: none;
   }
 }
+
 main {
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   margin: 2rem auto;
+
   /* width: 100%;
   height: auto; */
   h2 {
     text-align: center;
   }
+
   section {
     align-items: center;
+
     article {
       background-color: var(--second-bg);
       color: var(--texto1);
       height: 22vh;
+
       figure {
         height: 22vh;
+
         img {
           background-color: var(--main-bg);
           height: 22vh;
         }
       }
+
       text-align: center;
     }
+
     display: flex;
     flex-direction: column;
     justify-content: center;
