@@ -29,53 +29,24 @@
           </div>
         </div>
         <form action="" class="busqueda oculto" id="form-busqueda">
-          <input
-            id="busqueda"
-            placeholder="ID a buscar, ejemplo: 1"
-            type="number"
-            min="1"
-          />
+          <input id="busqueda" placeholder="ID a buscar, ejemplo: 1" type="number" min="1" />
           <input type="submit" name="buscar" value="Buscar" />
         </form>
 
         <form action="" class="form-odontologo oculto" id="form-odontologo">
           <label
             >Matricula:
-            <input
-              name="matricula"
-              id="matricula"
-              placeholder="Ingrese matrícula"
-              required
-              type="text"
-            />
+            <input name="matricula" id="matricula" placeholder="Ingrese matrícula" required type="text" />
           </label>
           <label
             >Nombre:
-            <input
-              name="nombre"
-              id="nombre"
-              placeholder="Ingrese nombre"
-              required
-              type="text"
-            />
+            <input name="nombre" id="nombre" placeholder="Ingrese nombre" required type="text" />
           </label>
           <label
-            >Apellido:
-            <input
-              name="apellido"
-              id="apellido"
-              placeholder="Ingrese apellido"
-              required
-              type="text"
+            >Apellido: <input name="apellido" id="apellido" placeholder="Ingrese apellido" required type="text"
           /></label>
           <input id="guardar" type="submit" value="Guardar" />
-          <input
-            type="button"
-            name="actualizar"
-            class="actualizar oculto"
-            id="actualizar"
-            value="Actualizar"
-          />
+          <input type="button" name="actualizar" class="actualizar oculto" id="actualizar" value="Actualizar" />
         </form>
         <div class="resultado-peticion">
           <ul class="lista-errores oculto" id="ul-errores">
@@ -97,6 +68,7 @@
             </tr>
           </thead>
           <tbody>
+            <td class="empty-list">lista vacia</td>
             <!-- Los datos se insertarán aquí -->
           </tbody>
         </table>
