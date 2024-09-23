@@ -317,9 +317,16 @@ out
 
 # SvelteKit build / generate output
 .svelte-kit
+## por el mismo intellij
+target/
+/target/
+!.mvn/wrapper/maven-wrapper.jar
+!**/src/main/**/target/
+!**/src/test/**/target/
+
+## por el mismo intellij
 
 # End of https://www.toptal.com/developers/gitignore/api/node
-
 #Por el mismo IntelliJ Idea
 target/
 /target/
@@ -339,10 +346,9 @@ buildNumber.properties
 .mvn/timing.properties
 # https://github.com/takari/maven-wrapper#usage-without-binary-jar
 .mvn/wrapper/maven-wrapper.jar
-
 #fuente
 ##https://www.toptal.com/developers/gitignore/api/maven,intellij
-*/target/**
-**/target/
 **/target/**
+*/target/**
+**/target/*
 #por mi
