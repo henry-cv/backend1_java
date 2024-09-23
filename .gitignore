@@ -327,6 +327,13 @@ target/
 ## por el mismo intellij
 
 # End of https://www.toptal.com/developers/gitignore/api/node
+#Por el mismo IntelliJ Idea
+target/
+/target/
+!.mvn/wrapper/maven-wrapper.jar
+!**/src/main/**/target/
+!**/src/test/**/target/
+
 ## Maven ###
 target/
 pom.xml.tag
